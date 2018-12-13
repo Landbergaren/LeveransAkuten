@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Company\" />
+    <Folder Include="Views\Driver\" />
+    <Folder Include="Views\Auth\" />
     <Folder Include="wwwroot\Bootstrap\" />
     <Folder Include="wwwroot\Jquery\" />
   </ItemGroup>
