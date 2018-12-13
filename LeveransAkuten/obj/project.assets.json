@@ -12085,11 +12085,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten.csproj",
+      "projectUniqueName": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten.csproj",
       "projectName": "LeveransAkuten",
-      "projectPath": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten.csproj",
+      "projectPath": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten.csproj",
       "packagesPath": "C:\\Users\\MiniTomato\\.nuget\\packages\\",
-      "outputPath": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\LeveransAkuten\\obj\\",
+      "outputPath": "C:\\MinaProjekt\\Skola\\AspDotNetCore\\LeveransAkuten\\LeveransAkuten\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
