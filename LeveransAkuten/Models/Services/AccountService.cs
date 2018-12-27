@@ -17,7 +17,7 @@ namespace LeveransAkuten.Models
 
         public void BuildIdentityDb()
         {
-            _IdentityCtx.Database.EnsureCreated();
+            //_IdentityCtx.Database.EnsureCreated();
         }
     }
 }
