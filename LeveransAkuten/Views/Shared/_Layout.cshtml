@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>LeveransAkuten</title>
     <link href="~/Bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="~/styles/main.css" rel="stylesheet" />
+    @RenderSection("styles", false);
 </head>
 <body>
     <!-- Navigation -->
@@ -42,7 +42,7 @@
         </div>
         <!-- /.container -->
     </footer>
-
+    @RenderSection("scripts", false);
     <script src="~/Bootstrap/bootstrap.min.js"></script>
     <script src="~/Jquery/jquery-3.3.1.min.js"></script>
 </body>
