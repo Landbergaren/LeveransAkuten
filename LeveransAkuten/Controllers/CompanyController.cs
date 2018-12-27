@@ -8,6 +8,7 @@ namespace LeveransAkuten.Controllers
 {
     public class CompanyController : Controller
     {
+        //cars was here
         public IActionResult Index()
         {
             return View();
