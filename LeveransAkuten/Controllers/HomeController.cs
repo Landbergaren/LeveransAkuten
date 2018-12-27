@@ -18,7 +18,7 @@ namespace LeveransAkuten.Controllers.HomeController
 
         public IActionResult Index()
         {
-            //accService.BuildIdentityDb();
+            accService.BuildIdentityDb();
             return View();
         }
     }
