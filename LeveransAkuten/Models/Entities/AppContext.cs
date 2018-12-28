@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using LeveransAkuten.Models.ViewModels.Ads;
 
 namespace LeveransAkuten.Models.Entities
 {
@@ -22,7 +23,7 @@ namespace LeveransAkuten.Models.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BudAkuten;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -100,12 +101,10 @@ namespace LeveransAkuten.Models.Entities
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
-                entity.HasOne(d => d.Account)
-                    .WithMany(p => p.Driver)
-                    .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Driver__AccountI__4BAC3F29");
+              
             });
         }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.Ads.AdsVm> AdsVm { get; set; }
     }
 }
