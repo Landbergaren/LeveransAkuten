@@ -27,7 +27,19 @@ namespace LeveransAkuten.Controllers
         //public async Task<IActionResult> Login (LoginVm loginVm)
         //{
 
-        //    return View();
-        //}
+            return RedirectToAction(nameof(TestAuthLandingPage));
+        }
+
+        [Authorize]
+        public IActionResult TestAuthLandingPage()
+        {
+            return Content("welcome Mr " + HttpContext.User.Identity.Name);
+        }
+
+        public async Task<IActionResult> Logout ()
+        {
+            await accountService.LogoutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

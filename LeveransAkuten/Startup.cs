@@ -26,6 +26,10 @@ namespace LeveransAkuten
            {
                options.UseSqlServer(connectionString);
            });
+            services.AddDbContext<DbFirstContext>(options =>
+           {
+               options.UseSqlServer(connectionString);
+           });
             services.AddIdentity<BudAkutenUsers, IdentityRole>( options => {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
@@ -33,6 +37,7 @@ namespace LeveransAkuten
             })
                 .AddEntityFrameworkStores<BudIdentityContext>()
                 .AddDefaultTokenProviders();
+
             services.AddMvc();
             services.AddTransient<AccountService>();
             services.AddTransient<AdsService>();
