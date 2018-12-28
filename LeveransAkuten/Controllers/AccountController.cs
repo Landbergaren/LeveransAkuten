@@ -32,11 +32,11 @@ namespace LeveransAkuten.Controllers
             if (!loginResult.Succeeded)
                 return View(loginVm);
 
-            return RedirectToAction(nameof(TestAuthLandingPage));
+            return RedirectToAction(nameof(TestAuth));
         }
 
         [Authorize]
-        public IActionResult TestAuthLandingPage()
+        public IActionResult TestAuth()
         {
             return Content("welcome Mr " + HttpContext.User.Identity.Name);
         }
