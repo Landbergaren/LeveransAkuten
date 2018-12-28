@@ -21,6 +21,6 @@ namespace LeveransAkuten.Models.Entities
         public bool? D { get; set; }
         public bool? Ce { get; set; }
 
-        public virtual AspNetUsers Account { get; set; }
+   
     }
 }
