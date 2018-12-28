@@ -27,7 +27,6 @@ namespace LeveransAkuten.Models
         public async Task<IdentityResult> AddNewUserAsync()
         {
             return await userManager.CreateAsync(new BudAkutenUsers { UserName = "TestPelle" }, "Password");
-            
         }
     }
 }
