@@ -16,7 +16,5 @@ namespace LeveransAkuten.Models.Entities
         public bool? Drequired { get; set; }
         public bool? Cerequired { get; set; }
         public string CompanyId { get; set; }
-
-        public virtual Company Company { get; set; }
     }
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeveransAkuten.Models;
+using LeveransAkuten.Models.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,10 +21,16 @@ namespace LeveransAkuten
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BudAkuten;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            services.AddDbContext<IdentityDbContext>(options =>
+            services.AddDbContext<BudIdentityContext>(options =>
            {
                options.UseSqlServer(connectionString);
            });
+            services.AddIdentity<BudAkutenUsers, IdentityRole>( options => {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+            })
+                .AddEntityFrameworkStores<BudIdentityContext>()
+                .AddDefaultTokenProviders();
             services.AddMvc();
             services.AddTransient<AccountService>();
         }
@@ -34,6 +42,7 @@ namespace LeveransAkuten
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

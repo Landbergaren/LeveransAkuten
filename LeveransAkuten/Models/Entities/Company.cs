@@ -17,8 +17,7 @@ namespace LeveransAkuten.Models.Entities
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string Description { get; set; }
-
-        public virtual AspNetUsers IdNavigation { get; set; }
+        
         public virtual ICollection<Ad> Ad { get; set; }
     }
 }

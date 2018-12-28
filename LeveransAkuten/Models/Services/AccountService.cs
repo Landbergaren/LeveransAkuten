@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LeveransAkuten.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace LeveransAkuten.Models
 {
     public class AccountService
     {
-        IdentityDbContext _IdentityCtx;
-        public AccountService(IdentityDbContext IdentityCtx)
+        BudIdentityContext _IdentityCtx;
+        public AccountService(BudIdentityContext IdentityCtx)
         {
             _IdentityCtx = IdentityCtx;
         }
@@ -17,7 +18,7 @@ namespace LeveransAkuten.Models
 
         public void BuildIdentityDb()
         {
-            //_IdentityCtx.Database.EnsureCreated();
+            _IdentityCtx.Database.EnsureCreated();
         }
     }
 }
