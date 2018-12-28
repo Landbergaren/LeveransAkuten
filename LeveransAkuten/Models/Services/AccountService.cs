@@ -1,4 +1,5 @@
 ﻿using LeveransAkuten.Models.Entities;
+using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
@@ -10,23 +11,31 @@ namespace LeveransAkuten.Models
 {
     public class AccountService
     {
-        BudIdentityContext _IdentityCtx;
+        BudIdentityContext identityCtx;
         UserManager<BudAkutenUsers> userManager;
+        SignInManager<BudAkutenUsers> signInManager;
 
-        public AccountService(BudIdentityContext IdentityCtx, UserManager<BudAkutenUsers> userMan)
+        public AccountService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
         {
-            _IdentityCtx = IdentityCtx;
+            identityCtx = identCtx;
             userManager = userMan;
+            signInManager = signInMan;
         }
 
         public void BuildIdentityDb()
         {
-            _IdentityCtx.Database.EnsureCreated();
+            identityCtx.Database.EnsureCreated();
         }
 
         public async Task<IdentityResult> AddNewUserAsync()
         {
             return await userManager.CreateAsync(new BudAkutenUsers { UserName = "TestPelle" }, "Password");
+        }
+
+        public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
+        {
+            var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
+            return result;
         }
     }
 }
