@@ -18,9 +18,8 @@ namespace LeveransAkuten.Controllers
             accountService = accSer;
         }
 
-        public IActionResult Index()
-        {
-            
+        public IActionResult Login()
+        {            
             return View();
         }
 
@@ -40,6 +39,12 @@ namespace LeveransAkuten.Controllers
         public IActionResult TestAuthLandingPage()
         {
             return Content("welcome Mr " + HttpContext.User.Identity.Name);
+        }
+
+        public async Task<IActionResult> Logout ()
+        {
+            await accountService.LogoutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

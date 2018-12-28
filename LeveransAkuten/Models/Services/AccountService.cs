@@ -37,5 +37,10 @@ namespace LeveransAkuten.Models
             var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
             return result;
         }
+
+        public async Task LogoutAsync()
+        {
+            await signInManager.SignOutAsync();
+        }
     }
 }
