@@ -16,8 +16,7 @@ namespace LeveransAkuten.Models.Entities
         }
 
         public virtual DbSet<Ad> Ad { get; set; }
-        public virtual DbSet<Company> Company { get; set; }
-        public virtual DbSet<Driver> Driver { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,8 +33,6 @@ namespace LeveransAkuten.Models.Entities
 
             modelBuilder.Entity<Ad>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Arequired)
                     .HasColumnName("ARequired")
                     .HasDefaultValueSql("((0))");
@@ -64,86 +61,50 @@ namespace LeveransAkuten.Models.Entities
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Company)
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Ad)
-                    .HasForeignKey(d => d.CompanyId)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ad__CompanyId__693CA210");
+                    .HasConstraintName("FK__Ad__UserId__4E88ABD4");
             });
 
-            
-            modelBuilder.Entity<Company>(entity =>
+            modelBuilder.Entity<AspNetUsers>(entity =>
             {
-                entity.Property(e => e.AccountId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+                entity.HasIndex(e => e.NormalizedEmail)
+                    .HasName("EmailIndex");
 
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.HasIndex(e => e.NormalizedUserName)
+                    .HasName("UserNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ImageUrl).HasMaxLength(100);
+                entity.Property(e => e.City).HasMaxLength(100);
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Description).HasMaxLength(2000);
 
-                entity.Property(e => e.StreetAdress)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.ZipCode)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
+                entity.Property(e => e.ImageUrl).HasMaxLength(250);
 
-            modelBuilder.Entity<Driver>(entity =>
-            {
-                entity.Property(e => e.A).HasDefaultValueSql("((0))");
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
-                entity.Property(e => e.AccountId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
-                entity.Property(e => e.B).HasDefaultValueSql("((0))");
+                entity.Property(e => e.StreetAdress).HasMaxLength(100);
 
-                entity.Property(e => e.C).HasDefaultValueSql("((0))");
+                entity.Property(e => e.UserName).HasMaxLength(256);
 
-                entity.Property(e => e.Ce)
-                    .HasColumnName("CE")
-                    .HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.D).HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
-
-                entity.Property(e => e.Description).HasMaxLength(1000);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ImageUrl).HasMaxLength(100);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.StreetAdress)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.ZipCode)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-         
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Driver)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Driver__AccountI__4BAC3F29");
             });
         }
     }

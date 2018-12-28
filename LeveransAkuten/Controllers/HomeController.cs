@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeveransAkuten.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers.HomeController
@@ -16,9 +17,9 @@ namespace LeveransAkuten.Controllers.HomeController
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //accService.BuildIdentityDb();
+            accService.BuildIdentityDb();
             return View();
         }
     }
