@@ -15,6 +15,8 @@ namespace LeveransAkuten.Models.Entities
         public bool? Crequired { get; set; }
         public bool? Drequired { get; set; }
         public bool? Cerequired { get; set; }
-        public string CompanyId { get; set; }
+        public string UserId { get; set; }
+
+        public virtual AspNetUsers User { get; set; }
     }
 }
