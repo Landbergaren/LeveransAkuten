@@ -19,6 +19,7 @@ namespace LeveransAkuten.Controllers.HomeController
 
         public async Task<IActionResult> Index()
         {
+            await accService.AddNewUserAsync();
             return View();
         }
     }

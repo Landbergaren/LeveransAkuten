@@ -29,7 +29,7 @@ namespace LeveransAkuten.Models
 
         public async Task<IdentityResult> AddNewUserAsync()
         {
-            return await userManager.CreateAsync(new BudAkutenUsers { UserName = "TestPelle" }, "Password");
+            return await userManager.CreateAsync(new BudAkutenUsers { UserName = "Test@Test.se" }, "Password");
         }
 
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
