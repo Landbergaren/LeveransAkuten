@@ -28,6 +28,7 @@ namespace LeveransAkuten
             services.AddIdentity<BudAkutenUsers, IdentityRole>( options => {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
             })
                 .AddEntityFrameworkStores<BudIdentityContext>()
                 .AddDefaultTokenProviders();
