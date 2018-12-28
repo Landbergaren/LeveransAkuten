@@ -101,11 +101,7 @@ namespace LeveransAkuten.Models.Entities
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
-                entity.HasOne(d => d.Account)
-                    .WithMany(p => p.Driver)
-                    .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Driver__AccountI__4BAC3F29");
+               
             });
         }
 

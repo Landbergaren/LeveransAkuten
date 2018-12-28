@@ -23,11 +23,11 @@ namespace LeveransAkuten.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login (LoginVm loginVm)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> Login (LoginVm loginVm)
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }

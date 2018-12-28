@@ -16,10 +16,10 @@ namespace LeveransAkuten.Controllers
         {
             this.adService = adService;
         }
-        [Route("/ads")]
-        public IActionResult Index()
+     
+        public async Task<IActionResult> Index()
         {
-            var CompanyAds = adService.GetAllAdsAsync();
+            var CompanyAds = await adService.GetAllAdsAsync();
             return View(CompanyAds);
         }
         [HttpGet]
