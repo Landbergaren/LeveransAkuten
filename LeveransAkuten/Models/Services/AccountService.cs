@@ -20,6 +20,7 @@ namespace LeveransAkuten.Models
             identityCtx = identCtx;
             userManager = userMan;
             signInManager = signInMan;
+
         }
 
         public void BuildIdentityDb()

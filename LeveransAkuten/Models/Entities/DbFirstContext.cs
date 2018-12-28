@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace LeveransAkuten.Models.Entities
 {
-    public partial class AppContext : DbContext
+    public partial class DbFirstContext : DbContext
     {
-        public AppContext()
+        public DbFirstContext()
         {
         }
 
-        public AppContext(DbContextOptions<AppContext> options)
+        public DbFirstContext(DbContextOptions<DbFirstContext> options)
             : base(options)
         {
         }
