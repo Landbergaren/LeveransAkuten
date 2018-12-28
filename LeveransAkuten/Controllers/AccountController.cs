@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers
@@ -19,9 +20,11 @@ namespace LeveransAkuten.Controllers
             return View();
         }
 
-        public async Task Login ()
+        [HttpPost]
+        public async Task<IActionResult> Login (LoginVm loginVm)
         {
 
+            return View();
         }
     }
 }
