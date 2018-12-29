@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeveransAkuten.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,8 +26,8 @@ namespace LeveransAkuten.Models.ViewModels.Ads
         public bool Crequired { get; set; }
         public bool Drequired { get; set; }
         public bool Cerequired { get; set; }
-        [Required]
-        public string UserId { get; set; }
-
+        //[Required]
+        //public string UserId { get; set; }
+       
     }
 }

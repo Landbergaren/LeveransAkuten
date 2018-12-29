@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LeveransAkuten.Models;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
@@ -41,7 +42,7 @@ namespace LeveransAkuten
             services.AddMvc();
             services.AddTransient<AccountService>();
             services.AddTransient<AdsService>();
-            
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
