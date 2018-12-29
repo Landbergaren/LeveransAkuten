@@ -31,7 +31,12 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCompany(RegIndexVm regVm)
         {
-            await regService.CreateCompanyAsync(regVm.Company);
+            var createResult = await regService.CreateCompanyAsync(regVm.Company);
+            if (!createResult.Succeeded)
+            {
+                regVm.ErrorMsges = createResult.Errors.Select(p => p.Description).ToList();
+                return View(nameof(Index), regVm);
+            }
             return RedirectToAction("Index", "Home");
         }
     }

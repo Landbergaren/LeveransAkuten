@@ -55,6 +55,13 @@
                                 <span asp-validation-for="Company.StreetAddress"></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Registrera</button>
+                            @if (Model?.ErrorMsges != null)
+                            {
+                                foreach (var error in Model.ErrorMsges)
+                                {
+                                    <div>@error</div>
+                                }
+                            }
                         </form>
                     </div>
                 </div>
