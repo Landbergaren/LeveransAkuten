@@ -13,9 +13,9 @@ namespace LeveransAkuten.Controllers
     {
         private readonly AdsService adService;
         private readonly IMapper mapper;
-        private readonly AccountService account;
+        private readonly LoginService account;
    
-        public AdsController(AdsService adService ,IMapper mapper,AccountService account)
+        public AdsController(AdsService adService ,IMapper mapper,LoginService account)
         {
             this.adService = adService;
             this.mapper = mapper;

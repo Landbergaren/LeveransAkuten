@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
 {
-    public class AccountService
+    public class LoginService
     {
         BudIdentityContext identityCtx;
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
 
-        public AccountService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
+        public LoginService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
         {
             identityCtx = identCtx;
             userManager = userMan;
