@@ -18,14 +18,14 @@ namespace LeveransAkuten.Controllers
             accountService = accSer;
         }
 
-        public IActionResult Login()
-        {
-            return View();
+        public IActionResult Login(string ReturnUrl)
+        {           
+            return View(new LoginVm { ReturnUrl = ReturnUrl });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVm loginVm, string returnUrl)
+        public async Task<IActionResult> Login(LoginVm loginVm)
         {
             //Unsuccessfull
             var loginResult = await accountService.LoginUserAsync(loginVm);
@@ -35,10 +35,10 @@ namespace LeveransAkuten.Controllers
                 return View(loginVm);
 
             //Successfull
-            if (string.IsNullOrEmpty(returnUrl))
-                return RedirectToAction(nameof(TestAuth));
+            if (string.IsNullOrEmpty(loginVm.ReturnUrl))
+                return RedirectToAction("Index", "home");
             else
-                return Redirect(returnUrl);
+                return Redirect(loginVm.ReturnUrl);
         }
 
         [Authorize]
