@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Company\" />
-    <Folder Include="Views\Driver\" />
     <Folder Include="wwwroot\Bootstrap\" />
     <Folder Include="wwwroot\Jquery\" />
   </ItemGroup>
