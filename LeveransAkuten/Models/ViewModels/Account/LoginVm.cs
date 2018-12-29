@@ -15,5 +15,6 @@ namespace LeveransAkuten.Models.ViewModels.Account
         [MinLength(6)]
         public string Password { get; set; }
         public string ErrorMsg { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
