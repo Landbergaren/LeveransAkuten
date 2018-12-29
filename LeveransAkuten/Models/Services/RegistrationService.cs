@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models.Services
@@ -26,7 +27,11 @@ namespace LeveransAkuten.Models.Services
             var createResult = await userManager.CreateAsync(company, companyVm.Password);
             if (!createResult.Succeeded)
                 return createResult;
-            var roleResult = await userManager.AddToRoleAsync(company, "Company");            
+            var roleResult = await userManager.AddToRoleAsync(company, "Company");       
+            if (roleResult.Succeeded)
+            {
+                await userManager.AddClaimAsync(company, new Claim("company_name", company.UserName));
+            }
                 return createResult;
         }
     }
