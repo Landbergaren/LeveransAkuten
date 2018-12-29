@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿@model LoginVm
+<div class="container">
 
     <div class="row">
         <div class="col-md-4"></div>
@@ -6,26 +7,23 @@
         <div class="col-md-4">
             <section class="login-form login-container">
                 <div class="login-container-buffert"></div>
-                <form>
-                  k
+                <form asp-controller="Account" asp-action="Login">
                   <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive mt-5" alt="" />
-                  <input type="email" name="email" placeholder="Email" class="form-control input-lg mt-3" />
+                  <input type="text" asp-for="Username" placeholder="Username" class="form-control input-lg mt-3" />
+                  <span asp-validation-for="Username"></span>
 
-                  <input type="password" class="form-control input-lg mt-3" placeholder="Password" />
+                  <input type="password" asp-for="Password" class="form-control input-lg mt-3" placeholder="Password" />
+                  <span asp-validation-for="Password"></span>
 
                   <div class=""></div>
 
                   <button type="submit" name="go" class="btn btn-lg btn-primary btn-block mt-3">Sign in</button>
                   <div>
-                    <a href="#">Create account</a> or <a href="#">reset password</a>
+                    <a  asp-controller="registration" asp-action="index">Create account</a>
                   </div>
-                  <a class="nav-link" asp-controller="registration" asp-action="index">Create account</a>
 
                 </form>
 
-                <div class="form-links">
-                    <a href="#">www.website.com</a>
-                </div>
             </section>
         </div>
         <div class="col-md-4"></div>
