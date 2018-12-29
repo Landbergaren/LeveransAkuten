@@ -16,7 +16,6 @@ namespace LeveransAkuten.Controllers.HomeController
             accService = accSer;
         }
 
-
         public IActionResult Index()
         {
             return View();

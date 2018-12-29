@@ -19,20 +19,26 @@ namespace LeveransAkuten.Controllers
         }
 
         public IActionResult Login()
-        {            
+        {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login (LoginVm loginVm)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginVm loginVm, string returnUrl)
         {
+            //Unsuccessfull
             var loginResult = await accountService.LoginUserAsync(loginVm);
             if (!ModelState.IsValid)
                 return View(loginVm);
             if (!loginResult.Succeeded)
                 return View(loginVm);
 
-            return RedirectToAction(nameof(TestAuth));
+            //Successfull
+            if (string.IsNullOrEmpty(returnUrl))
+                return RedirectToAction(nameof(TestAuth));
+            else
+                return Redirect(returnUrl);
         }
 
         [Authorize]
@@ -41,7 +47,7 @@ namespace LeveransAkuten.Controllers
             return Content("welcome Mr " + HttpContext.User.Identity.Name);
         }
 
-        public async Task<IActionResult> Logout ()
+        public async Task<IActionResult> Logout()
         {
             await accountService.LogoutAsync();
             return RedirectToAction("Index", "Home");
