@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -17,34 +12,55 @@ namespace LeveransAkuten.Models.Services
     {
         private readonly DbFirstContext appctx;
         private readonly IMapper mapper;
-        private readonly BudIdentityContext identCtx;
-        private readonly UserManager<BudAkutenUsers> userMan;
-        private readonly SignInManager<BudAkutenUsers> signInMan;
-    
 
-        public AdsService(DbFirstContext Appctx, IMapper mapper,BudIdentityContext identCtx,UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
+
+
+        public AdsService(DbFirstContext Appctx, IMapper mapper)
         {
-           
+
             this.appctx = Appctx;
             this.mapper = mapper;
-            this.identCtx = identCtx;
-            this.userMan = userMan;
-            this.signInMan = signInMan;
-            
+
+
         }
-        public async Task AddAdsAsync(AdsVm ad,string id )
+        public async Task AddAdsAsync(AdsVm ad, string id)
         {
-            var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired ,UserId= id };
+            var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired, UserId = id };
             await appctx.Ad.AddAsync(newAd);
             await appctx.SaveChangesAsync();
 
         }
         public Ad GetAdsAsync()
         {
-           
-            Ad adsHeaders =  appctx.Ad.SingleOrDefault();
+
+            Ad adsHeaders = appctx.Ad.SingleOrDefault();
             return adsHeaders;
         }
+        public List<Ad> GetUserAds(string userId)
+        {
 
+            List<Ad> adsList = appctx.Ad.Where(U => U.UserId == userId).Select(U => U).ToList();
+            return adsList;
+        }
+        public Ad GetUserAd(int id)
+        {
+
+            Ad ad = appctx.Ad.FirstOrDefault(u => u.Id == id);
+            return ad;
+        }
+        public async Task EditAdsAsync(EditAdsVm ad)
+        {
+
+            var dbAd = await appctx.Ad.FindAsync(ad.Id);
+            mapper.Map(ad, dbAd);
+            await appctx.SaveChangesAsync();
+        }
+
+        public async Task RemoveAd(int id)
+        {
+
+            appctx.Ad.Remove(new Ad() { Id = id }); 
+            await appctx.SaveChangesAsync();
+        }
     }
 }

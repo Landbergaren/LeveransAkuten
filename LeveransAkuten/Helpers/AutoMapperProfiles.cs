@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
-using LeveransAkuten.Models.ViewModels.Registration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,8 @@ namespace LeveransAkuten.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Ad, AdsVm>();
-            CreateMap<CompanyRegVm, BudAkutenUsers>();
+            CreateMap<Ad, EditAdsVm>();
+            CreateMap<EditAdsVm, Ad>();
         }
     }
 }
