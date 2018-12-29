@@ -18,6 +18,7 @@ namespace LeveransAkuten.Controllers.HomeController
 
         public IActionResult Index()
         {
+           
             return View();
         }
     }
