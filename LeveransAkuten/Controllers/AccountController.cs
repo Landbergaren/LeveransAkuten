@@ -18,8 +18,9 @@ namespace LeveransAkuten.Controllers
             accountService = accSer;
         }
 
-        public IActionResult Login(string ReturnUrl)
-        {           
+        public async Task<IActionResult> Login(string ReturnUrl)
+        {
+            await accountService.IfNotExistCreateRolesAsync();
             return View(new LoginVm { ReturnUrl = ReturnUrl });
         }
 
@@ -27,6 +28,7 @@ namespace LeveransAkuten.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVm loginVm)
         {
+            
             //Unsuccessfull
             var loginResult = await accountService.LoginUserAsync(loginVm);
             if (!ModelState.IsValid)

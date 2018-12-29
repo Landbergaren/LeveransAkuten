@@ -20,10 +20,14 @@ namespace LeveransAkuten.Models.Services
             mapper = map;
         }
 
-        public async Task CreateCompanyAsync(CompanyRegVm companyVm)
+        public async Task<IdentityResult> CreateCompanyAsync(CompanyRegVm companyVm)
         {
             var company = mapper.Map<BudAkutenUsers>(companyVm);
-            await userManager.CreateAsync(company, companyVm.Password);
+            var createResult = await userManager.CreateAsync(company, companyVm.Password);
+            if (!createResult.Succeeded)
+                return createResult;
+            var roleResult = await userManager.AddToRoleAsync(company, "Company");            
+                return createResult;
         }
     }
 }
