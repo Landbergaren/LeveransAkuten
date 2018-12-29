@@ -7,5 +7,7 @@ namespace LeveransAkuten.Models.ViewModels.Registration
 {
     public class RegIndexVm
     {
+        public DriverRegVm Driver { get; set; }
+        public CompanyRegVm Company { get; set; }
     }
 }
