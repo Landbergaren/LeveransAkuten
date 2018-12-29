@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using LeveransAkuten.Models;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
@@ -10,11 +12,13 @@ namespace LeveransAkuten.Controllers
     {
         private readonly AdsService adService;
         private readonly IMapper mapper;
+        private readonly AccountService account;
 
-        public AdsController(AdsService adService ,IMapper mapper)
+        public AdsController(AdsService adService ,IMapper mapper,AccountService account)
         {
             this.adService = adService;
             this.mapper = mapper;
+            this.account = account;
         }
         [Route("/ads")]
         public IActionResult Index()
@@ -24,15 +28,18 @@ namespace LeveransAkuten.Controllers
             return View(companyAdsVm);
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            //await account.AddNewUserAsync();
+           
             return View();
         }
         [HttpPost]
 
         public async Task<IActionResult> Create(AdsVm adsVm)
         {
-            await adService.AddAdsAsync(adsVm);
+            var id = HttpContext.User.Claims.FirstOrDefault().Value;
+            await adService.AddAdsAsync(adsVm,id);
             return RedirectToAction(nameof(Index));
         }
 
