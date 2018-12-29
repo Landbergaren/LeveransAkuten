@@ -11,9 +11,9 @@ namespace LeveransAkuten.Controllers
 {
     public class AccountController : Controller
     {
-        AccountService accountService;
+        LoginService accountService;
 
-        public AccountController(AccountService accSer)
+        public AccountController(LoginService accSer)
         {
             accountService = accSer;
         }

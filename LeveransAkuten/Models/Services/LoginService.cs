@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
 {
-    public class AccountService
+    public class LoginService
     {
         BudIdentityContext identityCtx;
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
 
-        public AccountService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
+        public LoginService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan)
         {
             identityCtx = identCtx;
             userManager = userMan;
@@ -26,11 +26,6 @@ namespace LeveransAkuten.Models
         public void BuildIdentityDb()
         {
             identityCtx.Database.EnsureCreated();
-        }
-
-        public async Task<IdentityResult> AddNewUserAsync()
-        {
-            return await userManager.CreateAsync(new BudAkutenUsers { UserName = "testpelle" }, "Password");
         }
 
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
