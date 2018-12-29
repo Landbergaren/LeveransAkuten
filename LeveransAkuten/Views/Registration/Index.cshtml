@@ -13,7 +13,7 @@
                 <div class="container">
                     <div class="jumbotron">
                         <h3>Företag</h3>
-                        <form>
+                        <form asp-controller="registration" asp-action="CreateCompany">
                             <div class="form-group">
                                 <label asp-for="Company.Username"></label>
                                 <input asp-for="Company.Username" type="text" class="form-control" id="exampleInputPassword1" placeholder="lösenord">
@@ -58,7 +58,7 @@
                 <div class="container">
                     <div class="jumbotron">
                         <h3>Förare</h3>
-                        <form>
+                        <form asp-controller="registration" asp-action="CreateDriver">
                             <div class="form-group">
                                 <label asp-for="Driver.UserName"></label>
                                 <input asp-for="Driver.UserName" type="text" class="form-control" id="exampleInputPassword1" placeholder="lösenord">
