@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,13 @@ namespace LeveransAkuten.Models.Services
 
             appctx.Ad.Remove(new Ad() { Id = id }); 
             await appctx.SaveChangesAsync();
+        }
+
+        public Ad GetAdDetails(int id)
+        {
+            var AdDetails =  GetUserAd(id);
+
+            return AdDetails;
         }
     }
 }

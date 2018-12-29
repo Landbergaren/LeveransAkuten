@@ -67,5 +67,13 @@ namespace LeveransAkuten.Controllers
             await adService.RemoveAd(id);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var adDetails = adService.GetAdDetails(id);
+            var adDetailsVm = mapper.Map<DetailsAdsVm>(adDetails);
+            return View(adDetailsVm);
+        }
     }
 }
