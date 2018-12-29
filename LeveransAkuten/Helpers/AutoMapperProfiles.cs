@@ -14,7 +14,8 @@ namespace LeveransAkuten.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Ad, AdsVm>();
-          
+            CreateMap<Ad, EditAdsVm>();
+            CreateMap<EditAdsVm, Ad>();
         }
     }
 }
