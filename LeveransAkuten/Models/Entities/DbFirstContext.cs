@@ -108,5 +108,7 @@ namespace LeveransAkuten.Models.Entities
         public DbSet<LeveransAkuten.Models.ViewModels.Ads.AdsVm> AdsVm { get; set; }
 
         public DbSet<LeveransAkuten.Models.ViewModels.Ads.EditAdsVm> EditAdsVm { get; set; }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.Ads.DetailsAdsVm> DetailsAdsVm { get; set; }
     }
 }
