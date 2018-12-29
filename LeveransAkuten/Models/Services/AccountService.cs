@@ -28,11 +28,6 @@ namespace LeveransAkuten.Models
             identityCtx.Database.EnsureCreated();
         }
 
-        public async Task<IdentityResult> AddNewUserAsync()
-        {
-            return await userManager.CreateAsync(new BudAkutenUsers { UserName = "testpelle" }, "Password");
-        }
-
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
         {
             var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
