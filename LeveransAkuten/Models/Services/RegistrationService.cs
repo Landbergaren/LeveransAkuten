@@ -30,7 +30,7 @@ namespace LeveransAkuten.Models.Services
             var roleResult = await userManager.AddToRoleAsync(company, "Company");       
             if (roleResult.Succeeded)
             {
-                await userManager.AddClaimAsync(company, new Claim("company_name", company.UserName));
+                await userManager.AddClaimAsync(company, new Claim("company_name", companyVm.CompanyName));
             }
                 return createResult;
         }
