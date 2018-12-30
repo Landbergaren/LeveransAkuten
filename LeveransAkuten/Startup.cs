@@ -40,9 +40,9 @@ namespace LeveransAkuten
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            services.AddTransient<RegistrationService>();
-            services.AddTransient<LoginService>();
-            services.AddTransient<AdsService>();
+            services.AddTransient<RegistrationServices>();
+            services.AddTransient<LoginServices>();
+            services.AddTransient<AdsServices>();
             services.AddAutoMapper();
         }
 

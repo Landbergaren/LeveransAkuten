@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
 {
-    public class LoginService
+    public class LoginServices
     {
         private const string DRIVER_ROLE = "Driver";
         private const string COMPANY_ROLE = "Company";
@@ -18,7 +18,7 @@ namespace LeveransAkuten.Models
         SignInManager<BudAkutenUsers> signInManager;
         RoleManager<IdentityRole> roleManager;
 
-        public LoginService(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan, RoleManager<IdentityRole> rolMan)
+        public LoginServices(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan, RoleManager<IdentityRole> rolMan)
         {
             identityCtx = identCtx;
             userManager = userMan;
