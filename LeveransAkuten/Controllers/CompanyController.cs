@@ -21,11 +21,12 @@ namespace LeveransAkuten.Controllers
         CompanyServices companyServices;
         UserManager<BudAkutenUsers> userManager;
         private readonly IMapper mapper;
-        public CompanyController(CompanyServices compSer, UserManager<BudAkutenUsers> userMan, AdsServices adService, IMapper map)
+        public CompanyController(CompanyServices compSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer, IMapper map)
         {
             companyServices = compSer;
             userManager = userMan;
             mapper = map;
+            adService = adSer;
         }
 
         public async Task<IActionResult> Index()
@@ -35,6 +36,13 @@ namespace LeveransAkuten.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CreateAd()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateAd(AdsVm adsVm)
         {
             var id = HttpContext.User.Claims.FirstOrDefault().Value;
