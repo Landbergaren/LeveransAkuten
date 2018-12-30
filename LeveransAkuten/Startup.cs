@@ -43,6 +43,8 @@ namespace LeveransAkuten
             services.AddTransient<RegistrationService>();
             services.AddTransient<LoginService>();
             services.AddTransient<AdsService>();
+            services.AddTransient<SearchDriverService>();
+            
             services.AddAutoMapper();
         }
 

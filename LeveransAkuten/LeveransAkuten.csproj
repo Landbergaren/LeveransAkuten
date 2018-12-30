@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Company\" />
+    <Folder Include="Models\ViewModels\SearchDriver\" />
     <Folder Include="wwwroot\Bootstrap\" />
     <Folder Include="wwwroot\Jquery\" />
   </ItemGroup>
