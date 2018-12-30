@@ -37,7 +37,7 @@ namespace LeveransAkuten.Controllers
                 return View(nameof(Index), regVm);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Driver");
         }
 
         [HttpPost]
@@ -54,7 +54,7 @@ namespace LeveransAkuten.Controllers
                 regVm.ErrorMsges = createResult.Errors.Select(p => p.Description).ToList();
                 return View(nameof(Index), regVm);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Company");
         }
     }
 }
