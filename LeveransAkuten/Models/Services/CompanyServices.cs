@@ -20,8 +20,7 @@ namespace LeveransAkuten.Models.Services
         }
         public async Task<CompanyIndexAdVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
-            var user = userManager.GetUserAsync(HttpContext.User);
-            var ads = dbContext.Ad.Include(o => o.User).Select(p => p.User.)
+            var ads = await dbContext.Ad.Include(o => o.User).Select(p => new CompanyIndexAdVm { Header = p.Header, username = p.User.UserName }).ToListAsync();
                 return new CompanyIndexAdVm();
         }
     }

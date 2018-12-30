@@ -7,21 +7,29 @@
     </h1>
 
     <h3>Dina kommande uppdrag</h3>
-    @foreach (var ad in Model.AdsNotStarted)
+    @if (Model?.AdsNotStarted != null)
     {
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Project One</a>
-                        </h4>
+        foreach (var ad in Model?.AdsNotStarted)
+        {
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#">Project One</a>
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     }
+    else
+    {
+        <p>Det finns inga uppdrag just nu</p>
+    }
+
 
     <!-- /.row -->
     <!-- Pagination -->
