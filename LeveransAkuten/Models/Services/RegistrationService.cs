@@ -34,5 +34,25 @@ namespace LeveransAkuten.Models.Services
             }
                 return createResult;
         }
+
+        internal async Task<IdentityResult> CreateDriverAsync(DriverRegVm driverVm)
+        {
+            var driver = mapper.Map<BudAkutenUsers>(driverVm);
+            var createResult = await userManager.CreateAsync(driver, driverVm.Password);
+            if (!createResult.Succeeded)
+                return createResult;
+            var roleResult = await userManager.AddToRoleAsync(driver, "Driver");
+            if (roleResult.Succeeded)
+            {
+                await userManager.AddClaimAsync(driver, new Claim("first_name", driverVm.FirstName));
+                await userManager.AddClaimAsync(driver, new Claim("first_name", driverVm.LastName));
+                await userManager.AddClaimAsync(driver, new Claim("a_license", driverVm.ALicense.ToString()));
+                await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
+                await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
+                await userManager.AddClaimAsync(driver, new Claim("ce_license", driverVm.CELicense.ToString()));
+                await userManager.AddClaimAsync(driver, new Claim("d_license", driverVm.DLicense.ToString()));
+            }
+            return createResult;
+        }
     }
 }

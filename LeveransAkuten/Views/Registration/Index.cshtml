@@ -7,6 +7,13 @@
 </div>
 
 <div class="container">
+    @if (Model?.ErrorMsges != null)
+    {
+        foreach (var error in Model.ErrorMsges)
+        {
+            <div>@error</div>
+        }
+    }
     <table>
         <tr>
             <td>
@@ -55,13 +62,6 @@
                                 <span asp-validation-for="Company.StreetAddress"></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Registrera</button>
-                            @if (Model?.ErrorMsges != null)
-                            {
-                                foreach (var error in Model.ErrorMsges)
-                                {
-                                    <div>@error</div>
-                                }
-                            }
                         </form>
                     </div>
                 </div>
@@ -80,6 +80,16 @@
                                 <label asp-for="Driver.Password"></label>
                                 <input asp-for="Driver.Password" type="password" class="form-control">
                                 <span asp-validation-for="Driver.Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Driver.FirstName"></label>
+                                <input asp-for="Driver.FirstName" type="text" class="form-control">
+                                <span asp-validation-for="Driver.FirstName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Driver.LastName"></label>
+                                <input asp-for="Driver.LastName" type="text" class="form-control">
+                                <span asp-validation-for="Driver.LastName"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Driver.Email"></label>
@@ -121,7 +131,7 @@
                                 <input asp-for="Driver.DLicense" type="checkbox" class="form-control">
                                 <span asp-validation-for="Driver.DLicense"></span>
                             </div>
-                            <button disabled type="submit" class="btn btn-primary">Registrera</button>
+                            <button type="submit" class="btn btn-primary">Registrera</button>
                         </form>
                     </div>
                 </div>

@@ -25,6 +25,18 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDriver(RegIndexVm regVm)
         {
+            if (!ModelState.IsValid)
+                return View(nameof(Index), regVm);
+
+            var createResult = await regService.CreateDriverAsync(regVm.Driver);
+
+            if (!createResult.Succeeded)
+            {
+                //failed to create
+                regVm.ErrorMsges = createResult.Errors.Select(p => p.Description).ToList();
+                return View(nameof(Index), regVm);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

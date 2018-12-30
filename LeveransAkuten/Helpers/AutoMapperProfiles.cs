@@ -18,6 +18,7 @@ namespace LeveransAkuten.Helpers
             CreateMap<Ad, EditAdsVm>();
             CreateMap<EditAdsVm, Ad>();
             CreateMap<CompanyRegVm, BudAkutenUsers>();
+            CreateMap<DriverRegVm, BudAkutenUsers>();
         }
     }
 }
