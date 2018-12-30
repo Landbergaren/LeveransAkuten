@@ -2,6 +2,7 @@
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Registration;
+using LeveransAkuten.Models.ViewModels.SearchDriver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace LeveransAkuten.Helpers
             CreateMap<EditAdsVm, Ad>();
             CreateMap<CompanyRegVm, BudAkutenUsers>();
             CreateMap<DriverRegVm, BudAkutenUsers>();
+            CreateMap<SearchDriverVm, BudAkutenUsers>();
         }
     }
 }

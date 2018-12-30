@@ -2,6 +2,7 @@
 using LeveransAkuten.Models;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {
+    [Authorize(Roles = "Company")]
     public class AdsController : Controller
     {
         private readonly AdsServices adService;
         private readonly IMapper mapper;
-        private readonly LoginService account;
+        private readonly LoginServices account;
    
-        public AdsController(AdsService adService ,IMapper mapper,LoginService account)
+        public AdsController(AdsServices adService ,IMapper mapper, LoginServices account)
         {
             this.adService = adService;
             this.mapper = mapper;
