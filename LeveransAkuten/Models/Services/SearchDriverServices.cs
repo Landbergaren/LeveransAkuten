@@ -27,19 +27,19 @@ namespace LeveransAkuten.Models.Services
         public List<List<SearchDriverVm>> GetDriverList()
         {
 
-            var DriverLists= new List<List<SearchDriverVm>>();
+            var DriverLists = new List<List<SearchDriverVm>>();
             var Drivers = userMan.GetUsersInRoleAsync("Driver").Result.Select(x => x).ToList();
             foreach (var item in Drivers)
             {
-                var DriverList = userMan.GetClaimsAsync(item).Result.Select(d => new SearchDriverVm { Value = d.Value }).ToList();
+
+                var DriverList = userMan.GetClaimsAsync(item).Result.Select(d => new SearchDriverVm { Value = d.Value, Email = item.Email }).ToList();
                 DriverLists.Add(DriverList);
             }
-            
-           
-          
 
             return DriverLists;
-            
+
         }
+
+
     }
 }

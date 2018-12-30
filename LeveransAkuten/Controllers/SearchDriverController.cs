@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.SearchDriver;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace LeveransAkuten.Controllers
 {
@@ -18,6 +15,7 @@ namespace LeveransAkuten.Controllers
         {
             this.searchDriverService = searchDriverService;
             this.map = map;
+
         }
         [Route("/Search/Driver")]
         public IActionResult Index()
@@ -26,5 +24,10 @@ namespace LeveransAkuten.Controllers
             var DriverListVm = map.Map<List<List<SearchDriverVm>>>(DriverList);
             return View(DriverList);
         }
+
+
+
+
+
     }
 }

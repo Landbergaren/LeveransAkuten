@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Find Your Driver</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +25,7 @@
                 B-Licence
             </th>
             <th>
-                Be-Licence
+                C-Licence
             </th>
             <th>
                 Ce-Licence
@@ -35,9 +33,6 @@
             <th>
                 D-Licence
             </th>
-
-
-
         </tr>
     </thead>
     <tbody>
@@ -48,11 +43,9 @@
                 @foreach (var item1 in item)
                 {
 
-
                     <td>
                         @Html.DisplayFor(modelItem => item1.Value)
                     </td>
-
 
                 }
 
