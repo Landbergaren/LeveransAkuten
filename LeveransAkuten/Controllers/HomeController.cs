@@ -10,8 +10,8 @@ namespace LeveransAkuten.Controllers.HomeController
 {
     public class HomeController : Controller
     {
-        LoginService accService;
-        public HomeController(LoginService accSer)
+        LoginServices accService;
+        public HomeController(LoginServices accSer)
         {
             accService = accSer;
         }

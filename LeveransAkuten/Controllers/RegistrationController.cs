@@ -11,8 +11,8 @@ namespace LeveransAkuten.Controllers
 {
     public class RegistrationController : Controller
     {
-        RegistrationService regService;
-        public RegistrationController(RegistrationService regSer)
+        RegistrationServices regService;
+        public RegistrationController(RegistrationServices regSer)
         {
             regService = regSer;
         }
