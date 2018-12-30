@@ -18,10 +18,10 @@ namespace LeveransAkuten.Models.Services
             dbContext = dbCtx;
             userManager = userMan;
         }
-        public async Task<CompanyIndexAdVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
+        public async Task<List<CompanyIndexAdVm>> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
-            var ads = await dbContext.Ad.Include(o => o.User).Select(p => new CompanyIndexAdVm { Header = p.Header, username = p.User.UserName }).ToListAsync();
-                return new CompanyIndexAdVm();
+            var ads = await dbContext.Ad.Include(o => o.User).Where( a => DateTime.Compare(a.StartDate, DateTime.Now) > 0).Select(p => new CompanyIndexAdVm { Header = p.Header, username = p.User.UserName }).ToListAsync();
+                return ads;
         }
     }
 }

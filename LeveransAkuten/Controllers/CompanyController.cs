@@ -6,6 +6,7 @@ using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,12 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await userManager.GetUserAsync(HttpContext.User);
-            await companyServices.GetAdsNotStartedAsync(loggedInUser);
-            return View();
+            var companyIndexVm = new CompanyIndexVm 
+            {
+                AdsNotStarted = await companyServices.GetAdsNotStartedAsync(loggedInUser)
+            };
+            
+            return View(companyIndexVm);
         }
 
         [HttpGet]
