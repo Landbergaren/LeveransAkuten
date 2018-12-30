@@ -56,7 +56,7 @@ namespace LeveransAkuten.Models.Services
                 return roleResult;
             }
             await userManager.AddClaimAsync(driver, new Claim("first_name", driverVm.FirstName));
-            await userManager.AddClaimAsync(driver, new Claim("first_name", driverVm.LastName));
+            await userManager.AddClaimAsync(driver, new Claim("last_name", driverVm.LastName));
             await userManager.AddClaimAsync(driver, new Claim("a_license", driverVm.ALicense.ToString()));
             await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
             await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
