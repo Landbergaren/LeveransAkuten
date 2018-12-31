@@ -11,22 +11,24 @@ namespace LeveransAkuten.Controllers
 {
     public class AccountController : Controller
     {
-        AccountService accountService;
+        LoginServices accountService;
 
-        public AccountController(AccountService accSer)
+        public AccountController(LoginServices accSer)
         {
             accountService = accSer;
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> Login(string ReturnUrl)
         {
-            return View();
+            await accountService.IfNotExistCreateRolesAsync();
+            return View(new LoginVm { ReturnUrl = ReturnUrl });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVm loginVm, string returnUrl)
+        public async Task<IActionResult> Login(LoginVm loginVm)
         {
+            
             //Unsuccessfull
             var loginResult = await accountService.LoginUserAsync(loginVm);
             if (!ModelState.IsValid)
@@ -35,10 +37,10 @@ namespace LeveransAkuten.Controllers
                 return View(loginVm);
 
             //Successfull
-            if (string.IsNullOrEmpty(returnUrl))
-                return RedirectToAction(nameof(TestAuth));
+            if (string.IsNullOrEmpty(loginVm.ReturnUrl))
+                return RedirectToAction("Index", "home");
             else
-                return Redirect(returnUrl);
+                return Redirect(loginVm.ReturnUrl);
         }
 
         [Authorize]

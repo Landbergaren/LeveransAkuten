@@ -1,4 +1,4 @@
-﻿@model LeveransAkuten.Models.ViewModels.Ads.AdsVm
+﻿@model IEnumerable<LeveransAkuten.Models.ViewModels.Ads.AdsVm>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,73 +7,77 @@
 
 <h1>Index</h1>
 
-<div>
-    <h4>AdsVm</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Header)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Header)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Arequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Arequired)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brequired)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Crequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Crequired)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Drequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Drequired)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cerequired)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cerequired)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>*@
-    </dl>
-</div>
-<div>
-    
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Header)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+
+            <th >
+                @Html.DisplayNameFor(model => model.Arequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cerequired)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Header)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Arequired)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Brequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Crequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cerequired)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <form  asp-action="Delete" asp-route-id="@item.Id" method="post" >
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

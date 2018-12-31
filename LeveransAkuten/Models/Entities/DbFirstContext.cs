@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.SearchDriver;
 
 namespace LeveransAkuten.Models.Entities
 {
@@ -106,5 +107,11 @@ namespace LeveransAkuten.Models.Entities
         }
 
         public DbSet<LeveransAkuten.Models.ViewModels.Ads.AdsVm> AdsVm { get; set; }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.Ads.EditAdsVm> EditAdsVm { get; set; }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.Ads.DetailsAdsVm> DetailsAdsVm { get; set; }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.SearchDriver.SearchDriverVm> SearchDriverVm { get; set; }
     }
 }
