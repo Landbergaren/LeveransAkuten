@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Registration;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +37,7 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(company);
                 return roleResult;
             }
-            await userManager.AddClaimAsync(company, new Claim("company_name", companyVm.CompanyName));
+            await userManager.AddClaimAsync(company, new Claim(CompanyClaimTypes.CompanyName, companyVm.CompanyName));
             return createResult;
         }
 
@@ -55,13 +56,13 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(driver);
                 return roleResult;
             }
-            await userManager.AddClaimAsync(driver, new Claim("first_name", driverVm.FirstName));
-            await userManager.AddClaimAsync(driver, new Claim("last_name", driverVm.LastName));
-            await userManager.AddClaimAsync(driver, new Claim("a_license", driverVm.ALicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim("b_license", driverVm.BLicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim("ce_license", driverVm.CELicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim("d_license", driverVm.DLicense.ToString()));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.FirstName, driverVm.FirstName));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.LastName, driverVm.LastName));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.ALicense, driverVm.ALicense.ToString()));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.BLicense, driverVm.BLicense.ToString()));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.CLicense, driverVm.BLicense.ToString()));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.CELicense, driverVm.CELicense.ToString()));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.DLicense, driverVm.DLicense.ToString()));
             return createResult;
         }
     }
