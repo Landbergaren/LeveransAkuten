@@ -29,10 +29,11 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Login(LoginVm loginVm)
         {
             
-            //Unsuccessfull
-            var loginResult = await accountService.LoginUserAsync(loginVm);
+            //Unsuccessfull            
             if (!ModelState.IsValid)
                 return View(loginVm);
+
+            var loginResult = await accountService.LoginUserAsync(loginVm);
             if (!loginResult.Succeeded)
                 return View(loginVm);
 
