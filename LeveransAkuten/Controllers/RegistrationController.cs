@@ -37,7 +37,7 @@ namespace LeveransAkuten.Controllers
                 return View(nameof(Index), regVm);
             }
 
-            return RedirectToAction("Index", "Ads");
+            return RedirectToAction("Index", "Driver");
         }
 
         [HttpPost]
