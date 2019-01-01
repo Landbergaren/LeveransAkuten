@@ -24,15 +24,15 @@ namespace LeveransAkuten.Models.Services
             var allAds = await dbContext.Ad.Where(a => a.UserId == loggedInUser.Id).ToListAsync();
             indexVm.AdsNotStarted = allAds
                 .Where( a => DateTime.Compare(a.StartDate, DateTime.Now) > 0)
-                .Select(a => new CompanyIndexAdVm {username = a.User.UserName })
+                .Select(a => new CompanyIndexAdVm { Header = a.Header })
                 .ToList();
             indexVm.AdsActive = allAds
                 .Where(a => (DateTime.Compare(a.StartDate, DateTime.Now) < 0) && (DateTime.Compare((DateTime)a.EndDate, DateTime.Now) > 0))
-                .Select(a => new CompanyIndexAdVm { username = a.User.UserName })
+                .Select(a => new CompanyIndexAdVm { Header = a.Header })
                 .ToList();
             indexVm.AdsFinished = allAds
                 .Where(a => DateTime.Compare((DateTime)a.EndDate, DateTime.Now) < 0)
-                .Select(a => new CompanyIndexAdVm { username = a.User.UserName })
+                .Select(a => new CompanyIndexAdVm { Header = a.Header })
                 .ToList();
                 return indexVm;
         }
