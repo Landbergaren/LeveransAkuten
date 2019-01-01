@@ -18,11 +18,23 @@ namespace LeveransAkuten.Models.Services
             dbContext = dbCtx;
             userManager = userMan;
         }
-        public async Task<List<CompanyIndexAdVm>> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
+        public async Task<CompanyIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
+            var indexVm = new CompanyIndexVm();
             var allAds = await dbContext.Ad.Where(a => a.UserId == loggedInUser.Id).ToListAsync();
-            var ads = allAds.Where( a => DateTime.Compare(a.StartDate, DateTime.Now) > 0).Select(p => new CompanyIndexAdVm {username = p.User.UserName }).ToList();
-                return ads;
+            indexVm.AdsNotStarted = allAds
+                .Where( a => DateTime.Compare(a.StartDate, DateTime.Now) > 0)
+                .Select(a => new CompanyIndexAdVm {username = a.User.UserName })
+                .ToList();
+            indexVm.AdsActive = allAds
+                .Where(a => (DateTime.Compare(a.StartDate, DateTime.Now) < 0) && (DateTime.Compare((DateTime)a.EndDate, DateTime.Now) > 0))
+                .Select(a => new CompanyIndexAdVm { username = a.User.UserName })
+                .ToList();
+            indexVm.AdsFinished = allAds
+                .Where(a => DateTime.Compare((DateTime)a.EndDate, DateTime.Now) < 0)
+                .Select(a => new CompanyIndexAdVm { username = a.User.UserName })
+                .ToList();
+                return indexVm;
         }
     }
 }

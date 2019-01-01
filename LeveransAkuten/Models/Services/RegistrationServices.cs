@@ -31,7 +31,7 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(company);
                 return createResult;
             }
-            var roleResult = await userManager.AddToRoleAsync(company, "Company");       
+            var roleResult = await userManager.AddToRoleAsync(company, Roles.Company);       
             if (!roleResult.Succeeded)
             {
                 await userManager.DeleteAsync(company);
@@ -50,7 +50,7 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(driver);
                 return createResult;
             }
-            var roleResult = await userManager.AddToRoleAsync(driver, "Driver");
+            var roleResult = await userManager.AddToRoleAsync(driver, Roles.Driver);
             if (!roleResult.Succeeded)
             {
                 await userManager.DeleteAsync(driver);

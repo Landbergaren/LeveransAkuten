@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeveransAkuten.Models;
+using LeveransAkuten.Models.ClaimTypes;
+using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers
@@ -12,10 +15,12 @@ namespace LeveransAkuten.Controllers
     public class AccountController : Controller
     {
         LoginServices accountService;
+        UserManager<BudAkutenUsers> userManager;
 
-        public AccountController(LoginServices accSer)
+        public AccountController(LoginServices accSer, UserManager<BudAkutenUsers> userMan)
         {
             accountService = accSer;
+            userManager = userMan;
         }
 
         public async Task<IActionResult> Login(string ReturnUrl)
@@ -28,7 +33,6 @@ namespace LeveransAkuten.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVm loginVm)
         {
-            
             //Unsuccessfull            
             if (!ModelState.IsValid)
                 return View(loginVm);
@@ -38,10 +42,17 @@ namespace LeveransAkuten.Controllers
                 return View(loginVm);
 
             //Successfull
-            if (string.IsNullOrEmpty(loginVm.ReturnUrl))
-                return RedirectToAction("Index", "home");
+            if (!string.IsNullOrEmpty(loginVm.ReturnUrl))
+            {
+                return Redirect(loginVm.ReturnUrl);                
+            }
+            
+            if (User.IsInRole(Roles.Driver))
+                return RedirectToAction("Index", "Driver");
+            else if (User.IsInRole(Roles.Company))
+                return RedirectToAction("Index", "Company");
             else
-                return Redirect(loginVm.ReturnUrl);
+                return View(loginVm);
         }
 
         [Authorize]

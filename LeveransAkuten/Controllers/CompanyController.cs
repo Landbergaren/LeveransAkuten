@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
@@ -15,7 +16,7 @@ namespace LeveransAkuten.Controllers
 {
 
 
-    [Authorize(Roles = "Company")]
+    [Authorize(Roles = Roles.Company)]
     public class CompanyController : Controller
     {
         private readonly AdsServices adService;
@@ -33,11 +34,8 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await userManager.GetUserAsync(HttpContext.User);
-            var companyIndexVm = new CompanyIndexVm 
-            {
-                AdsNotStarted = await companyServices.GetAdsNotStartedAsync(loggedInUser)
-            };
-            
+            var companyIndexVm = await companyServices.GetAdsNotStartedAsync(loggedInUser);
+
             return View(companyIndexVm);
         }
 
