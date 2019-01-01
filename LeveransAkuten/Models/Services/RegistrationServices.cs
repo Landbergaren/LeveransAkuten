@@ -58,6 +58,7 @@ namespace LeveransAkuten.Models.Services
             }
             await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.FirstName, driverVm.FirstName));
             await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.LastName, driverVm.LastName));
+            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.BirthDate, driverVm.BirthDate.ToString()));
             await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.ALicense, driverVm.ALicense.ToString()));
             await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.BLicense, driverVm.BLicense.ToString()));
             await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.CLicense, driverVm.BLicense.ToString()));

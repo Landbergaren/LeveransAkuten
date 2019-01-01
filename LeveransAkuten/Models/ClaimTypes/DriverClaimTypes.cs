@@ -9,6 +9,7 @@ namespace LeveransAkuten.Models.ClaimTypes
     {
         public const string FirstName = "first_name";
         public const string LastName = "last_name";
+        public const string BirthDate = "birth_date";
         public const string ALicense = "a_license";
         public const string BLicense = "b_license";
         public const string CLicense = "c_license";
