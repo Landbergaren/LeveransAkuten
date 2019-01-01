@@ -4,7 +4,6 @@
     {
         public const string FirstName = "first_name";
         public const string LastName = "last_name";
-        public const string Age = "Age";
         public const string ALicense = "a_license";
         public const string BLicense = "b_license";
         public const string CLicense = "c_license";
