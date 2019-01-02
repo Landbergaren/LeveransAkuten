@@ -12,6 +12,7 @@ namespace LeveransAkuten.Models.Entities
 
         public int Id { get; set; }
         public string CompanyName { get; set; }
+        public string AspNetUsersId { get; set; }
 
         public virtual ICollection<Ad> Ad { get; set; }
     }
