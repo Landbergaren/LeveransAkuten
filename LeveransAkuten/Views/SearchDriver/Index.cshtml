@@ -1,0 +1,54 @@
+﻿@model IEnumerable<List<LeveransAkuten.Models.ViewModels.SearchDriver.SearchDriverVm>>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Find Your Driver</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                A-Licence
+            </th>
+            <th>
+                B-Licence
+            </th>
+            <th>
+                C-Licence
+            </th>
+            <th>
+                Ce-Licence
+            </th>
+            <th>
+                D-Licence
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                @foreach (var item1 in item)
+                {
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Value)
+                    </td>
+
+                }
+
+            </tr>}
+    </tbody>
+</table>
