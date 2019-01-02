@@ -10,13 +10,15 @@ namespace LeveransAkuten.Models.Entities
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public bool? Arequired { get; set; }
-        public bool? Brequired { get; set; }
-        public bool? Crequired { get; set; }
-        public bool? Drequired { get; set; }
-        public bool? Cerequired { get; set; }
-        public string UserId { get; set; }
+        public bool Arequired { get; set; }
+        public bool Brequired { get; set; }
+        public bool Crequired { get; set; }
+        public bool Drequired { get; set; }
+        public bool Cerequired { get; set; }
+        public int? DriverId { get; set; }
+        public int CompanyId { get; set; }
 
-        public virtual AspNetUsers User { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Driver Driver { get; set; }
     }
 }
