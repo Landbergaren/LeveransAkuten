@@ -23,7 +23,7 @@ namespace LeveransAkuten.Models.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BudAkuten;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -58,16 +58,20 @@ namespace LeveransAkuten.Models.Entities
                     .WithMany(p => p.Ad)
                     .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ad__CompanyId__5629CD9C");
+                    .HasConstraintName("FK__Ad__CompanyId__5812160E");
 
                 entity.HasOne(d => d.Driver)
                     .WithMany(p => p.Ad)
                     .HasForeignKey(d => d.DriverId)
-                    .HasConstraintName("FK__Ad__DriverId__5535A963");
+                    .HasConstraintName("FK__Ad__DriverId__571DF1D5");
             });
 
             modelBuilder.Entity<Company>(entity =>
             {
+                entity.Property(e => e.AspNetUsersId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.CompanyName)
                     .IsRequired()
                     .HasMaxLength(50);
