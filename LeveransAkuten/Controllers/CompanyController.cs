@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
-using LeveransAkuten.Models.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {

@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,12 +37,7 @@ namespace LeveransAkuten.Models.Services
             Ad adsHeaders = appctx.Ad.SingleOrDefault();
             return adsHeaders;
         }
-        //public List<Ad> GetUserAds(string userId)
-        //{
 
-        //    List<Ad> adsList = appctx.Ad.Where(U => U.UserId == userId).Select(U => U).ToList();
-        //    return adsList;
-        //}
         public Ad GetUserAd(int id)
         {
 
@@ -62,13 +55,13 @@ namespace LeveransAkuten.Models.Services
         public async Task RemoveAd(int id)
         {
 
-            appctx.Ad.Remove(new Ad() { Id = id }); 
+            appctx.Ad.Remove(new Ad() { Id = id });
             await appctx.SaveChangesAsync();
         }
 
         public Ad GetAdDetails(int id)
         {
-            var AdDetails =  GetUserAd(id);
+            var AdDetails = GetUserAd(id);
 
             return AdDetails;
         }
