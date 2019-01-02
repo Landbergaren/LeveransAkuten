@@ -36,7 +36,7 @@ namespace LeveransAkuten.Controllers
             var loggedInUser = await userManager.GetUserAsync(HttpContext.User);
             var companyIndexVm = await companyServices.GetAdsNotStartedAsync(loggedInUser);
 
-            return View(/*companyIndexVm*/);
+            return View(companyIndexVm);
         }
 
         [HttpGet]

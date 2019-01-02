@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <section>
         <h1 class="my-4">
-            @User.FindFirst("company_name").Value
+            @User.Identity.Name
         </h1>
     </section>
     <a asp-controller="Company" asp-action="CreateAd" class="btn btn-success">Skapa ny Annons</a>

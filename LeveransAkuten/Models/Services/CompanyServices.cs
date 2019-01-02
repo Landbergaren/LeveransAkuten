@@ -21,7 +21,8 @@ namespace LeveransAkuten.Models.Services
         public async Task<CompanyIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
             var indexVm = new CompanyIndexVm();
-            var allAds = await dbContext.Ad.Where(a => a.CompanyId.ToString() == loggedInUser.Id).ToListAsync();
+            var usersCompanyId = dbContext.Company.Where(c => c.AspNetUsersId == loggedInUser.Id).Select( c => c.Id).FirstOrDefault();
+            var allAds = await dbContext.Ad.Where(a => a.CompanyId == usersCompanyId).ToListAsync();
             indexVm.AdsNotStarted = allAds
                 .Where(a => DateTime.Compare(a.StartDate, DateTime.Now) > 0)
                 .Select(a => new CompanyIndexAdVm { Header = a.Header })
