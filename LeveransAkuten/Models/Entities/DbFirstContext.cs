@@ -18,7 +18,7 @@ namespace LeveransAkuten.Models.Entities
         }
 
         public virtual DbSet<Ad> Ad { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        //public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -67,43 +67,43 @@ namespace LeveransAkuten.Models.Entities
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Ad)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ad__UserId__4E88ABD4");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.Ad)
+                //    .HasForeignKey(d => d.UserId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK__Ad__UserId__4E88ABD4");
             });
 
-            modelBuilder.Entity<AspNetUsers>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedEmail)
-                    .HasName("EmailIndex");
+            //modelBuilder.Entity<AspNetUsers>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedEmail)
+            //        .HasName("EmailIndex");
 
-                entity.HasIndex(e => e.NormalizedUserName)
-                    .HasName("UserNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+            //    entity.HasIndex(e => e.NormalizedUserName)
+            //        .HasName("UserNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+            //    entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.City).HasMaxLength(100);
+            //    entity.Property(e => e.City).HasMaxLength(100);
 
-                entity.Property(e => e.Description).HasMaxLength(2000);
+            //    entity.Property(e => e.Description).HasMaxLength(2000);
 
-                entity.Property(e => e.Email).HasMaxLength(256);
+            //    entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.ImageUrl).HasMaxLength(250);
+            //    entity.Property(e => e.ImageUrl).HasMaxLength(250);
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            //    entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+            //    entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
-                entity.Property(e => e.StreetAdress).HasMaxLength(100);
+            //    entity.Property(e => e.StreetAdress).HasMaxLength(100);
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
+            //    entity.Property(e => e.UserName).HasMaxLength(256);
 
                
-            });
+            //});
         }
 
         public DbSet<LeveransAkuten.Models.ViewModels.Ads.AdsVm> AdsVm { get; set; }

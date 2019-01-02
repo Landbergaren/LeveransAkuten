@@ -1,4 +1,5 @@
-﻿using LeveransAkuten.Models.Entities;
+﻿using LeveransAkuten.Models.ClaimTypes;
+using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace LeveransAkuten.Models
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
         {
             var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
+            var roles = await userManager.GetRolesAsync(await userManager.FindByNameAsync(loginVm.Username));
             return result;
         }
 
@@ -54,5 +56,7 @@ namespace LeveransAkuten.Models
         {
             await signInManager.SignOutAsync();
         }
+
+        
     }
 }
