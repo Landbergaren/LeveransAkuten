@@ -15,11 +15,13 @@ namespace LeveransAkuten.Models.Services
     {
         IMapper mapper;
         UserManager<BudAkutenUsers> userManager;
+        DbFirstContext appContext;
 
-        public RegistrationServices(IMapper map, UserManager<BudAkutenUsers> userMan)
+        public RegistrationServices(IMapper map, UserManager<BudAkutenUsers> userMan, DbFirstContext appCon)
         {
             userManager = userMan;
             mapper = map;
+            appContext = appCon;
         }
 
         public async Task<IdentityResult> CreateCompanyAsync(CompanyRegVm companyVm)
@@ -56,14 +58,10 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(driver);
                 return roleResult;
             }
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.FirstName, driverVm.FirstName));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.LastName, driverVm.LastName));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.BirthDate, driverVm.BirthDate.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.ALicense, driverVm.ALicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.BLicense, driverVm.BLicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.CLicense, driverVm.BLicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.CELicense, driverVm.CELicense.ToString()));
-            await userManager.AddClaimAsync(driver, new Claim(DriverClaimTypes.DLicense, driverVm.DLicense.ToString()));
+            var userDriver = mapper.Map<Driver>(driverVm);
+            userDriver.AspNetUsersId = userManager.GetUserIdAsync(driver).Result;
+            await appContext.Driver.AddAsync(userDriver);
+            await appContext.SaveChangesAsync();
             return createResult;
         }
     }

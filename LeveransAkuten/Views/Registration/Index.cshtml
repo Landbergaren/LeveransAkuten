@@ -87,6 +87,11 @@
                                 <span asp-validation-for="Driver.Password"></span>
                             </div>
                             <div class="form-group">
+                                <label asp-for="Driver.ConfirmPassword"></label>
+                                <input asp-for="Driver.ConfirmPassword" type="password" class="form-control">
+                                <span asp-validation-for="Driver.ConfirmPassword"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for="Driver.FirstName"></label>
                                 <input asp-for="Driver.FirstName" type="text" class="form-control">
                                 <span asp-validation-for="Driver.FirstName"></span>
@@ -97,9 +102,9 @@
                                 <span asp-validation-for="Driver.LastName"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.BirthDate"></label>
-                                <input asp-for="Driver.BirthDate" type="date" class="form-control">
-                                <span asp-validation-for="Driver.BirthDate"></span>
+                                <label asp-for="Driver.DateOfBirth"></label>
+                                <input asp-for="Driver.DateOfBirth" type="date" class="form-control">
+                                <span asp-validation-for="Driver.DateOfBirth"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Driver.Email"></label>
@@ -117,29 +122,29 @@
                                 <span asp-validation-for="Driver.City"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.ALicense"></label>
-                                <input asp-for="Driver.ALicense" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.ALicense"></span>
+                                <label asp-for="Driver.A"></label>
+                                <input asp-for="Driver.A" type="checkbox" class="form-control">
+                                <span asp-validation-for="Driver.A"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.BLicense"></label>
-                                <input asp-for="Driver.BLicense" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.BLicense"></span>
+                                <label asp-for="Driver.B"></label>
+                                <input asp-for="Driver.B" type="checkbox" class="form-control">
+                                <span asp-validation-for="Driver.B"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.CLicense"></label>
-                                <input asp-for="Driver.CLicense" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.CLicense"></span>
+                                <label asp-for="Driver.C"></label>
+                                <input asp-for="Driver.C" type="checkbox" class="form-control">
+                                <span asp-validation-for="Driver.C"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.CELicense"></label>
-                                <input asp-for="Driver.CELicense" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.CELicense"></span>
+                                <label asp-for="Driver.CE"></label>
+                                <input asp-for="Driver.CE" type="checkbox" class="form-control">
+                                <span asp-validation-for="Driver.CE"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Driver.DLicense"></label>
-                                <input asp-for="Driver.DLicense" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.DLicense"></span>
+                                <label asp-for="Driver.D"></label>
+                                <input asp-for="Driver.D" type="checkbox" class="form-control">
+                                <span asp-validation-for="Driver.D"></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Registrera</button>
                         </form>
