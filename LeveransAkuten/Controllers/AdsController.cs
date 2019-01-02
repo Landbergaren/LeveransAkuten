@@ -29,9 +29,9 @@ namespace LeveransAkuten.Controllers
         {
             var userId = HttpContext.User.Claims.FirstOrDefault().Value;
 
-            var companyAds = adService.GetUserAds(userId);
-            var companyAdsVm = mapper.Map<List<AdsVm>>(companyAds);
-            return View(companyAdsVm);
+            //var companyAds = adService.GetUserAds(userId);
+            //var companyAdsVm = mapper.Map<List<AdsVm>>(companyAds);
+            return View();
         }
         [HttpGet]
         public IActionResult Create()

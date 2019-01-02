@@ -22,6 +22,7 @@ namespace LeveransAkuten.Helpers
             CreateMap<DriverRegVm, BudAkutenUsers>();
             CreateMap<SearchDriverVm, BudAkutenUsers>();
             CreateMap<DriverRegVm, Driver>();
+            CreateMap<CompanyRegVm, Company>();
         }
     }
 }
