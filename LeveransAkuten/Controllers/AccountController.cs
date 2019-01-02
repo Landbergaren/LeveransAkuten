@@ -46,6 +46,7 @@ namespace LeveransAkuten.Controllers
             {
                 return Redirect(loginVm.ReturnUrl);                
             }
+            var test = User.IsInRole(Roles.Company);
             if (User.IsInRole(Roles.Driver))
                 return RedirectToAction("Index", "Driver");
             else if (User.IsInRole(Roles.Company))
