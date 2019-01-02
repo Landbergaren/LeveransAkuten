@@ -26,7 +26,7 @@ namespace LeveransAkuten.Models.Services
         }
         public async Task AddAdsAsync(AdsVm ad, string id)
         {
-            var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired, UserId = id };
+            var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired,CompanyId= int.Parse(id)};
             await appctx.Ad.AddAsync(newAd);
             await appctx.SaveChangesAsync();
 
@@ -37,12 +37,12 @@ namespace LeveransAkuten.Models.Services
             Ad adsHeaders = appctx.Ad.SingleOrDefault();
             return adsHeaders;
         }
-        public List<Ad> GetUserAds(string userId)
-        {
+        //public List<Ad> GetUserAds(string userId)
+        //{
 
-            List<Ad> adsList = appctx.Ad.Where(U => U.UserId == userId).Select(U => U).ToList();
-            return adsList;
-        }
+        //    List<Ad> adsList = appctx.Ad.Where(U => U.UserId == userId).Select(U => U).ToList();
+        //    return adsList;
+        //}
         public Ad GetUserAd(int id)
         {
 
