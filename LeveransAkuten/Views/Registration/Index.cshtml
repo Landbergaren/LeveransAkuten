@@ -32,6 +32,11 @@
                                 <span asp-validation-for="Company.Password"></span>
                             </div>
                             <div class="form-group">
+                                <label asp-for="Company.ConfirmPassword"></label>
+                                <input asp-for="Company.ConfirmPassword" type="password" class="form-control">
+                                <span asp-validation-for="Company.ConfirmPassword"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for="Company.CompanyName"></label>
                                 <input asp-for="Company.CompanyName" type="text" class="form-control" id="exampleInputEmail1">
                                 <span asp-validation-for="Company.CompanyName"></span>
