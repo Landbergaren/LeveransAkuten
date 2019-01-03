@@ -5,13 +5,17 @@
     <div class="container">
       <img src="~/Img/newlogo.png" />
     </div>
-     <p>Budakuten är en hemsida som hjälper företag och yrkeschaufförer att få kontakt med varandra. </p>
+    <p>Budakuten är en hemsida som hjälper företag och yrkeschaufförer att få kontakt med varandra. </p>
   </div>
-  
-</div>
-<div class="container">
-  <p>@Html.ActionLink("Logga in", "Login", "Account") eller @Html.ActionLink("Registera", "Index", "Registration") dig för att komma igång!</p>
 
 </div>
+@if (!User.Identity.IsAuthenticated)
+{
+  <div class="container">
+    <p>@Html.ActionLink("Logga in", "Login", "Account") eller @Html.ActionLink("Registera", "Index", "Registration") dig för att komma igång!</p>
+
+  </div>
+}
+
 
 <!-- /.container -->
