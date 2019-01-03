@@ -32,9 +32,16 @@ namespace LeveransAkuten.Controllers
             return View(companyIndexVm);
         }
 
-        public async Task<IActionResult> Details(string id)
+        //public async Task<IActionResult> Details(string id)
+        //{
+        //    return View(await driverSer.GetDriverByIdAsync(id));
+        //}
+
+        [HttpGet]
+        [Route("driver/{name}")]
+        public async Task<IActionResult> Details(string name)
         {
-            return View(await driverSer.GetDriverByIdAsync(id));
+            return View(await driverSer.GetDriverByUserName(name));
         }
     }
 }
