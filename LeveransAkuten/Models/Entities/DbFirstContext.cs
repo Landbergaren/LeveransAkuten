@@ -63,9 +63,9 @@ namespace LeveransAkuten.Models.Entities
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+                //entity.Property(e => e.UserId)
+                //    .IsRequired()
+                //    .HasMaxLength(450);
 
                 //entity.HasOne(d => d.User)
                 //    .WithMany(p => p.Ad)
