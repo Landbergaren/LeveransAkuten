@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using LeveransAkuten.Models.ViewModels.Driver;
 
 namespace LeveransAkuten.Models.Entities
 {
@@ -94,5 +95,7 @@ namespace LeveransAkuten.Models.Entities
                     .HasMaxLength(50);
             });
         }
+
+        public DbSet<LeveransAkuten.Models.ViewModels.Driver.DriverIndexAdVm> DriverIndexAdVm { get; set; }
     }
 }
