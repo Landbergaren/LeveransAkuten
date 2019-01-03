@@ -33,31 +33,38 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(company);
                 return createResult;
             }
-            var roleResult = await userManager.AddToRoleAsync(company, Roles.Company);       
+            var roleResult = await userManager.AddToRoleAsync(company, Roles.Company);
             if (!roleResult.Succeeded)
             {
                 await userManager.DeleteAsync(company);
                 return roleResult;
             }
+            var userCompany = mapper.Map<Company>(companyVm);
+            userCompany.AspNetUsersId = company.Id;
+            await appContext.Company.AddAsync(userCompany);
+            await appContext.SaveChangesAsync();
             return createResult;
         }
 
-        internal async Task<IdentityResult> CreateDriverAsync(DriverRegVm driverVm)
+        public async Task<IdentityResult> CreateDriverAsync(DriverRegVm driverVm)
         {
-            var userDriver = mapper.Map<BudAkutenUsers>(driverVm);
-            var createResult = await userManager.CreateAsync(userDriver, driverVm.Password);
+            var driver = mapper.Map<BudAkutenUsers>(driverVm);
+            var createResult = await userManager.CreateAsync(driver, driverVm.Password);
             if (!createResult.Succeeded)
             {
-                await userManager.DeleteAsync(userDriver);
+                await userManager.DeleteAsync(driver);
                 return createResult;
             }
-            var roleResult = await userManager.AddToRoleAsync(userDriver, Roles.Driver);
+            var roleResult = await userManager.AddToRoleAsync(driver, Roles.Driver);
             if (!roleResult.Succeeded)
             {
-                await userManager.DeleteAsync(userDriver);
+                await userManager.DeleteAsync(driver);
                 return roleResult;
             }
-            //appContext.
+            var userDriver = mapper.Map<Driver>(driverVm);
+            userDriver.AspNetUsersId = driver.Id;
+            await appContext.Driver.AddAsync(userDriver);
+            await appContext.SaveChangesAsync();
             return createResult;
         }
     }

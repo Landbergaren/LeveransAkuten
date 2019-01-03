@@ -1,4 +1,5 @@
-﻿using LeveransAkuten.Models.Entities;
+﻿using LeveransAkuten.Models.ClaimTypes;
+using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
@@ -7,8 +8,6 @@ namespace LeveransAkuten.Models
 {
     public class LoginServices
     {
-        private const string DRIVER_ROLE = "Driver";
-        private const string COMPANY_ROLE = "Company";
         BudIdentityContext identityCtx;
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
@@ -29,12 +28,12 @@ namespace LeveransAkuten.Models
 
         public async Task IfNotExistCreateRolesAsync()
         {
-            if (!await roleManager.RoleExistsAsync(COMPANY_ROLE) && !await roleManager.RoleExistsAsync(DRIVER_ROLE))
+            if (!await roleManager.RoleExistsAsync(Roles.Company) && !await roleManager.RoleExistsAsync(Roles.Driver))
             {
                 var companyRole = new IdentityRole();
                 var driverRole = new IdentityRole();
-                companyRole.Name = COMPANY_ROLE;
-                driverRole.Name = DRIVER_ROLE;
+                companyRole.Name = Roles.Driver;
+                driverRole.Name = Roles.Company;
                 await roleManager.CreateAsync(companyRole);
                 await roleManager.CreateAsync(driverRole);
             }
