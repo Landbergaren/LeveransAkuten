@@ -20,17 +20,17 @@ namespace LeveransAkuten.Models.ViewModels.Registration
         [Required, MinLength(2)]
         public string LastName { get; set; }
         [Required]
-        public DateTime BirthDate { get; set; }
+        public DateTime DateOfBirth { get; set; }
         [Required, EmailAddress]
         public string Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
         public string City { get; set; }
-        public bool ALicense { get; set; } = false;
-        public bool BLicense { get; set; } = false;
-        public bool CLicense { get; set; } = false;
-        public bool DLicense { get; set; } = false;
-        public bool CELicense { get; set; } = false;
+        public bool A { get; set; } = false;
+        public bool B { get; set; } = false;
+        public bool C { get; set; } = false;
+        public bool D { get; set; } = false;
+        public bool CE { get; set; } = false;
     }
 }
