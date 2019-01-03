@@ -59,5 +59,26 @@ namespace LeveransAkuten.Models.Services
 
             return driver;
         }
+
+        public async Task<DriverIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
+        {
+
+            var indexVm = new DriverIndexVm();
+
+            var allAds = await appctx.Ad.ToListAsync();
+            indexVm.AdsNotStarted = allAds
+                .Where(a => DateTime.Compare(a.StartDate, DateTime.Now) > 0)
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
+                .ToList();
+            indexVm.AdsActive = allAds
+                .Where(a => (DateTime.Compare(a.StartDate, DateTime.Now) < 0) && (DateTime.Compare((DateTime)a.EndDate, DateTime.Now) > 0))
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
+                .ToList();
+            indexVm.AdsFinished = allAds
+                .Where(a => DateTime.Compare((DateTime)a.EndDate, DateTime.Now) < 0)
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
+                .ToList();
+            return indexVm;
+        }
     }
 }

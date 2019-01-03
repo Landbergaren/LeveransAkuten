@@ -14,10 +14,10 @@ namespace LeveransAkuten.Controllers
     public class DriverController : Controller
     {
       
-        private readonly DriverServices driverSer;
+        private readonly DriverService driverSer;
         private readonly UserManager<BudAkutenUsers> userMan;
 
-        public DriverController(DriverServices driverSer, UserManager<BudAkutenUsers> userMan)
+        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan)
         {
             
             this.driverSer = driverSer;
