@@ -23,12 +23,18 @@ namespace LeveransAkuten.Controllers
             this.driverSer = driverSer;
             this.userMan = userMan;
         }
+
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
 
             return View(companyIndexVm);
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            return View(await driverSer.GetDriverByIdAsync(id));
         }
     }
 }
