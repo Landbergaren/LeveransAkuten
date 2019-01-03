@@ -20,6 +20,7 @@ namespace LeveransAkuten.Models.Entities
         public bool D { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string AspNetUsersId { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<Ad> Ad { get; set; }
     }

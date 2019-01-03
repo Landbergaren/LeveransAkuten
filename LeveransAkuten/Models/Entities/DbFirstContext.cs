@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using LeveransAkuten.Models.ViewModels.Driver;
 
 namespace LeveransAkuten.Models.Entities
 {
@@ -24,7 +23,7 @@ namespace LeveransAkuten.Models.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-////#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BudAkuten;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -59,12 +58,12 @@ namespace LeveransAkuten.Models.Entities
                     .WithMany(p => p.Ad)
                     .HasForeignKey(d => d.CompanyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ad__CompanyId__5812160E");
+                    .HasConstraintName("FK__Ad__CompanyId__75A278F5");
 
                 entity.HasOne(d => d.Driver)
                     .WithMany(p => p.Ad)
                     .HasForeignKey(d => d.DriverId)
-                    .HasConstraintName("FK__Ad__DriverId__571DF1D5");
+                    .HasConstraintName("FK__Ad__DriverId__74AE54BC");
             });
 
             modelBuilder.Entity<Company>(entity =>
@@ -76,6 +75,8 @@ namespace LeveransAkuten.Models.Entities
                 entity.Property(e => e.CompanyName)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Description).HasMaxLength(500);
             });
 
             modelBuilder.Entity<Driver>(entity =>
@@ -86,6 +87,8 @@ namespace LeveransAkuten.Models.Entities
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
 
+                entity.Property(e => e.Description).HasMaxLength(500);
+
                 entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -95,7 +98,5 @@ namespace LeveransAkuten.Models.Entities
                     .HasMaxLength(50);
             });
         }
-
-        public DbSet<LeveransAkuten.Models.ViewModels.Driver.DriverIndexAdVm> DriverIndexAdVm { get; set; }
     }
 }

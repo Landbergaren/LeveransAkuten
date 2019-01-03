@@ -39,7 +39,6 @@ namespace LeveransAkuten.Models.Services
                 await userManager.DeleteAsync(company);
                 return roleResult;
             }
-            await userManager.AddClaimAsync(company, new Claim(CompanyClaimTypes.CompanyName, companyVm.CompanyName));
             return createResult;
         }
 
