@@ -20,5 +20,8 @@ namespace LeveransAkuten.Models.ViewModels.Driver
         public bool C { get; set; }
         public bool D { get; set; }
         public bool CE { get; set; }
+        public string PhoneNumber { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }
