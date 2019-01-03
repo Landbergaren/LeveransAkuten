@@ -16,7 +16,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Header)
             </th>
-          
+
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
 
-            <th >
+            <th>
                 @Html.DisplayNameFor(model => model.Arequired)
             </th>
             <th>
@@ -43,41 +43,42 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Header)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Header)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td >
-                @Html.DisplayFor(modelItem => item.Arequired)
-            </td>
-            <td >
-                @Html.DisplayFor(modelItem => item.Brequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Crequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drequired)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cerequired)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <form  asp-action="Delete" asp-route-id="@item.Id" method="post" >
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arequired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brequired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Crequired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Drequired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cerequired)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

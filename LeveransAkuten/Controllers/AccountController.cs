@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LeveransAkuten.Models;
-using LeveransAkuten.Models.ClaimTypes;
+﻿using LeveransAkuten.Models;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {
@@ -44,15 +40,14 @@ namespace LeveransAkuten.Controllers
             //Successfull
             if (!string.IsNullOrEmpty(loginVm.ReturnUrl))
             {
-                return Redirect(loginVm.ReturnUrl);                
+                return Redirect(loginVm.ReturnUrl);
             }
-            var test = User.IsInRole(Roles.Company);
-            if (User.IsInRole(Roles.Driver))
-                return RedirectToAction("Index", "Driver");
-            else if (User.IsInRole(Roles.Company))
-                return RedirectToAction("Index", "Company");
-            else
-                return View(loginVm);
+            //if (User.IsInRole(Roles.Driver))
+            //    return RedirectToAction("Index", "Driver");
+            //else if (User.IsInRole(Roles.Company))
+            //    return RedirectToAction("Index", "Company");
+            //else
+            return View(loginVm);
         }
 
         [Authorize]

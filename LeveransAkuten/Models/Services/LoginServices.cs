@@ -1,11 +1,6 @@
-﻿using LeveransAkuten.Models.ClaimTypes;
-using LeveransAkuten.Models.Entities;
+﻿using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
@@ -57,6 +52,6 @@ namespace LeveransAkuten.Models
             await signInManager.SignOutAsync();
         }
 
-        
+
     }
 }
