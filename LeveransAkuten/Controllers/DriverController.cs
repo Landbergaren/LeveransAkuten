@@ -57,6 +57,10 @@ namespace LeveransAkuten.Controllers
         {
             var adDetails = adsServices.GetAdDetails(id);
             var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
+            if (adDetails.DriverId != null)
+            {
+                adDetailsVm.Booked = true;
+            }
             return View(adDetailsVm);
         }
         [HttpPost]
@@ -68,7 +72,7 @@ namespace LeveransAkuten.Controllers
                 var ad = adsServices.GetUserAd(id);
                 var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
                 var driverIdInt = driverSer.GetDriverId(driverId);
-
+                
                 ad.DriverId = driverIdInt;
                 var adEdit = map.Map<EditAdsVm>(ad);
                 await adsServices.EditAdsAsync(adEdit);

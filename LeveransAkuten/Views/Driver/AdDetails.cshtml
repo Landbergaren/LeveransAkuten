@@ -9,7 +9,7 @@
 
 <div>
 
-    <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post"><input type="submit" value="Take It" /></form>
+    <form asp-action="TakeIt"  asp-controller="Driver" asp-route-id="@Model.Id" method="post"><input  disabled ="@Model.Booked" type="submit" value="Take It" /></form>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
