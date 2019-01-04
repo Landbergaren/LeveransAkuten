@@ -45,7 +45,7 @@ namespace LeveransAkuten.Controllers
         //}
 
         [HttpGet]
-        [Route("driver/{name}")]
+        [Route("driver/details/{name}")]
         public async Task<IActionResult> Details(string name)
         {
             return View(await driverSer.GetDriverByUserName(name));
