@@ -1,4 +1,5 @@
 ﻿using LeveransAkuten.Models;
+using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
@@ -34,7 +35,6 @@ namespace LeveransAkuten.Controllers
                 return View(loginVm);
 
             var loginResult = await accountService.LoginUserAsync(loginVm);
-            var roles = accountService.GetRole("");
             if (!loginResult.Succeeded)
                 return View(loginVm);
 
@@ -43,11 +43,15 @@ namespace LeveransAkuten.Controllers
             {
                 return Redirect(loginVm.ReturnUrl);
             }
-            //if (User.IsInRole(Roles.Driver))
-            //    return RedirectToAction("Index", "Driver");
-            //else if (User.IsInRole(Roles.Company))
-            //    return RedirectToAction("Index", "Company");
-            //else
+            var roles = await accountService.GetRoleAsync(loginVm.Username);
+            foreach (var role in roles)
+            {
+                if (role.Contains(Roles.Company))
+                    return RedirectToAction("Index", "Company");
+                else if (role.Contains(Roles.Driver))
+                    return RedirectToAction("Index", "Driver");
+            }
+            //No roles available for user
             return View(loginVm);
         }
 

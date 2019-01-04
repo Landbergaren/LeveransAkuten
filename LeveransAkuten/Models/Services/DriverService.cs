@@ -1,5 +1,6 @@
 ﻿using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Driver;
+using LeveransAkuten.Models.ViewModels.Ads;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -127,5 +128,44 @@ namespace LeveransAkuten.Models.Services
             var driverIdInt = driver.Id;
             return driverIdInt;
         }
+
+        public async Task<AdsVm[]> GetAllAds()
+        {
+            var allAds = await appctx.Ad.ToArrayAsync();
+
+            //AdsVm[] ads = new AdsVm[allAds.Length];
+
+            //for(int i = 0; i < allAds.Length; i++)
+            //{
+            //    ads[i].Header = allAds[i].Header;
+            //    ads[i].Arequired = allAds[i].Arequired;
+            //    ads[i].Brequired = allAds[i].Brequired;
+            //    ads[i].Cerequired = allAds[i].Crequired;
+            //    ads[i].Crequired = allAds[i].Crequired;
+            //    ads[i].Description = allAds[i].Description;
+            //    ads[i].StartDate = allAds[i].StartDate;
+            //    ads[i].EndDate = allAds[i].StartDate;
+            //}
+
+
+
+            //return ads;
+
+            var ads = allAds.Select
+                (a => new AdsVm
+                {
+                    Header = a.Header,
+                    Arequired = a.Arequired,
+                    Brequired = a.Brequired,
+                    Crequired = a.Crequired,
+                    Cerequired = a.Cerequired,
+                    Description = a.Description,
+                    StartDate = a.StartDate,
+                    EndDate = a.EndDate.Value
+
+                });
+
+            return ads.ToArray();
         }
+    }
 }

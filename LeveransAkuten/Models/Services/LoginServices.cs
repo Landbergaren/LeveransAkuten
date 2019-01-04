@@ -44,7 +44,6 @@ namespace LeveransAkuten.Models
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
         {
             var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
-            var roles = await userManager.GetRolesAsync(await userManager.FindByNameAsync(loginVm.Username));
             return result;
         }
 
@@ -53,10 +52,9 @@ namespace LeveransAkuten.Models
             await signInManager.SignOutAsync();
         }
 
-        public async Task<IList<string>> GetRole(string id)
+        public async Task<IList<string>> GetRoleAsync(string userName)
         {
-            //var loggedInUser = await userManager.FindByNameAsync(loginVm.Username)
-            var roles = await userManager.GetRolesAsync(new BudAkutenUsers { Id = id });
+            var roles = await userManager.GetRolesAsync(await userManager.FindByNameAsync(userName));
             return roles;
         }
     }
