@@ -6,6 +6,7 @@ using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,19 +32,12 @@ namespace LeveransAkuten.Controllers
         }
 
         public async Task<IActionResult> Index()
-
-
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
 
             return View(companyIndexVm);
         }
-
-        //public async Task<IActionResult> Details(string id)
-        //{
-        //    return View(await driverSer.GetDriverByIdAsync(id));
-        //}
 
         [HttpGet]
         [Route("driver/details/{name}")]
@@ -63,6 +57,7 @@ namespace LeveransAkuten.Controllers
             }
             return View(adDetailsVm);
         }
+
         [HttpPost]
         public async Task<IActionResult> TakeIt(int id)
         {
@@ -78,16 +73,15 @@ namespace LeveransAkuten.Controllers
                 await adsServices.EditAdsAsync(adEdit);
               
             }
-
             return RedirectToAction(nameof(Index));
         }
-
 
         [HttpGet]
         public IActionResult SearchAd()
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
@@ -97,6 +91,21 @@ namespace LeveransAkuten.Controllers
                 Ads = ads
             };
             return View(vm);
+        }
+        
+        [HttpGet]
+        [Route("driver/update/{name}")]
+        public async Task<IActionResult> Update(string name)
+        {
+            var d = await driverSer.GetDriverForUpdate(name);
+            return View(d);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(DriverUpdateVm driver)
+        {
+            await driverSer.UpdateDriver(driver);
+            return View();
         }
 
         [HttpPost]
