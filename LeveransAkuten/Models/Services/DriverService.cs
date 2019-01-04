@@ -148,5 +148,36 @@ namespace LeveransAkuten.Models.Services
 
             return ads.ToArray();
         }
+
+        public async Task<AdsVm[]> FilterAds (AdsVm adRequest)
+        {
+            var allAds = await appctx.Ad.ToArrayAsync();
+            List<AdsVm> filteredAds = new List<AdsVm>();
+
+            foreach (var ad in allAds)
+            {
+                if(ad.Arequired && adRequest.Arequired ||
+                    ad.Brequired && adRequest.Brequired ||
+                    ad.Crequired && adRequest.Crequired ||
+                    ad.Cerequired && adRequest.Cerequired ||
+                    ad.Drequired && adRequest.Drequired
+                    )
+                {
+                    filteredAds.Add(new AdsVm {
+                        Header = ad.Header,
+                        Arequired = ad.Arequired,
+                        Brequired = ad.Brequired,
+                        Crequired = ad.Crequired,
+                        Cerequired = ad.Cerequired,
+                        Description = ad.Description,
+                        StartDate = ad.StartDate,
+                        EndDate = ad.EndDate.Value
+                    });
+                }
+            }
+
+            return filteredAds.ToArray(); 
+
+        } 
     }
 }

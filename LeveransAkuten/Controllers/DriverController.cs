@@ -88,5 +88,18 @@ namespace LeveransAkuten.Controllers
             };
             return View(vm);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DisplayAds(AdsVm ad)
+        {
+            var filteredAds = await driverSer.FilterAds(ad);
+
+            AdSearchVm vm = new AdSearchVm
+            {
+                Ads = filteredAds
+            };
+
+            return View(vm);
+        }
     }
 }
