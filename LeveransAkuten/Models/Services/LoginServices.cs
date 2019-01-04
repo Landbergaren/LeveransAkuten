@@ -1,18 +1,19 @@
-﻿using LeveransAkuten.Models.Entities;
+﻿using LeveransAkuten.Models.ClaimTypes;
+using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
 {
     public class LoginServices
     {
-        private const string DRIVER_ROLE = "Driver";
-        private const string COMPANY_ROLE = "Company";
         BudIdentityContext identityCtx;
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
         RoleManager<IdentityRole> roleManager;
+        private object loginVm;
 
         public LoginServices(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan, RoleManager<IdentityRole> rolMan)
         {
@@ -29,12 +30,12 @@ namespace LeveransAkuten.Models
 
         public async Task IfNotExistCreateRolesAsync()
         {
-            if (!await roleManager.RoleExistsAsync(COMPANY_ROLE) && !await roleManager.RoleExistsAsync(DRIVER_ROLE))
+            if (!await roleManager.RoleExistsAsync(Roles.Company) && !await roleManager.RoleExistsAsync(Roles.Driver))
             {
                 var companyRole = new IdentityRole();
                 var driverRole = new IdentityRole();
-                companyRole.Name = COMPANY_ROLE;
-                driverRole.Name = DRIVER_ROLE;
+                companyRole.Name = Roles.Driver;
+                driverRole.Name = Roles.Company;
                 await roleManager.CreateAsync(companyRole);
                 await roleManager.CreateAsync(driverRole);
             }
@@ -43,7 +44,6 @@ namespace LeveransAkuten.Models
         public async Task<SignInResult> LoginUserAsync(LoginVm loginVm)
         {
             var result = await signInManager.PasswordSignInAsync(loginVm.Username, loginVm.Password, false, false);
-            var roles = await userManager.GetRolesAsync(await userManager.FindByNameAsync(loginVm.Username));
             return result;
         }
 
@@ -52,6 +52,10 @@ namespace LeveransAkuten.Models
             await signInManager.SignOutAsync();
         }
 
-
+        public async Task<IList<string>> GetRoleAsync(string userName)
+        {
+            var roles = await userManager.GetRolesAsync(await userManager.FindByNameAsync(userName));
+            return roles;
+        }
     }
 }

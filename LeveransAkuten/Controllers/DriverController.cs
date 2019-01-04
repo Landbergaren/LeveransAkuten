@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
@@ -17,14 +18,20 @@ namespace LeveransAkuten.Controllers
       
         private readonly DriverService driverSer;
         private readonly UserManager<BudAkutenUsers> userMan;
+        private readonly AdsServices adsServices;
+        private readonly IMapper map;
 
-        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan)
+        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan,AdsServices adsServices, IMapper map)
         {
             
             this.driverSer = driverSer;
             this.userMan = userMan;
+            this.adsServices = adsServices;
+            this.map = map;
         }
+
         public async Task<IActionResult> Index()
+
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
@@ -32,20 +39,37 @@ namespace LeveransAkuten.Controllers
             return View(companyIndexVm);
         }
 
+        //public async Task<IActionResult> Details(string id)
+        //{
+        //    return View(await driverSer.GetDriverByIdAsync(id));
+        //}
+
         [HttpGet]
-        public IActionResult SearchAd ()
+        [Route("driver/{name}")]
+        public async Task<IActionResult> Details(string name)
         {
-            return View();
+            return View(await driverSer.GetDriverByUserName(name));
         }
+
         [HttpGet]
-        public async Task<IActionResult>  DisplayAds ()
+        public IActionResult AdDetails(int id)
         {
-            var ads = await driverSer.GetAllAds();
-            AdSearchVm vm = new AdSearchVm
-            {
-                Ads = ads
-            };
-            return View(vm);
+            var adDetails = adsServices.GetAdDetails(id);
+            var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
+            return View(adDetailsVm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> TakeIt(int id)
+        {
+           
+            var ad = adsServices.GetUserAd(id);
+            var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
+            var driverIdInt = driverSer.GetDriverId(driverId);
+
+            ad.DriverId = driverIdInt;
+            var adEdit = map.Map<EditAdsVm>(ad);
+            await adsServices.EditAdsAsync(adEdit);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

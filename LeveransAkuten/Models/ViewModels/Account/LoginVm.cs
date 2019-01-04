@@ -8,7 +8,7 @@ namespace LeveransAkuten.Models.ViewModels.Account
 {
     public class LoginVm
     {
-        [Required, MinLength(6)]
+        [Required, MinLength(3)]
         public string Username { get; set; }
         [Required, MinLength(6)]
         public string Password { get; set; }
