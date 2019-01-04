@@ -46,7 +46,7 @@ namespace LeveransAkuten.Controllers
         //}
 
         [HttpGet]
-        [Route("driver/{name}")]
+        [Route("driver/details/{name}")]
         public async Task<IActionResult> Details(string name)
         {
             return View(await driverSer.GetDriverByUserName(name));
@@ -76,6 +76,23 @@ namespace LeveransAkuten.Controllers
             }
 
             return RedirectToAction(nameof(AdDetails), id);
+        }
+
+
+        [HttpGet]
+        public IActionResult SearchAd()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> DisplayAds()
+        {
+            var ads = await driverSer.GetAllAds();
+            AdSearchVm vm = new AdSearchVm
+            {
+                Ads = ads
+            };
+            return View(vm);
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿@model AdSearchVm
+@{
+}
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+        <div class="jumbotron">
+          <h4 class="card-title">
+            Körkort
+          </h4>
+          <div class="form-group">
+            <form asp-controller="Driver" asp-action="SearchAd">
+              <div class="form-group">
+                <label asp-for="Ad.Arequired"></label>
+                <input asp-for="Ad.Arequired" type="checkbox" class="form-control">
+                <span asp-validation-for="Ad.Arequired"></span>
+              </div>
+              <div class="form-group">
+                <label asp-for="Ad.Brequired"></label>
+                <input asp-for="Ad.Brequired" type="checkbox" class="form-control">
+                <span asp-validation-for="Ad.Brequired"></span>
+              </div>
+              <div class="form-group">
+                <label asp-for="Ad.Crequired"></label>
+                <input asp-for="Ad.Crequired" type="checkbox" class="form-control">
+                <span asp-validation-for="Ad.Crequired"></span>
+              </div>
+              <div class="form-group">
+                <label asp-for="Ad.Cerequired"></label>
+                <input asp-for="Ad.Cerequired" type="checkbox" class="form-control">
+                <span asp-validation-for="Ad.Cerequired"></span>
+              </div>
+              <div class="form-group">
+                <label asp-for="Ad.Drequired"></label>
+                <input asp-for="Ad.Drequired" type="checkbox" class="form-control">
+                <span asp-validation-for="Ad.Drequired"></span>
+              </div>
+              <button type="submit" class="btn btn-primary">Sök</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+        <div class="jumbotron">
+          <h4 class="card-title">
+            Frisök
+          </h4>
+          <div class="form-group">
+            <form asp-controller="Person" asp-action="Create">
+              <input asp-for="Ad.Description" type="search" class="form-control">              <br />
+              <input class="btn btn-primary" type="submit" value="Sök" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container">
+    <div class="row">
+      @if (Model != null)
+      {
+        foreach (var ad in Model.Ads)
+        {
+          <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">@ad.Header</a>
+                </h4>
+                <a asp-action="TakeJob" asp-controller="Driver" asp-route-id="@ad.Id">Apply</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a>
+                <p class="card-text">@ad.Description</p>
+              </div>
+            </div>
+          </div>
+        }
+      }
+
+    </div>
+  </div>
+</main>
+

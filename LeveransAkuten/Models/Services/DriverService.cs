@@ -1,5 +1,6 @@
 ﻿using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Driver;
+using LeveransAkuten.Models.ViewModels.Ads;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -108,16 +109,16 @@ namespace LeveransAkuten.Models.Services
 
             var allAds = await appctx.Ad.ToListAsync();
             indexVm.AdsNotStarted = allAds
-           
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id ,DriverId=a.DriverId})
+                .Where(a => DateTime.Compare(a.StartDate, DateTime.Now) > 0)
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
                 .ToList();
             indexVm.AdsActive = allAds
-               
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId })
+                .Where(a => (DateTime.Compare(a.StartDate, DateTime.Now) < 0) && (DateTime.Compare((DateTime)a.EndDate, DateTime.Now) > 0))
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
                 .ToList();
             indexVm.AdsFinished = allAds
-               
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id , DriverId = a.DriverId })
+                .Where(a => DateTime.Compare((DateTime)a.EndDate, DateTime.Now) < 0)
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id })
                 .ToList();
             return indexVm;
         }
@@ -127,5 +128,25 @@ namespace LeveransAkuten.Models.Services
             var driverIdInt = driver.Id;
             return driverIdInt;
         }
+
+        public async Task<AdsVm[]> GetAllAds()
+        {
+            var allAds = await appctx.Ad.ToArrayAsync();
+            
+            var ads = allAds.Select
+                (a => new AdsVm
+                {
+                    Header = a.Header,
+                    Arequired = a.Arequired,
+                    Brequired = a.Brequired,
+                    Crequired = a.Crequired,
+                    Cerequired = a.Cerequired,
+                    Description = a.Description,
+                    StartDate = a.StartDate,
+                    EndDate = a.EndDate.Value
+                });
+
+            return ads.ToArray();
         }
+    }
 }
