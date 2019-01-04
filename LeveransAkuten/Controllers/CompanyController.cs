@@ -17,9 +17,10 @@ namespace LeveransAkuten.Controllers
     public class CompanyController : Controller
     {
         private readonly AdsServices adService;
+        private readonly IMapper mapper;
         CompanyServices companyServices;
         UserManager<BudAkutenUsers> userManager;
-        private readonly IMapper mapper;
+
         public CompanyController(CompanyServices compSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer, IMapper map)
         {
             companyServices = compSer;
@@ -77,6 +78,12 @@ namespace LeveransAkuten.Controllers
             var adDetails = adService.GetAdDetails(id);
             var adDetailsVm = mapper.Map<DetailsAdsVm>(adDetails);
             return View(adDetailsVm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            return View(await companyServices.GetCompanyById(id));
         }
     }
 }

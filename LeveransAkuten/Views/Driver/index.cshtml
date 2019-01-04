@@ -21,7 +21,8 @@
                                 <h4 class="card-title">
                                     <a href="#">@ad.Header</a>
                                 </h4>
-                          
+                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
+
                             </div>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
                                 <h4 class="card-title">
                                     <a href="#">@ad.Header</a>
                                 </h4>
-                                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
                             </div>
                         </div>
                     </div>
@@ -71,7 +72,7 @@
                                 <h4 class="card-title">
                                     <a href="#">@ad.Header</a>
                                 </h4>
-                 
+                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
 
                             </div>
                         </div>

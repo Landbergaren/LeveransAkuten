@@ -10,13 +10,18 @@ namespace LeveransAkuten.Models.Services
 {
     public class CompanyServices
     {
-        DbFirstContext dbContext;
+        private readonly DbFirstContext dbContext;
+      
         UserManager<BudAkutenUsers> userManager;
-        public CompanyServices(DbFirstContext dbCtx, UserManager<BudAkutenUsers> userMan)
+        private readonly BudIdentityContext idctx;
+
+        public CompanyServices(DbFirstContext dbCtx, UserManager<BudAkutenUsers> userMan, BudIdentityContext idctx)
         {
             dbContext = dbCtx;
             userManager = userMan;
+            this.idctx = idctx;
         }
+
         public async Task<CompanyIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
             var indexVm = new CompanyIndexVm();
@@ -36,5 +41,33 @@ namespace LeveransAkuten.Models.Services
                 .ToList();
             return indexVm;
         }
+
+        public async Task<CompanyVm> GetCompanyById(string id)
+        {
+            CompanyVm company = await idctx.Users.Where(p => p.Id == id).
+                Select(d => new CompanyVm
+                {
+                    Email = d.Email,
+                    StreetAdress = d.StreetAdress,
+                    ZipCode = d.ZipCode,
+                    City = d.City,
+                    PhoneNumber = d.PhoneNumber,
+                    UserName = d.UserName,
+                    ImageUrl = d.ImageUrl
+                })
+                .SingleOrDefaultAsync();
+
+            CompanyVm company2 = await dbContext.Company.Where(p => p.AspNetUsersId == id).
+                Select(d => new CompanyVm
+                {
+                    Description = d.Description
+                })
+                .SingleOrDefaultAsync();
+
+            company.Description = company2.Description;
+
+            return company;
+        }
+
     }
 }
