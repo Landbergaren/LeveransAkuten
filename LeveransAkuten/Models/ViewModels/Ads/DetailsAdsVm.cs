@@ -25,5 +25,7 @@ namespace LeveransAkuten.Models.ViewModels.Ads
         public bool Crequired { get; set; }
         public bool Drequired { get; set; }
         public bool Cerequired { get; set; }
+
+        public bool Booked { get; set; }
     }
 }

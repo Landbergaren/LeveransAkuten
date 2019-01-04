@@ -6,7 +6,6 @@ using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
-using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +32,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> Index()
 
+
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
@@ -57,29 +57,37 @@ namespace LeveransAkuten.Controllers
         {
             var adDetails = adsServices.GetAdDetails(id);
             var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
+            if (adDetails.DriverId != null)
+            {
+                adDetailsVm.Booked = true;
+            }
             return View(adDetailsVm);
         }
-
         [HttpPost]
         public async Task<IActionResult> TakeIt(int id)
         {
-           
-            var ad = adsServices.GetUserAd(id);
-            var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
-            var driverIdInt = driverSer.GetDriverId(driverId);
+            var adDetails = adsServices.GetAdDetails(id);
+            if(adDetails.DriverId == null)
+            {
+                var ad = adsServices.GetUserAd(id);
+                var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
+                var driverIdInt = driverSer.GetDriverId(driverId);
+                
+                ad.DriverId = driverIdInt;
+                var adEdit = map.Map<EditAdsVm>(ad);
+                await adsServices.EditAdsAsync(adEdit);
+              
+            }
 
-            ad.DriverId = driverIdInt;
-            var adEdit = map.Map<EditAdsVm>(ad);
-            await adsServices.EditAdsAsync(adEdit);
             return RedirectToAction(nameof(Index));
         }
+
 
         [HttpGet]
         public IActionResult SearchAd()
         {
             return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
@@ -91,19 +99,17 @@ namespace LeveransAkuten.Controllers
             return View(vm);
         }
 
-        [HttpGet]
-        [Route("driver/update/{name}")]
-        public async Task<IActionResult> Update(string name)
-        {
-            var d = await driverSer.GetDriverForUpdate(name);
-            return View(d);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Update(DriverUpdateVm driver)
+        public async Task<IActionResult> DisplayAds(AdsVm ad)
         {
-            await driverSer.UpdateDriver(driver);
-            return View();
+            var filteredAds = await driverSer.FilterAds(ad);
+
+            AdSearchVm vm = new AdSearchVm
+            {
+                Ads = filteredAds
+            };
+
+            return View(vm);
         }
     }
 }

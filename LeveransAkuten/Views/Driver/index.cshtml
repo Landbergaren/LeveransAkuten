@@ -6,84 +6,62 @@
             @User.Identity.Name
         </h1>
     </section>
-    
+
     <main>
-        
+
         @if (Model?.AdsNotStarted != null)
         {
             foreach (var ad in Model?.AdsNotStarted)
             {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
+                @if (ad.DriverId != null)
+                {
+                    <div class="row ">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+                            <div class="card h-100 ">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body ">
+                                    
+                                    <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver"><h4 class="card-title">
+                                        @ad.Header
+                                    </h4></a>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body ">
+
+                                    <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">
+                                        <h4 class="card-title">
+                                            @ad.Header
+                                        </h4>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
             }
         }
         else
         {
             <p>Det finns inga kommande uppdrag just nu</p>
         }
-    
-   
-        @if (Model?.AdsActive != null)
-        {
-            foreach (var ad in Model?.AdsActive)
-            {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <p>Det finns inga pågående uppdrag just nu</p>
-        }
-        
-        
-        @if (Model?.AdsFinished != null)
-        {
-            foreach (var ad in Model?.AdsFinished)
-            {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">Details</a>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <p>Du har inga avslutade uppdrag än</p>
-        }
+
+
+
+
         <!-- /.row -->
         <!-- Pagination -->
         <ul class="pagination justify-content-center">
