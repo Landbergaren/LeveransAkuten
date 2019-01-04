@@ -65,5 +65,6 @@ namespace LeveransAkuten.Models.Services
 
             return AdDetails;
         }
+       
     }
 }
