@@ -21,7 +21,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> Login(string ReturnUrl)
         {
-            await accountService.IfNotExistCreateRolesAsync();
+            await accountService.IfNotExistCreateRolesAsync();            
             return View(new LoginVm { ReturnUrl = ReturnUrl });
         }
 
@@ -34,6 +34,7 @@ namespace LeveransAkuten.Controllers
                 return View(loginVm);
 
             var loginResult = await accountService.LoginUserAsync(loginVm);
+            var roles = accountService.GetRole("");
             if (!loginResult.Succeeded)
                 return View(loginVm);
 

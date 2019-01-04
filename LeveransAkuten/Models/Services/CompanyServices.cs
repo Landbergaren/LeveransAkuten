@@ -11,8 +11,9 @@ namespace LeveransAkuten.Models.Services
     public class CompanyServices
     {
         private readonly DbFirstContext dbContext;
-        private readonly BudIdentityContext idctx;
+      
         UserManager<BudAkutenUsers> userManager;
+        private readonly BudIdentityContext idctx;
 
         public CompanyServices(DbFirstContext dbCtx, UserManager<BudAkutenUsers> userMan, BudIdentityContext idctx)
         {

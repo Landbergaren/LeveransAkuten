@@ -2,6 +2,7 @@
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Models
@@ -12,6 +13,7 @@ namespace LeveransAkuten.Models
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
         RoleManager<IdentityRole> roleManager;
+        private object loginVm;
 
         public LoginServices(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan, RoleManager<IdentityRole> rolMan)
         {
@@ -51,6 +53,11 @@ namespace LeveransAkuten.Models
             await signInManager.SignOutAsync();
         }
 
-
+        public async Task<IList<string>> GetRole(string id)
+        {
+            //var loggedInUser = await userManager.FindByNameAsync(loginVm.Username)
+            var roles = await userManager.GetRolesAsync(new BudAkutenUsers { Id = id });
+            return roles;
+        }
     }
 }
