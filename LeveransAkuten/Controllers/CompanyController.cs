@@ -81,9 +81,10 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(string id)
+        [Route("company/{name}")]
+        public async Task<IActionResult> Details(string name)
         {
-            return View(await companyServices.GetCompanyById(id));
+            return View(await companyServices.GetCompanyByName(name));
         }
     }
 }

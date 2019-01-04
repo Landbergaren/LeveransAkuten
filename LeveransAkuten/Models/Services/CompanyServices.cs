@@ -18,6 +18,7 @@ namespace LeveransAkuten.Models.Services
         {
             dbContext = dbCtx;
             userManager = userMan;
+            this.idctx = idctx;
         }
 
         public async Task<CompanyIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
@@ -65,6 +66,40 @@ namespace LeveransAkuten.Models.Services
             company.Description = company2.Description;
 
             return company;
+        }
+
+        public async Task<CompanyVm> GetCompanyByName(string name)
+        {
+            BudAkutenUsers company = await idctx.Users.Where(p => p.UserName == name).
+                Select(d => new BudAkutenUsers
+                {
+                    Email = d.Email,
+                    StreetAdress = d.StreetAdress,
+                    ZipCode = d.ZipCode,
+                    City = d.City,
+                    PhoneNumber = d.PhoneNumber,
+                    UserName = d.UserName,
+                    ImageUrl = d.ImageUrl,
+                    Id = d.Id
+                })
+                .SingleOrDefaultAsync();
+
+            CompanyVm company2 = await dbContext.Company.Where(p => p.AspNetUsersId == company.Id).
+                Select(d => new CompanyVm
+                {
+                    Description = d.Description
+                })
+                .SingleOrDefaultAsync();
+
+            company2.Email = company.Email;
+            company2.StreetAdress = company.StreetAdress;
+            company2.ZipCode = company.ZipCode;
+            company2.City = company.City;
+            company2.PhoneNumber = company.PhoneNumber;
+            company2.UserName = company.UserName;
+            company2.ImageUrl = company.ImageUrl;
+
+            return company2;
         }
 
     }
