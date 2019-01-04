@@ -71,5 +71,22 @@ namespace LeveransAkuten.Controllers
             await adsServices.EditAdsAsync(adEdit);
             return RedirectToAction(nameof(Index));
         }
+
+
+        [HttpGet]
+        public IActionResult SearchAd()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> DisplayAds()
+        {
+            var ads = await driverSer.GetAllAds();
+            AdSearchVm vm = new AdSearchVm
+            {
+                Ads = ads
+            };
+            return View(vm);
+        }
     }
 }
