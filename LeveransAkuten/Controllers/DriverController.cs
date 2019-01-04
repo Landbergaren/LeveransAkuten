@@ -32,6 +32,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> Index()
 
+
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
@@ -56,19 +57,28 @@ namespace LeveransAkuten.Controllers
         {
             var adDetails = adsServices.GetAdDetails(id);
             var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
+            if (adDetails.DriverId != null)
+            {
+                adDetailsVm.Booked = true;
+            }
             return View(adDetailsVm);
         }
         [HttpPost]
         public async Task<IActionResult> TakeIt(int id)
         {
-           
-            var ad = adsServices.GetUserAd(id);
-            var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
-            var driverIdInt = driverSer.GetDriverId(driverId);
+            var adDetails = adsServices.GetAdDetails(id);
+            if(adDetails.DriverId == null)
+            {
+                var ad = adsServices.GetUserAd(id);
+                var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
+                var driverIdInt = driverSer.GetDriverId(driverId);
+                
+                ad.DriverId = driverIdInt;
+                var adEdit = map.Map<EditAdsVm>(ad);
+                await adsServices.EditAdsAsync(adEdit);
+              
+            }
 
-            ad.DriverId = driverIdInt;
-            var adEdit = map.Map<EditAdsVm>(ad);
-            await adsServices.EditAdsAsync(adEdit);
             return RedirectToAction(nameof(Index));
         }
 
