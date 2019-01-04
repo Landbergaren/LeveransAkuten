@@ -6,6 +6,7 @@ using AutoMapper;
 using LeveransAkuten.Models;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
+using LeveransAkuten.Models.ViewModels.Ads;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +32,8 @@ namespace LeveransAkuten
            {
                options.UseSqlServer(connectionString);
            });
-            services.AddIdentity<BudAkutenUsers, IdentityRole>( options => {
+            services.AddIdentity<BudAkutenUsers, IdentityRole>(options =>
+            {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequireDigit = false;
@@ -45,7 +47,7 @@ namespace LeveransAkuten
             services.AddTransient<AdsServices>();
             services.AddTransient<CompanyServices>();
             services.AddTransient<SearchDriverServices>();
-            services.AddTransient<DriverServices>();
+            services.AddTransient<DriverService>();
             services.AddAutoMapper();
         }
 
