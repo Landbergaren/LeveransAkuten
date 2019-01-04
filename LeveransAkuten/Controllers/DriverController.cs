@@ -72,10 +72,10 @@ namespace LeveransAkuten.Controllers
                 ad.DriverId = driverIdInt;
                 var adEdit = map.Map<EditAdsVm>(ad);
                 await adsServices.EditAdsAsync(adEdit);
-                return RedirectToAction(nameof(Index));
+              
             }
 
-            return RedirectToAction(nameof(AdDetails), id);
+            return RedirectToAction(nameof(Index));
         }
 
 
