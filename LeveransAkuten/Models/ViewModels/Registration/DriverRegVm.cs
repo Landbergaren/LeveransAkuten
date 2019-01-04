@@ -27,6 +27,10 @@ namespace LeveransAkuten.Models.ViewModels.Registration
         public string PhoneNumber { get; set; }
         [Required]
         public string City { get; set; }
+        [Required]
+        public string StreetAdress { get; set; }
+        [Required]
+        public string ZipCode { get; set; }
         public bool A { get; set; } = false;
         public bool B { get; set; } = false;
         public bool C { get; set; } = false;
