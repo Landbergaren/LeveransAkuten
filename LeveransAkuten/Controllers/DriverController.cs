@@ -6,6 +6,7 @@ using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,7 @@ namespace LeveransAkuten.Controllers
             var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
             return View(adDetailsVm);
         }
+
         [HttpPost]
         public async Task<IActionResult> TakeIt(int id)
         {
@@ -72,12 +74,12 @@ namespace LeveransAkuten.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpGet]
         public IActionResult SearchAd()
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
@@ -87,6 +89,21 @@ namespace LeveransAkuten.Controllers
                 Ads = ads
             };
             return View(vm);
+        }
+
+        [HttpGet]
+        [Route("driver/update/{name}")]
+        public async Task<IActionResult> Update(string name)
+        {
+            var d = await driverSer.GetDriverForUpdate(name);
+            return View(d);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(DriverUpdateVm driver)
+        {
+            await driverSer.UpdateDriver(driver);
+            return View();
         }
     }
 }

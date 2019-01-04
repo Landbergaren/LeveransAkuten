@@ -122,6 +122,7 @@ namespace LeveransAkuten.Models.Services
                 .ToList();
             return indexVm;
         }
+
         public int GetDriverId(string driverId)
         {
             var driver =  appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
@@ -147,6 +148,58 @@ namespace LeveransAkuten.Models.Services
                 });
 
             return ads.ToArray();
+        }
+
+        public async Task<DriverUpdateVm> GetDriverForUpdate(string name)
+        {
+            var driver = await GetDriverByUserName(name);
+            DriverUpdateVm d = new DriverUpdateVm();
+
+            d.A = driver.A;
+            d.B = driver.B;
+            d.C = driver.C;
+            d.CE = driver.CE;
+            d.D = driver.D;
+            d.City = driver.City;
+            d.Description = driver.Description;
+            d.Email = driver.Email;
+            d.FirstName = driver.FirstName;
+            d.Id = driver.Id;
+            d.ImageUrl = driver.ImageUrl;
+            d.LastName = driver.LastName;
+            d.PhoneNumber = driver.PhoneNumber;
+            d.StreetAdress = driver.StreetAdress;
+            d.UserName = driver.UserName;
+            d.ZipCode = driver.ZipCode;
+
+            return d;
+        }
+
+        public async Task UpdateDriver(DriverUpdateVm driver)
+        {
+            BudAkutenUsers d = await idctx.Users.Where(p => p.UserName == driver.UserName).SingleOrDefaultAsync();
+
+            d.Email = driver.Email;
+            d.StreetAdress = driver.StreetAdress;
+            d.ZipCode = driver.ZipCode;
+            d.City = driver.City;
+            d.PhoneNumber = driver.PhoneNumber;
+            d.UserName = driver.UserName;
+            d.ImageUrl = driver.ImageUrl;
+
+            var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
+
+            driver2.Description = driver.Description;
+            driver2.A = driver.A;
+            driver2.B = driver.B;
+            driver2.C = driver.C;
+            driver2.Ce = driver.CE;
+            driver2.D = driver.D;
+            driver2.FirstName = driver.FirstName;
+            driver2.LastName = driver.LastName;
+
+            await appctx.SaveChangesAsync();
+            await idctx.SaveChangesAsync();
         }
     }
 }
