@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="@Model.ImageUrl" alt="Profilbild" />
+                    <img src="@Model.ImageUrl" alt="Profilbild" width="200" height="150" />
                     <div class="file btn btn-lg btn-primary">
                         Ladda upp ny bild
                         <input type="file" name="file" />
@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Presentation</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Personlig info</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -46,19 +49,19 @@
                     @{
                         if (Model.A)
                         {
-                            <span>A</span>
+                            <span>A</span><br />
                         }
                         if (Model.B)
                         {
-                            <span>B</span>
+                            <span>B</span><br />
                         }
                         if (Model.C)
                         {
-                            <span>C</span>
+                            <span>C</span><br />
                         }
                         if (Model.CE)
                         {
-                            <span>CE</span>
+                            <span>CE</span><br />
                         }
                         if (Model.D)
                         {
@@ -74,7 +77,71 @@
                             <div class="col-md-6">
                                 <label>
                                     @Model.Description
+                                    Lorem Ipsum is the single greatest threat. We are not - we are not keeping up with other websites. 
+                                    Lorem Ipsum best not make any more threats to your website. 
+                                    It will be met with fire and fury like the world has never seen. 
+                                    Does everybody know that pig named Lorem Ipsum? 
+                                    An ‘extremely credible source’ has called my office and told me that 
+                                    Barack Obama’s placeholder text is a fraud.
                                 </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Förnamn</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.FirstName</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Efternamn</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.LastName</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Gatuadress</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.StreetAdress</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Postnummer</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.ZipCode</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Postort</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.City</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tel. nr.</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.PhoneNumber</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>E-mail</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Model.Email</p>
                             </div>
                         </div>
                     </div>
