@@ -10,7 +10,7 @@ namespace LeveransAkuten.Models.ViewModels.Account
     {
         [Required, MinLength(3)]
         public string Username { get; set; }
-        [Required, MinLength(6)]
+        [DataType(DataType.Password), Required, MinLength(3)]
         public string Password { get; set; }
         public string ErrorMsg { get; set; }
         public string ReturnUrl { get; set; }

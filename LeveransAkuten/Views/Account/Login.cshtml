@@ -8,19 +8,20 @@
             <section class="login-form login-container">
                 <div class="login-container-buffert"></div>
                 <form asp-controller="Account" asp-action="Login">
-                  <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive mt-5" alt="" />
-                  <input type="text" asp-for="Username" placeholder="Username" class="form-control input-lg mt-3" />
-                  <span asp-validation-for="Username"></span>
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive mt-5" alt="" />
+                    <input type="text" asp-for="Username" placeholder="Username" class="form-control input-lg mt-3" />
+                    <span asp-validation-for="Username"></span>
 
-                  <input type="password" asp-for="Password" class="form-control input-lg mt-3" placeholder="Password" />
-                  <span asp-validation-for="Password"></span>
+                    <input type="password" asp-for="Password" class="form-control input-lg mt-3" placeholder="Password" />
+                    <span asp-validation-for="Password"></span>
 
-                  <input type="hidden" asp-for="ReturnUrl" />
+                    <input type="hidden" asp-for="ReturnUrl" />
 
-                  <button type="submit" name="go" class="btn btn-lg btn-primary btn-block mt-3">Sign in</button>
-                  <div>
-                    <a  asp-controller="registration" asp-action="index">Create account</a>
-                  </div>
+                    <button type="submit" name="go" class="btn btn-lg btn-primary btn-block mt-3">Sign in</button>
+                    <div>
+                        <a asp-controller="registration" asp-action="index">Create account</a>
+                    </div>
 
                 </form>
 
