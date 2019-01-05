@@ -122,6 +122,7 @@ namespace LeveransAkuten.Models.Services
                 .ToList();
             return indexVm;
         }
+
         public int GetDriverId(string driverId)
         {
             var driver =  appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
@@ -175,10 +176,9 @@ namespace LeveransAkuten.Models.Services
                     });
                 }
             }
-
             return filteredAds.ToArray(); 
-
         }
+
         public async Task<DriverUpdateVm> GetDriverForUpdate(string name)
         {
             var driver = await GetDriverByUserName(name);

@@ -103,5 +103,43 @@ namespace LeveransAkuten.Models.Services
             return company2;
         }
 
+        public async Task<CompanyUpdateVm> GetCompanyForUpdate(string name)
+        {
+            var company = await GetCompanyByName(name);
+            CompanyUpdateVm c = new CompanyUpdateVm();
+
+            c.City = company.City;
+            c.Description = company.Description;
+            c.Email = company.Email;
+            c.Id = company.Id;
+            c.ImageUrl = company.ImageUrl;
+            c.PhoneNumber = company.PhoneNumber;
+            c.StreetAddress = company.StreetAdress;
+            c.UserName = company.UserName;
+            c.ZipCode = company.ZipCode;
+
+            return c;
+        }
+
+        public async Task UpdateCompany(CompanyUpdateVm company)
+        {
+            BudAkutenUsers c = await idctx.Users.Where(o => o.UserName == company.UserName).SingleOrDefaultAsync();
+
+            c.Email = company.Email;
+            c.StreetAdress = company.StreetAddress;
+            c.ZipCode = company.ZipCode;
+            c.City = company.City;
+            c.PhoneNumber = company.PhoneNumber;
+            c.UserName = company.UserName;
+            c.ImageUrl = company.ImageUrl;
+
+            var company2 = await dbContext.Company.Where(o => o.AspNetUsersId == c.Id).SingleOrDefaultAsync();
+
+            company2.Description = company.Description;
+            company2.CompanyName = company.CompanyName;
+
+            await dbContext.SaveChangesAsync();
+            await idctx.SaveChangesAsync();
+        }
     }
 }

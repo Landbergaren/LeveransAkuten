@@ -14,6 +14,16 @@
                 <span asp-validation-for="UserName"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control">
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control">
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" type="text" class="form-control">
                 <span asp-validation-for="FirstName"></span>
@@ -47,6 +57,11 @@
                 <label asp-for="ZipCode"></label>
                 <input asp-for="ZipCode" type="text" class="form-control">
                 <span asp-validation-for="ZipCode"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="6" type="text" class="form-control"></textarea>
+                <span asp-validation-for="Description"></span>
             </div>
             <div class="form-group">
                 <label asp-for="A"></label>
