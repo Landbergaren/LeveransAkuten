@@ -2,6 +2,7 @@
 using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -130,6 +131,7 @@ namespace LeveransAkuten.Models.Services
             var ads = allAds.Select
                 (a => new AdsVm
                 {
+                    DriverId = a.DriverId,
                     Id = a.Id,
                     Header = a.Header,
                     Arequired = a.Arequired,
@@ -139,6 +141,7 @@ namespace LeveransAkuten.Models.Services
                     Description = a.Description,
                     StartDate = a.StartDate,
                     EndDate = a.EndDate.Value
+                    
                 });
 
             return ads.ToArray();

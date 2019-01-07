@@ -9,6 +9,8 @@ namespace LeveransAkuten.Models.ViewModels.Ads
 {
     public class AdsVm
     {
+        public int? DriverId { get; set; }
+
         public int Id { get; set; }
         [Required]
         public string Header { get; set; }
