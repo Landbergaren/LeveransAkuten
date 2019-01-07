@@ -11,9 +11,15 @@ namespace LeveransAkuten.Controllers.HomeController
 {
     public class HomeController : Controller
     {
+        HomeService accService;
+        public HomeController(HomeService accSer)
+        {
+            accService = accSer;
+        }
+
         public IActionResult Index()
         {
-            accService.BuildIdentityDb();
+            //accService.BuildIdentityDb();
             return View();
         }
     }
