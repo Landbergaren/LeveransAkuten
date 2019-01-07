@@ -9,7 +9,7 @@ namespace LeveransAkuten.Models.ViewModels.Company
     public class CompanyUpdateVm
     {
         public int Id { get; set; }
-        public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(3, ErrorMessage = "Minst tre bokstäver")]
         public string UserName { get; set; }

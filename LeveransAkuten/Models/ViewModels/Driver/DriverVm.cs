@@ -10,7 +10,7 @@ namespace LeveransAkuten.Models.ViewModels.Driver
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
         public string StreetAdress { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }
