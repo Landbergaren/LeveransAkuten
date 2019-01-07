@@ -1,8 +1,7 @@
 ﻿using LeveransAkuten.Models.Entities;
-using LeveransAkuten.Models.ViewModels.Driver;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -106,28 +105,23 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<DriverIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
-
+            
+            var loggedInDriverId = GetDriverId(loggedInUser.Id);
             var indexVm = new DriverIndexVm();
 
-            var allAds = await appctx.Ad.ToListAsync();
+            var allAds = await appctx.Ad.Where(d=>d.DriverId==loggedInDriverId).ToListAsync();
             indexVm.AdsNotStarted = allAds
-               
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId=a.DriverId })
+
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId, Start = a.StartDate.Date, End = a.EndDate})
                 .ToList();
-            indexVm.AdsActive = allAds
-               
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId })
-                .ToList();
-            indexVm.AdsFinished = allAds
-               
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId })
-                .ToList();
+
+
             return indexVm;
         }
 
         public int GetDriverId(string driverId)
         {
-            var driver =  appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
+            var driver = appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
             var driverIdInt = driver.Id;
             return driverIdInt;
         }
@@ -135,10 +129,12 @@ namespace LeveransAkuten.Models.Services
         public async Task<AdsVm[]> GetAllAds()
         {
             var allAds = await appctx.Ad.ToArrayAsync();
-            
+
             var ads = allAds.Select
                 (a => new AdsVm
                 {
+                    DriverId = a.DriverId,
+                    Id = a.Id,
                     Header = a.Header,
                     Arequired = a.Arequired,
                     Brequired = a.Brequired,
@@ -147,6 +143,7 @@ namespace LeveransAkuten.Models.Services
                     Description = a.Description,
                     StartDate = a.StartDate,
                     EndDate = a.EndDate.Value
+                    
                 });
 
             return ads.ToArray();
@@ -167,6 +164,7 @@ namespace LeveransAkuten.Models.Services
                     )
                 {
                     filteredAds.Add(new AdsVm {
+                        Id = ad.Id,
                         Header = ad.Header,
                         Arequired = ad.Arequired,
                         Brequired = ad.Brequired,
