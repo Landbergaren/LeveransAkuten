@@ -34,9 +34,9 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Index()
         {
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
-            var companyIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
+            var driverIndexVm = await driverSer.GetAdsNotStartedAsync(loggedInUser);
 
-            return View(companyIndexVm);
+            return View(driverIndexVm);
         }
 
         [HttpGet]

@@ -44,47 +44,48 @@
 
 <main>
   <div class="container">
-    <div class="row">
-      @if (Model != null)
-      {
-        foreach (var ad in Model.Ads)
-        {
-          <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">@ad.Header</a>
-                </h4>
-                <form asp-action="AdDetails" asp-controller="Driver" asp-route-id="@ad.Id" method="get"><input type="submit" class="btn btn-primary" value="Take It" /></form>
-                <p class="card-text">@ad.Description</p>
-                @if (ad.Arequired)
-  {
-              <p class="card-text">körkortskrav : A</p>
-}
-                @if (ad.Brequired)
-  {
-              <p class="card-text">körkortskrav : B</p>
-}
-                @if (ad.Crequired)
-  {
-              <p class="card-text">körkortskrav : C</p>
-}
-                @if (ad.Cerequired)
-  {
-              <p class="card-text">körkortskrav : CE</p>
-}
-                @if (ad.Drequired)
-  {
-              <p class="card-text">körkortskrav : D</p>
-}
-              </div>
-            </div>
+      <div class="row">
+          @if (Model != null)
+          {
+              foreach (var ad in Model.Ads)
+              {
+                 
+                      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                          <div class="card h-100">
+                              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                              <div class="card-body">
+                                  <h4 class="card-title">
+                                      <a href="#">@ad.Header</a>
+                                  </h4>
+                                  <form asp-action="AdDetails" asp-controller="Driver" asp-route-id="@ad.Id" method="get"><input type="submit" class="btn btn-primary" value="Take It" /></form>
+                                  <p class="card-text">@ad.Description</p>
+                                  @if (ad.Arequired)
+                                  {
+                                      <p class="card-text">körkortskrav : A</p>
+                                  }
+                                  @if (ad.Brequired)
+                                  {
+                                      <p class="card-text">körkortskrav : B</p>
+                                  }
+                                  @if (ad.Crequired)
+                                  {
+                                      <p class="card-text">körkortskrav : C</p>
+                                  }
+                                  @if (ad.Cerequired)
+                                  {
+                                      <p class="card-text">körkortskrav : CE</p>
+                                  }
+                                  @if (ad.Drequired)
+                                  {
+                                      <p class="card-text">körkortskrav : D</p>
+                                  }
+                              </div>
+                          </div>
+                      </div>
+                  }
+              }
+       
           </div>
-        }
-      }
-
-    </div>
   </div>
 </main>
 
