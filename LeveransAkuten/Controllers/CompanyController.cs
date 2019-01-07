@@ -19,15 +19,19 @@ namespace LeveransAkuten.Controllers
     {
         private readonly AdsServices adService;
         private readonly IMapper mapper;
+        private readonly DbFirstContext dbCtx;
+        private readonly DriverService driverService;
         CompanyServices companyServices;
         UserManager<BudAkutenUsers> userManager;
 
-        public CompanyController(CompanyServices compSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer, IMapper map)
+        public CompanyController(CompanyServices compSer, DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer, IMapper map, DbFirstContext dbCtx)
         {
             companyServices = compSer;
             userManager = userMan;
             mapper = map;
+            this.dbCtx = dbCtx;
             adService = adSer;
+            driverService = driverSer;
         }
 
         public async Task<IActionResult> Index()
@@ -86,6 +90,15 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Details(string name)
         {
             return View(await companyServices.GetCompanyByName(name));
+        }
+
+        [HttpGet] 
+        public async Task<IActionResult> DriverDetails(int driverId)
+        {
+            var driverStringId = dbCtx.Driver.Where(d => d.AspNetUsersId == driverId.ToString()).Select(d => d.Id).FirstOrDefault();
+
+            var driver = await driverService.GetDriverByIdAsync(driverStringId.ToString());
+            return View(driver);
         }
 
         [HttpGet]
