@@ -5,12 +5,14 @@ using LeveransAkuten.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {
     public class AccountController : Controller
     {
+        private const string LOGIN_ERROR = "LoginError";
         LoginServices accountService;
         UserManager<BudAkutenUsers> userManager;
 
@@ -20,9 +22,9 @@ namespace LeveransAkuten.Controllers
             userManager = userMan;
         }
 
-        public async Task<IActionResult> Login(string ReturnUrl)
+        public async Task<IActionResult> Login(string ReturnUrl = "")
         {
-            await accountService.IfNotExistCreateRolesAsync();            
+            await accountService.IfNotExistCreateRolesAsync();
             return View(new LoginVm { ReturnUrl = ReturnUrl });
         }
 
@@ -32,11 +34,17 @@ namespace LeveransAkuten.Controllers
         {
             //Unsuccessfull            
             if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(String.Empty, "Failed to login");
                 return View(loginVm);
+            }
 
             var loginResult = await accountService.LoginUserAsync(loginVm);
             if (!loginResult.Succeeded)
+            {
+                ModelState.AddModelError(String.Empty, "Failed to login");
                 return View(loginVm);
+            }
 
             //Successfull
             if (!string.IsNullOrEmpty(loginVm.ReturnUrl))

@@ -3,6 +3,7 @@ using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Company;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -85,6 +86,21 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> Details(string name)
         {
             return View(await companyServices.GetCompanyByName(name));
+        }
+
+        [HttpGet]
+        [Route("company/update/{name}")]
+        public async Task<IActionResult> Update(string name)
+        {
+            var d = await companyServices.GetCompanyForUpdate(name);
+            return View(d);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CompanyUpdateVm company)
+        {
+            await companyServices.UpdateCompany(company);
+            return View();
         }
     }
 }

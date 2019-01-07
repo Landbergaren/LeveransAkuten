@@ -10,7 +10,7 @@ namespace LeveransAkuten.Models.Entities
     public class BudAkutenUsers : IdentityUser
     {
         [StringLength(250)]
-        public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
         [StringLength(100)]
         public string StreetAdress { get; set; }
         [StringLength(20)]

@@ -1,0 +1,95 @@
+﻿@model DriverUpdateVm
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <h3>Förare</h3>
+        <form asp-controller="driver" asp-action="Update">
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" type="text" class="form-control">
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control">
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control">
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" type="text" class="form-control">
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" type="text" class="form-control">
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" type="text" class="form-control">
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" type="text" class="form-control">
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <input asp-for="City" type="text" class="form-control">
+                <span asp-validation-for="City"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetAdress"></label>
+                <input asp-for="StreetAdress" type="text" class="form-control">
+                <span asp-validation-for="StreetAdress"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode"></label>
+                <input asp-for="ZipCode" type="text" class="form-control">
+                <span asp-validation-for="ZipCode"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" rows="6" type="text" class="form-control"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="A"></label>
+                <input asp-for="A" type="checkbox" class="form-control">
+                <span asp-validation-for="A"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B"></label>
+                <input asp-for="B" type="checkbox" class="form-control">
+                <span asp-validation-for="B"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="C"></label>
+                <input asp-for="C" type="checkbox" class="form-control">
+                <span asp-validation-for="C"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CE"></label>
+                <input asp-for="CE" type="checkbox" class="form-control">
+                <span asp-validation-for="CE"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="D"></label>
+                <input asp-for="D" type="checkbox" class="form-control">
+                <span asp-validation-for="D"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Uppdatera</button>
+        </form>
+    </div>
+</div>
+

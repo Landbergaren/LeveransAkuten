@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="@Model.ImageUrl" alt="Profilbild" width="200" height="150" />
+                    <img src="@Model.Image" alt="Profilbild" width="200" height="150" />
                     <div class="file btn btn-lg btn-primary">
                         Ladda upp ny bild
                         <input type="file" name="file" />
@@ -39,6 +39,7 @@
                 </div>
             </div>
             <div class="col-md-2">
+                @Html.ActionLink("Uppdatera profil", "UpdateDriver", "Driver", new { name = Model.UserName })
                 <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Uppdatera profil" />
             </div>
         </div>
@@ -77,12 +78,6 @@
                             <div class="col-md-6">
                                 <label>
                                     @Model.Description
-                                    Lorem Ipsum is the single greatest threat. We are not - we are not keeping up with other websites. 
-                                    Lorem Ipsum best not make any more threats to your website. 
-                                    It will be met with fire and fury like the world has never seen. 
-                                    Does everybody know that pig named Lorem Ipsum? 
-                                    An ‘extremely credible source’ has called my office and told me that 
-                                    Barack Obama’s placeholder text is a fraud.
                                 </label>
                             </div>
                         </div>
