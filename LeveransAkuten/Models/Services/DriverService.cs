@@ -31,7 +31,7 @@ namespace LeveransAkuten.Models.Services
                     City = d.City,
                     PhoneNumber = d.PhoneNumber,
                     UserName = d.UserName,
-                    ImageUrl = d.ImageUrl,
+                    Image = d.Image,
                     Id = d.Id
                 })
                 .SingleOrDefaultAsync();
@@ -56,7 +56,7 @@ namespace LeveransAkuten.Models.Services
             driver2.City = driver.City;
             driver2.PhoneNumber = driver.PhoneNumber;
             driver2.UserName = driver.UserName;
-            driver2.ImageUrl = driver.ImageUrl;
+            driver2.Image = driver.Image;
 
             return driver2;
         }
@@ -72,7 +72,7 @@ namespace LeveransAkuten.Models.Services
                     City = d.City,
                     PhoneNumber = d.PhoneNumber,
                     UserName = d.UserName,
-                    ImageUrl = d.ImageUrl
+                    Image = d.Image
                 })
                 .SingleOrDefaultAsync();
 
@@ -194,7 +194,7 @@ namespace LeveransAkuten.Models.Services
             d.Email = driver.Email;
             d.FirstName = driver.FirstName;
             d.Id = driver.Id;
-            d.ImageUrl = driver.ImageUrl;
+            d.Image = driver.Image;
             d.LastName = driver.LastName;
             d.PhoneNumber = driver.PhoneNumber;
             d.StreetAdress = driver.StreetAdress;
@@ -214,7 +214,7 @@ namespace LeveransAkuten.Models.Services
             d.City = driver.City;
             d.PhoneNumber = driver.PhoneNumber;
             d.UserName = driver.UserName;
-            d.ImageUrl = driver.ImageUrl;
+            d.Image = driver.Image;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
 
