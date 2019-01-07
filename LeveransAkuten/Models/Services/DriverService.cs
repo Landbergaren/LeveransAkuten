@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using LeveransAkuten.Models.ViewModels.Company;
 
 namespace LeveransAkuten.Models.Services
 {
@@ -242,6 +243,46 @@ namespace LeveransAkuten.Models.Services
             }
                 
             await idctx.SaveChangesAsync();
+        }
+
+        public async Task<CompanyDriverDetailsVm> GetDriverDetailsByIdAsync(string id)
+        {
+            CompanyDriverDetailsVm driver = await idctx.Users.Where(p => p.Id == id).
+                Select(d => new CompanyDriverDetailsVm
+                {
+                    Email = d.Email,
+                    StreetAdress = d.StreetAdress,
+                    ZipCode = d.ZipCode,
+                    City = d.City,
+                    PhoneNumber = d.PhoneNumber,
+                    UserName = d.UserName
+                   
+                })
+                .SingleOrDefaultAsync();
+
+            CompanyDriverDetailsVm driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == id).
+                Select(d => new CompanyDriverDetailsVm
+                {
+                    A = d.A,
+                    B = d.B,
+                    C = d.C,
+                    CE = d.Ce,
+                    D = d.D,
+                    FirstName = d.FirstName,
+                    LastName = d.LastName
+                })
+                .SingleOrDefaultAsync();
+
+           
+            driver.A = driver2.A;
+            driver.B = driver2.B;
+            driver.C = driver2.C;
+            driver.CE = driver2.CE;
+            driver.D = driver2.D;
+            driver.FirstName = driver2.FirstName;
+            driver.LastName = driver2.LastName;
+
+            return driver;
         }
     }
 }

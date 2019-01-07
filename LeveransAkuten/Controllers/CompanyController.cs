@@ -92,12 +92,12 @@ namespace LeveransAkuten.Controllers
             return View(await companyServices.GetCompanyByName(name));
         }
 
-        [HttpGet] 
+        [HttpGet, Route("Company/" + nameof(DriverDetails) + "/{driverId}")] 
         public async Task<IActionResult> DriverDetails(int driverId)
         {
-            var driverStringId = dbCtx.Driver.Where(d => d.AspNetUsersId == driverId.ToString()).Select(d => d.Id).FirstOrDefault();
+            var driverStringId = dbCtx.Driver.Where(d => d.Id == driverId).Select(d => d.AspNetUsersId).FirstOrDefault();
 
-            var driver = await driverService.GetDriverByIdAsync(driverStringId.ToString());
+            var driver = await driverService.GetDriverDetailsByIdAsync(driverStringId.ToString());
             return View(driver);
         }
 
