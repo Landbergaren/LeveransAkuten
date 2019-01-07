@@ -125,7 +125,7 @@ namespace LeveransAkuten.Models.Services
 
         public int GetDriverId(string driverId)
         {
-            var driver =  appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
+            var driver = appctx.Driver.FirstOrDefault(p => p.AspNetUsersId == driverId);
             var driverIdInt = driver.Id;
             return driverIdInt;
         }
@@ -137,6 +137,7 @@ namespace LeveransAkuten.Models.Services
             var ads = allAds.Select
                 (a => new AdsVm
                 {
+                    Id = a.Id,
                     Header = a.Header,
                     Arequired = a.Arequired,
                     Brequired = a.Brequired,
@@ -165,6 +166,7 @@ namespace LeveransAkuten.Models.Services
                     )
                 {
                     filteredAds.Add(new AdsVm {
+                        Id = ad.Id,
                         Header = ad.Header,
                         Arequired = ad.Arequired,
                         Brequired = ad.Brequired,
