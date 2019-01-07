@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace LeveransAkuten.Models.Services
 {
@@ -226,6 +228,19 @@ namespace LeveransAkuten.Models.Services
             driver2.LastName = driver.LastName;
 
             await appctx.SaveChangesAsync();
+            await idctx.SaveChangesAsync();
+        }
+
+        public async Task UploadImage(string userName, IFormFile Image)
+        {
+            BudAkutenUsers d = await idctx.Users.Where(p => p.UserName == userName).SingleOrDefaultAsync();
+            
+            using (var ms = new MemoryStream())
+            {
+                Image.CopyTo(ms);
+                d.Image = ms.ToArray();
+            }
+                
             await idctx.SaveChangesAsync();
         }
     }

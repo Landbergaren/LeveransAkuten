@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,6 +9,7 @@ using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -122,6 +124,14 @@ namespace LeveransAkuten.Controllers
             };
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImg(UploadImgVm image)
+        {
+            var u = User.Identity.Name;
+            await driverSer.UploadImage(u, image.Img);
+            return RedirectToAction(nameof(Details), new { name = u });
         }
     }
 }
