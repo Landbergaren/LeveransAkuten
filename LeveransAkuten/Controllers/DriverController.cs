@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
@@ -15,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers
 {
-    [Authorize(Roles = "Driver")]
+    [Authorize(Roles = Roles.Driver)]
     public class DriverController : Controller
     {
       

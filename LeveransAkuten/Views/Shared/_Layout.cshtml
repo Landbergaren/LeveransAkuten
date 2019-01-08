@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -17,25 +19,46 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ärenden</a>
-                    </li>
-                    <li class="nav-item">
-                        @if (@User.IsInRole("Company"))
-                        {
+                    @if (@User.IsInRole(Roles.Company))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Company" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
                             <a class="nav-link" asp-controller="Company" asp-action="Update" asp-route-id="@User.Identity.Name">Profil</a>
-                        }
-                        else if (@User.IsInRole("Driver"))
-                        {
+
+                        </li>
+                    }
+                    else if (@User.IsInRole(Roles.Driver))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Driver" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
                             <a class="nav-link" asp-controller="Driver" asp-action="Update" asp-route-id="@User.Identity.Name">Profil</a>
-                        }
-                        else
-                        {
+
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
                             <a class="nav-link" href="#">Profil</a>
-                        }
+
+                        </li>
+
+                    }
 
 
-                    </li>
 
                     <li class="nav-item">
                         @if (User.Identity.IsAuthenticated)
