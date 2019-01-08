@@ -28,7 +28,7 @@ namespace LeveransAkuten.Models.ViewModels.Registration
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(2, ErrorMessage = "Minst två bokstäver")]
-        public string StreetAddress { get; set; }
+        public string StreetAdress { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt")]
         [MinLength(2, ErrorMessage = "Minst två bokstäver")]

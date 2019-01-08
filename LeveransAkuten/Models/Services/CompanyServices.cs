@@ -90,7 +90,8 @@ namespace LeveransAkuten.Models.Services
             CompanyVm company2 = await dbContext.Company.Where(p => p.AspNetUsersId == company.Id).
                 Select(d => new CompanyVm
                 {
-                    Description = d.Description
+                    Description = d.Description,
+                    CompanyName = d.CompanyName
                 })
                 .SingleOrDefaultAsync();
 
@@ -119,6 +120,7 @@ namespace LeveransAkuten.Models.Services
             c.StreetAddress = company.StreetAdress;
             c.UserName = company.UserName;
             c.ZipCode = company.ZipCode;
+            c.CompanyName = company.CompanyName;
 
             return c;
         }
