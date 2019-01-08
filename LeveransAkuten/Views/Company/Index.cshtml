@@ -13,19 +13,49 @@
         {
             foreach (var ad in Model?.AdsNotStarted)
             {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                @if (ad.DriverId != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
+
+                                    <form>
+                                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@ad.DriverId" class="btn btn-info" value="Driver details" />
+                                    </form>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+
             }
         }
         else
@@ -62,19 +92,45 @@
         {
             foreach (var ad in Model?.AdsActive)
             {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                @if (ad.DriverId != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
+                                    <form>
+                                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@ad.DriverId" class="btn btn-info" value="Driver details" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
             }
         }
         else
@@ -111,20 +167,45 @@
         {
             foreach (var ad in Model?.AdsFinished)
             {
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
-
+                @if (ad.DriverId != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
+                                    <form>
+                                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@ad.DriverId" class="btn btn-info" value="Driver details" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">@ad.Header</a>
+                                    </h4>
+                                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@ad.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@ad.Id" method="post"><input type="submit" value="Delete" /></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
             }
         }
         else
