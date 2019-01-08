@@ -4,6 +4,7 @@ using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Company;
+using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,7 @@ namespace LeveransAkuten.Controllers
             await adService.AddAdsAsync(adsVm, id);
             return RedirectToAction(nameof(Index));
         }
+
         public IActionResult EditAd(int id)
         {
             var ad = adService.GetUserAd(id);
@@ -114,6 +116,14 @@ namespace LeveransAkuten.Controllers
         {
             await companyServices.UpdateCompany(company);
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImg(UploadImgVm image)
+        {
+            var u = User.Identity.Name;
+            await companyServices.UploadImage(u, image.Img);
+            return RedirectToAction(nameof(Details), new { name = u });
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Company;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -139,6 +141,19 @@ namespace LeveransAkuten.Models.Services
             company2.CompanyName = company.CompanyName;
 
             await dbContext.SaveChangesAsync();
+            await idctx.SaveChangesAsync();
+        }
+
+        public async Task UploadImage(string userName, IFormFile Image)
+        {
+            BudAkutenUsers d = await idctx.Users.Where(p => p.UserName == userName).SingleOrDefaultAsync();
+
+            using (var ms = new MemoryStream())
+            {
+                Image.CopyTo(ms);
+                d.Image = ms.ToArray();
+            }
+
             await idctx.SaveChangesAsync();
         }
     }

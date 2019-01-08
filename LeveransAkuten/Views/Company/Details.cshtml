@@ -12,15 +12,21 @@
 }
 
 <div class="container emp-profile">
-    <form method="post">
+    <form method="post" asp-controller="Driver" asp-action="UploadImg" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="@Model.Image" alt="Profilbild" />
-                    <div class="file btn btn-lg btn-primary">
-                        Ladda upp ny bild
-                        <input type="file" name="file" />
-                    </div>
+                    @{
+                        if (Model.Image != null)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
+                        }
+                    }
+                        <div class="file btn btn-lg btn-primary">
+                            Ladda upp ny bild
+                            <input type="file" asp-for="UpImg.Img"><br />
+                            <input type="submit" value="Ladda Upp" />
+                        </div>
                 </div>
             </div>
             <div class="col-md-6">
