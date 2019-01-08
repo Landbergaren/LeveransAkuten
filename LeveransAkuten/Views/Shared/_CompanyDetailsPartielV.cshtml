@@ -7,10 +7,10 @@
             <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">@Model.Header</a>
+                    <h4 class="card-title text-primary ">
+                        @Model.Header
                     </h4>
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
+                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Details</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
 
                     <form>
                         <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@Model.DriverId" class="btn btn-info" value="Driver details" />
@@ -31,10 +31,10 @@ else
             <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">@Model.Header</a>
+                    <h4 class="card-title text-primary ">
+                       @Model.Header
                     </h4>
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id">Edit</a> | <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company">Details</a> |<form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete" /></form>
+                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Details</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete"class="btn btn-danger" /></form>
                 </div>
             </div>
         </div>
