@@ -13,14 +13,20 @@ namespace LeveransAkuten.Models.ViewModels.Ads
 
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Rubrik")]
+      
+       
         public string Header { get; set; }
         
         [Required]
+        [Display(Name = "Beskrivning")]
         public string Description { get; set; }
         [Required]
+        [Display(Name = "Startdatum")]
+       
         public DateTime StartDate { get; set; }
         [Required]
-
+        [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
         
         [Display(Name = "A")]

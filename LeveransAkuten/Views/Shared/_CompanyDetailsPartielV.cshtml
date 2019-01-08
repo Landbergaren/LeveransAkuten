@@ -10,10 +10,11 @@
                     <h4 class="card-title text-primary ">
                         @Model.Header
                     </h4>
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Details</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete" class="btn btn-danger" /></form>
+                    <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
+                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Editera</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Detaljer</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger" /></form>
 
                     <form>
-                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@Model.DriverId" class="btn btn-info" value="Driver details" />
+                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@Model.DriverId" class="btn btn-info" value="Förarens detaljer" />
                     </form>
 
 
@@ -32,9 +33,11 @@ else
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title text-primary ">
-                       @Model.Header
+                        @Model.Header
                     </h4>
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Details</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Delete"class="btn btn-danger" /></form>
+                    <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
+
+                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Editera</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Detaljer</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger" /></form>
                 </div>
             </div>
         </div>

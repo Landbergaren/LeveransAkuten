@@ -52,6 +52,8 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAd(AdsVm adsVm)
         {
+            if (!ModelState.IsValid)
+                return View(adsVm);
             var id = HttpContext.User.Claims.FirstOrDefault().Value;
             await adService.AddAdsAsync(adsVm, id);
             return RedirectToAction(nameof(Index));
@@ -94,7 +96,7 @@ namespace LeveransAkuten.Controllers
             return View(await companyServices.GetCompanyByName(name));
         }
 
-        [HttpGet, Route("Company/" + nameof(DriverDetails) + "/{driverId}")] 
+        [HttpGet, Route("Company/" + nameof(DriverDetails) + "/{driverId}")]
         public async Task<IActionResult> DriverDetails(int driverId)
         {
             var driverStringId = dbCtx.Driver.Where(d => d.Id == driverId).Select(d => d.AspNetUsersId).FirstOrDefault();
