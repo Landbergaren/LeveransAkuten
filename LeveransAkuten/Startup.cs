@@ -46,7 +46,6 @@ namespace LeveransAkuten
             services.AddTransient<CompanyServices>();
             services.AddTransient<SearchDriverServices>();
             services.AddTransient<DriverService>();
-            services.AddTransient<HomeService>();
             services.AddAutoMapper();
         }
 
