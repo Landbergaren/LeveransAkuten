@@ -20,36 +20,48 @@
       {
         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                @driver.UserName
-              </h4>
-              <p>
-                Körkort:
-                @if (driver.A)
+            @if (driver.Image != null)
+            {
+              <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(driver.Image)" width="200" height="150" /></a>
+
+            }
+            else
+            {
+              <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
+            }
+
+              <div class="card-body">
+                <a asp-action="DriverDetails" asp-controller="Company" asp-route-id="@driver.Id">
+                  <h4 class="card-title">
+                    @driver.UserName
+                  </h4>
+                </a>
+                
+                <p>
+                  Körkort:
+                  @if (driver.A)
     {
-            <span>A</span>
+              <span>A</span>
 }
-                @if (driver.B)
+                  @if (driver.B)
     {
-            <span>B</span>
+              <span>B</span>
 }
-                @if (driver.C)
+                  @if (driver.C)
     {
-            <span>C</span>
+              <span>C</span>
 }
-                @if (driver.CE)
+                  @if (driver.CE)
     {
-            <span>CE</span>
+              <span>CE</span>
 }
-                @if (driver.D)
+                  @if (driver.D)
     {
-            <span>D</span>
+              <span>D</span>
 }
-              </p>
-              <a asp-action="ContactDriver" asp-controller="Company" asp-route-id="@driver.Id">Contact</a> | <a asp-action="DriverDetails" asp-route-id="@driver.Id" asp-controller="Company">Details</a> 
-            </div>
+                </p>
+                <a asp-action="ContactDriver" asp-controller="Company" asp-route-id="@driver.Id">Contact</a> | <a asp-action="DriverDetails" asp-route-id="@driver.Id" asp-controller="Company">Details</a>
+              </div>
           </div>
         </div>
       }

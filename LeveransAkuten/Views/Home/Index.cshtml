@@ -68,19 +68,19 @@
     </div>
     <div class="col-sm-4 my-4">
       <div class="card">
-        <img class="card-img-top" src="~/Img/express.jpg" />
+        <img class="card-img-top" src="~/Img/delivery-truck-clipart-22.jpg" />
         <div class="card-body">
           <h4 class="card-title">Express</h4>
           <p class="card-text">Budakuten är det snabbaste sättet att rekrytera på marknaden. När du drabbas av sjukskrivningar eller oväntade personalförluster. Använd oss!</p>
         </div>
         <div class="card-footer">
           @if (!User.Identity.IsAuthenticated)
-          {
-            <div class="container">
-              <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
+    {
+      <div class="container">
+        <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
 
-            </div>
-          }
+      </div>
+}
         </div>
       </div>
     </div>

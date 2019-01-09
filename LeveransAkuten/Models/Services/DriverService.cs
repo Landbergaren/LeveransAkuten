@@ -219,7 +219,7 @@ namespace LeveransAkuten.Models.Services
             d.Image = driver.Image;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
-
+            
             driver2.Description = driver.Description;
             driver2.A = driver.A;
             driver2.B = driver.B;
@@ -299,6 +299,11 @@ namespace LeveransAkuten.Models.Services
 
                 var driverUser = await GetDriverDetailsByIdAsync(driverStringId.ToString());
 
+                var driverAspNetUser = idctx.Users.Where(du => du.Id == driver.AspNetUsersId).SingleOrDefault();
+
+
+
+
                 drivers.Add(new DriverVm
                 {
                     Id = driver.Id,
@@ -309,6 +314,7 @@ namespace LeveransAkuten.Models.Services
                     StreetAdress = driverUser.StreetAdress,
                     FirstName = driver.FirstName,
                     LastName = driver.LastName,
+                    Image = driverAspNetUser.Image,
                     A = driver.A,
                     B = driver.B,
                     C = driver.C,
