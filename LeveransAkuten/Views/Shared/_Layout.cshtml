@@ -3,89 +3,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>LeveransAkuten</title>
-    <link href="~/Bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/styles/main.css" rel="stylesheet" />
-    @RenderSection("styles", false)
+  <meta name="viewport" content="width=device-width" />
+  <title>LeveransAkuten</title>
+  <link href="~/Bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <link href="~/styles/main.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+  @RenderSection("styles", false)
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" asp-controller="home" asp-action="index">Start Bootstrap</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    @if (@User.IsInRole(Roles.Company))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Company" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
-                        </li>
-                        <li class="nav-item">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" asp-controller="home" asp-action="index">
+        <img src="~/Img/newnewlogo.png" height="35" width="125" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          @if (@User.IsInRole(Roles.Company))
+          {
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Company" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden  <i class="fas fa-truck"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Company" asp-action="Details" asp-route-id="@User.Identity.Name">Profil  <i class="fas fa-user-circle"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Company" asp-action="DriverSearch">Förare  <i class="fas fa-search"></i></a>
+            </li>
 
+          }
+          else if (@User.IsInRole(Roles.Driver))
+          {
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Driver" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Driver" asp-action="Details" asp-route-id="@User.Identity.Name">Profil</a>
+            </li>
 
-                            <a class="nav-link" asp-controller="Company" asp-action="Details" asp-route-id="@User.Identity.Name">Profil</a>
-
-                        </li>
-                    }
-                    else if (@User.IsInRole(Roles.Driver))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Driver" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
-                        </li>
-                        <li class="nav-item">
-
-
-                            <a class="nav-link" asp-controller="Driver" asp-action="Details" asp-route-id="@User.Identity.Name">Profil</a>
-
-                        </li>
-
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Ärenden</a>
-                        </li>
-                        <li class="nav-item">
-
-
-                            <a class="nav-link" href="#">Profil</a>
-
-                        </li>
-
-                    }
+          }
 
 
 
-                    <li class="nav-item">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
-                        }
-                        else
-                        {
-                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-                        }
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div>
-        @RenderBody()
+          <li class="nav-item">
+            @if (User.Identity.IsAuthenticated)
+            {
+              <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout  <i class="fas fa-sign-out-alt"></i></a>
+            }
+            else
+            {
+              <a class="nav-link" asp-controller="Account" asp-action="Login">Login  <i class="fas fa-sign-in-alt"></i></a>
+            }
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-        </div>
-        <!-- /.container -->
-    </footer>
-    @RenderSection("scripts", false);
-    <script src="~/Bootstrap/bootstrap.min.js"></script>
-    <script src="~/Jquery/jquery-3.3.1.min.js"></script>
+  </nav>
+  <div>
+    @RenderBody()
+  </div>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Budakuten 2018</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  @RenderSection("scripts", false);
+  <script src="~/Bootstrap/bootstrap.min.js"></script>
+  <script src="~/Jquery/jquery-3.3.1.min.js"></script>
 </body>
 </html>
