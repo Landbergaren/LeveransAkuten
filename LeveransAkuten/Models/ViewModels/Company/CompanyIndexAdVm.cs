@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeveransAkuten.Models.ViewModels.Company
 {
@@ -6,9 +7,12 @@ namespace LeveransAkuten.Models.ViewModels.Company
     {
         public int? DriverId { get; set; }
         public int Id { get; set; }
+        [Display(Name = "Rubrik")]
         public string Header { get; set; }
+        [Display(Name = "Startdatum")]
         public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        [Display(Name = "Slutdatum")]
+        public DateTime? End { get; set; }
 
     }
 }

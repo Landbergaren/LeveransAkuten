@@ -1,13 +1,13 @@
 ﻿using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Company;
 using LeveransAkuten.Models.ViewModels.Driver;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using LeveransAkuten.Models.ViewModels.Company;
 
 namespace LeveransAkuten.Models.Services
 {
@@ -106,14 +106,14 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<DriverIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
         {
-            
+
             var loggedInDriverId = GetDriverId(loggedInUser.Id);
             var indexVm = new DriverIndexVm();
 
-            var allAds = await appctx.Ad.Where(d=>d.DriverId==loggedInDriverId).ToListAsync();
+            var allAds = await appctx.Ad.Where(d => d.DriverId == loggedInDriverId).ToListAsync();
             indexVm.AdsNotStarted = allAds
 
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId, Start = a.StartDate.Date, End = a.EndDate})
+                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId, Start = a.StartDate.Date, End = a.EndDate })
                 .ToList();
 
 
@@ -131,7 +131,7 @@ namespace LeveransAkuten.Models.Services
         {
             var allAds = await appctx.Ad.ToArrayAsync();
 
-            var ads = allAds.Select
+            var ads = allAds.Where(a => a.DriverId == null).Select
                 (a => new AdsVm
                 {
                     DriverId = a.DriverId,
@@ -144,27 +144,28 @@ namespace LeveransAkuten.Models.Services
                     Description = a.Description,
                     StartDate = a.StartDate,
                     EndDate = a.EndDate.Value
-                    
+
                 });
 
             return ads.ToArray();
         }
 
-        public async Task<AdsVm[]> FilterAds (AdsVm adRequest)
+        public async Task<AdsVm[]> FilterAds(AdsVm adRequest)
         {
             var allAds = await appctx.Ad.ToArrayAsync();
             List<AdsVm> filteredAds = new List<AdsVm>();
 
-            foreach (var ad in allAds)
+            foreach (var ad in allAds.Where(a => a.DriverId == null ))
             {
-                if(ad.Arequired && adRequest.Arequired ||
+                if (ad.Arequired && adRequest.Arequired ||
                     ad.Brequired && adRequest.Brequired ||
                     ad.Crequired && adRequest.Crequired ||
                     ad.Cerequired && adRequest.Cerequired ||
                     ad.Drequired && adRequest.Drequired
                     )
                 {
-                    filteredAds.Add(new AdsVm {
+                    filteredAds.Add(new AdsVm
+                    {
                         Id = ad.Id,
                         Header = ad.Header,
                         Arequired = ad.Arequired,
@@ -177,7 +178,7 @@ namespace LeveransAkuten.Models.Services
                     });
                 }
             }
-            return filteredAds.ToArray(); 
+            return filteredAds.ToArray();
         }
 
         public async Task<DriverUpdateVm> GetDriverForUpdate(string name)
@@ -235,13 +236,13 @@ namespace LeveransAkuten.Models.Services
         public async Task UploadImage(string userName, IFormFile Image)
         {
             BudAkutenUsers d = await idctx.Users.Where(p => p.UserName == userName).SingleOrDefaultAsync();
-            
+
             using (var ms = new MemoryStream())
             {
                 Image.CopyTo(ms);
                 d.Image = ms.ToArray();
             }
-                
+
             await idctx.SaveChangesAsync();
         }
 
@@ -256,7 +257,7 @@ namespace LeveransAkuten.Models.Services
                     City = d.City,
                     PhoneNumber = d.PhoneNumber,
                     UserName = d.UserName
-                   
+
                 })
                 .SingleOrDefaultAsync();
 
@@ -273,7 +274,7 @@ namespace LeveransAkuten.Models.Services
                 })
                 .SingleOrDefaultAsync();
 
-           
+
             driver.A = driver2.A;
             driver.B = driver2.B;
             driver.C = driver2.C;

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -17,12 +19,47 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ärenden</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
-                    </li>
+                    @if (@User.IsInRole(Roles.Company))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Company" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <a class="nav-link" asp-controller="Company" asp-action="Details" asp-route-id="@User.Identity.Name">Profil</a>
+
+                        </li>
+                    }
+                    else if (@User.IsInRole(Roles.Driver))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Driver" asp-action="Index" asp-route-id="@User.Identity.Name">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <a class="nav-link" asp-controller="Driver" asp-action="Details" asp-route-id="@User.Identity.Name">Profil</a>
+
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ärenden</a>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <a class="nav-link" href="#">Profil</a>
+
+                        </li>
+
+                    }
+
+
+
                     <li class="nav-item">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -37,11 +74,9 @@
             </div>
         </div>
     </nav>
-
     <div>
         @RenderBody()
     </div>
-
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
