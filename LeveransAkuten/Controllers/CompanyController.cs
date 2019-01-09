@@ -127,5 +127,13 @@ namespace LeveransAkuten.Controllers
             await companyServices.UploadImage(u, image.Img);
             return RedirectToAction(nameof(Details), new { name = u });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DriverSearch()
+        {
+            var drivers = await driverService.GetAllDrivers();
+            return View(drivers);
+        }
+
     }
 }
