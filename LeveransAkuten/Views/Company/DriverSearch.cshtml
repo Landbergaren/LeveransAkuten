@@ -1,0 +1,58 @@
+﻿@model DriverVm[]
+@*
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<section>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Drivers</h1>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container">
+    <div class="row">
+      @foreach (var driver in Model)
+      {
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                @driver.UserName
+              </h4>
+              <p>
+                Körkort:
+                @if (driver.A)
+    {
+            <span>A</span>
+}
+                @if (driver.B)
+    {
+            <span>B</span>
+}
+                @if (driver.C)
+    {
+            <span>C</span>
+}
+                @if (driver.CE)
+    {
+            <span>CE</span>
+}
+                @if (driver.D)
+    {
+            <span>D</span>
+}
+              </p>
+              <a asp-action="ContactDriver" asp-controller="Company" asp-route-id="@driver.Id">Contact</a> | <a asp-action="DriverDetails" asp-route-id="@driver.Id" asp-controller="Company">Details</a> 
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</main>

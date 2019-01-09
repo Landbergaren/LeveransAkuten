@@ -284,6 +284,44 @@ namespace LeveransAkuten.Models.Services
 
             return driver;
         }
+
+        public async Task<DriverVm[]> GetAllDrivers ()
+        {
+            var allDrivers = await appctx.Driver.ToArrayAsync();
+            List<DriverVm> drivers = new List<DriverVm>();
+
+
+            foreach (var driver in allDrivers)
+            {
+
+                var driverStringId = appctx.Driver.Where(d => d.Id == driver.Id).Select(d => d.AspNetUsersId).FirstOrDefault();
+
+                var driverUser = await GetDriverDetailsByIdAsync(driverStringId.ToString());
+
+                drivers.Add(new DriverVm
+                {
+                    Id = driver.Id,
+                    UserName = driverUser.UserName,
+                    Email = driverUser.Email,
+                    ZipCode = driverUser.ZipCode,
+                    City = driverUser.City,
+                    StreetAdress = driverUser.StreetAdress,
+                    FirstName = driver.FirstName,
+                    LastName = driver.LastName,
+                    A = driver.A,
+                    B = driver.B,
+                    C = driver.C,
+                    CE = driver.Ce,
+                    D = driver.D,
+                    PhoneNumber = driverUser.PhoneNumber
+
+                });
+            }
+
+            return drivers.ToArray(); 
+            
+
+        }
     }
 }
 

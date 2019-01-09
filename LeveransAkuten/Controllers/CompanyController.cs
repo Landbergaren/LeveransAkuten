@@ -43,6 +43,13 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> DriverSearch ()
+        {
+            var drivers = await driverService.GetAllDrivers();
+            return View(drivers);
+        }
+
+        [HttpGet]
         public IActionResult CreateAd()
         {
             return View();
