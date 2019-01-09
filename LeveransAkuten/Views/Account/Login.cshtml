@@ -1,33 +1,45 @@
 ﻿@model LoginVm
-<div class="container">
 
-    <div class="row">
-        <div class="col-md-4"></div>
+@section styles{ 
+    <link href="~/styles/LogIn.css" rel="stylesheet" />
+}
 
-        <div class="col-md-4">
-            <section class="login-form login-container">
-                <div class="login-container-buffert"></div>
-                <form asp-controller="Account" asp-action="Login">
-                    <div asp-validation-summary="ModelOnly"></div>
-                    <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive mt-5" alt="" />
-                    <input type="text" asp-for="Username" placeholder="Username" class="form-control input-lg mt-3" />
-                    <span asp-validation-for="Username"></span>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h3 class="login-heading mb-4"></h3>
+                            <form asp-controller="Account" asp-action="Login">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                <div class="form-label-group">
+                                    <input asp-for="Username" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                    <label for="inputEmail">Användarnamn</label>
+                                    <span asp-validation-for="Username"></span>
+                                </div>
 
-                    <input type="password" asp-for="Password" class="form-control input-lg mt-3" placeholder="Password" />
-                    <span asp-validation-for="Password"></span>
+                                <div class="form-label-group">
+                                    <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                    <label for="inputPassword">Lösenord</label>
+                                    <span asp-validation-for="Password"></span>
+                                    <input type="hidden" asp-for="ReturnUrl" />
+                                </div>
 
-                    <input type="hidden" asp-for="ReturnUrl" />
-
-                    <button type="submit" name="go" class="btn btn-lg btn-primary btn-block mt-3">Sign in</button>
-                    <div>
-                        <a asp-controller="registration" asp-action="index">Create account</a>
+                                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Logga in</button>
+                                <div class="text-center">
+                                    <a class="small" href="#"></a>
+                                </div>
+                                <div>
+                                    <a asp-controller="registration" asp-action="index">Inget konto? Registrera dig</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
-                </form>
-
-            </section>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4"></div>
     </div>
-
 </div>
