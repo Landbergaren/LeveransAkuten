@@ -1,65 +1,72 @@
 ﻿@model CompanyCreateAdVm
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@section styles{<link href="~/styles/company/createadd.css" rel="stylesheet" /> }
+
+
 <h1>Skapa en ny annons</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Company" asp-action="Createad" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Header" class="control-label"></label>
-                <input asp-for="Header" class="form-control" />
-                <span asp-validation-for="Header" class="text-danger"></span>
-            </div>
+<div id="main-div" class="col-10">
+    <form asp-controller="Company" asp-action="Createad" method="post" id="create-add-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id="left-box">
+            <section id="input-box">
+                <div class="form-group">
+                    <label asp-for="Header" class="control-label"></label>
+                    <input asp-for="Header" class="form-control" />
+                    <span asp-validation-for="Header" class="text-danger"></span>
+                </div>
+                <div id="dates">
+                    <div class="form-group date">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group date">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" type="date" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </section>
+            <h6>Körkorts krav</h6>
+            <section id="licenses">
+                <div class="form-group form-check-inline  license-box">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Arequired" /> @Html.DisplayNameFor(model => model.Arequired)
+                    </label>
+                </div>
+                <div class="form-group form-check  license-box">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Brequired" /> @Html.DisplayNameFor(model => model.Brequired)
+                    </label>
+                </div>
+                <div class="form-group form-check  license-box">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Crequired" /> @Html.DisplayNameFor(model => model.Crequired)
+                    </label>
+                </div>
+                <div class="form-group form-check  license-box">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Drequired" /> @Html.DisplayNameFor(model => model.Drequired)
+                    </label>
+                </div>
+                <div class="form-group form-check  license-box">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Cerequired" /> @Html.DisplayNameFor(model => model.Cerequired)
+                    </label>
+                </div>
+            </section>
+        </div>
+        <section id="description">
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="11"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" type="date" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" type="date" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Arequired" /> @Html.DisplayNameFor(model => model.Arequired)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Brequired" /> @Html.DisplayNameFor(model => model.Brequired)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Crequired" /> @Html.DisplayNameFor(model => model.Crequired)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Drequired" /> @Html.DisplayNameFor(model => model.Drequired)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Cerequired" /> @Html.DisplayNameFor(model => model.Cerequired)
-                </label>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Skapa" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </section>
+        <div class="form-group">
+            <input type="submit" value="Skapa" class="" id="submit-form" />
+        </div>
+    </form>
 </div>
 <div>
     <a asp-action="Index">Back to List</a>

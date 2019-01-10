@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {
-
-
     [Authorize(Roles = Roles.Company)]
     public class CompanyController : Controller
     {

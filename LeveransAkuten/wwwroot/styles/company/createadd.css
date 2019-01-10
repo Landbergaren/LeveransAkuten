@@ -1,0 +1,66 @@
+﻿h1 {
+    margin: 20px;
+    text-align: center;
+}
+h6 {
+    margin-top: 10px;
+}
+
+#input-box {
+    margin: 0 100px;
+}
+
+#licenses {
+    margin: 0 100px;
+    padding-top: 10px;
+    padding-right: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+}
+
+#description {
+    display: inline-block;
+    float: right;
+    width: 600px;
+}
+
+#main-div {
+    margin: 50px auto;
+    text-align: center;
+}
+
+#create-add-form {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+#left-box {
+    display: inline-block
+}
+
+.license-box {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#submit-form {
+    color: white;
+    margin-top: 40px;
+    width: 200px;
+    padding: 5px 10px;
+    background-color: #343a40;
+    border: 1px solid #343a40;
+    border-radius: 5px
+}
+
+    #submit-form:hover {
+        background-color: #141313;
+        border-color: grey;
+        cursor: pointer;
+    }
+
+    .date {
+        margin: 0 auto;
+        display: inline-block !important;
+        width: 150px;
+    }
