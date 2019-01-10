@@ -11,5 +11,6 @@ namespace LeveransAkuten.Models.ViewModels.Driver
         public List<DriverIndexAdVm> AdsNotStarted { get; set; }
         public List<DriverIndexAdVm> AdsActive { get; set; }
         public List<DriverIndexAdVm> AdsFinished { get; set; }
+
     }
 }

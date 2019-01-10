@@ -12,7 +12,8 @@ namespace LeveransAkuten.Models.ViewModels.Driver
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
         public int? DriverId { get; set; }
-      
+        public byte[] Image { get; set; }
+
 
     }
 }

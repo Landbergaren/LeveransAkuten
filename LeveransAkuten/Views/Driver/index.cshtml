@@ -1,93 +1,77 @@
 ﻿@model DriverIndexVm
 <div class="container">
-    <!-- Page Heading -->
-    <section>
-        <h1 class="my-4">
-            Hej @User.Identity.Name !
-        </h1>
-    </section>
-    <br />
-    <hr />
-    <br />
-    <div>
+  <!-- Page Heading -->
+  <section>
+    <h1 class="my-4">
+      Hej @User.Identity.Name !
+    </h1>
+  </section>
+
+  <main>
+
+    @if (Model?.AdsNotStarted != null)
+    {
+      <br />
+      <hr />
+      <br />
+      <div>
         <h3>
-            Här är dina Ärenden:
+          Ärenden:
         </h3>
 
-    </div>
-    <br />
-    <br />
-    <br />
-    <main>
-
-        @if (Model?.AdsNotStarted != null)
+      </div>
+      <br />
+      <br />
+      <br />
+      <div class="row">
+        @foreach (var ad in Model?.AdsNotStarted)
         {
-            <div class="row">
-            @foreach (var ad in Model?.AdsNotStarted)
-            {
-                @if (ad.DriverId != null)
+          @if (ad.DriverId != null)
+          {
+
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success m-3">
+
+              <div class="card h-100 ">
+                @if (ad.Image != null)
                 {
-
-
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success m-3">
-
-                        <div class="card h-100 ">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body ">
-
-                                <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">
-                                    <h4 class="card-title">
-                                        @ad.Header
-                                    </h4>
-                                </a>
-                                <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End?.ToString("yyyy/MM/dd") </h4>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    <br />
+                  <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(ad.Image)" width="200" height="150" /></a>
 
                 }
-
                 else
                 {
-
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                            <div class="card h-100">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                                <div class="card-body ">
-
-                                    <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">
-                                        <h4 class="card-title">
-                                            @ad.Header
-                                        </h4>
-                                    </a>
-                                    <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End?.ToString("yyyy/MM/dd") </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
+                  <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
                 }
+                <div class="card-body ">
 
-            }
+                  <a asp-action="AdDetails" asp-route-id="@ad.Id" asp-controller="Driver">
+                    <h4 class="card-title">
+                      @ad.Header
+                    </h4>
+                  </a>
+                  <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End?.ToString("yyyy/MM/dd") </h4>
+
+                </div>
+              </div>
             </div>
+
+            <br />
+            <br />
+            <br />
+
+          }
         }
-        else
-        {
-            <p>Det finns inga kommande uppdrag just nu</p>
-        }
+      </div>
+    }
+    else
+    {
+      <p>Det finns inga kommande uppdrag just nu</p>
+    }
 
-        <hr />
+    <hr />
 
 
-    </main>
+  </main>
 </div>
 <!-- /.container -->

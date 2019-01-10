@@ -111,13 +111,29 @@ namespace LeveransAkuten.Models.Services
 
             var loggedInDriverId = GetDriverId(loggedInUser.Id);
             var indexVm = new DriverIndexVm();
+            List<DriverIndexAdVm> ads = new List<DriverIndexAdVm>();
 
             var allAds = await appctx.Ad.Where(d => d.DriverId == loggedInDriverId).ToListAsync();
-            indexVm.AdsNotStarted = allAds
 
-                .Select(a => new DriverIndexAdVm { Header = a.Header, Id = a.Id, DriverId = a.DriverId, Start = a.StartDate.Date, End = a.EndDate })
-                .ToList();
+            foreach (var ad in allAds)
+            {
+                var company = appctx.Company.Where(c => c.Id == ad.CompanyId).SingleOrDefault();
 
+                var companyUser = await CompanySer.GetCompanyById(company.AspNetUsersId);
+
+                ads.Add(new DriverIndexAdVm
+                {
+                    
+                    DriverId = ad.DriverId,
+                    Id = ad.Id,
+                    Header = ad.Header,
+                    Image = companyUser.Image,
+                    Start = ad.StartDate,
+                    End = ad.EndDate.Value
+                });
+            }
+
+            indexVm.AdsNotStarted = ads;
 
             return indexVm;
         }
@@ -170,6 +186,8 @@ namespace LeveransAkuten.Models.Services
 
             foreach (var ad in allAds.Where(a => a.DriverId == null ))
             {
+
+
                 if (ad.Arequired && adRequest.Arequired ||
                     ad.Brequired && adRequest.Brequired ||
                     ad.Crequired && adRequest.Crequired ||
@@ -177,6 +195,10 @@ namespace LeveransAkuten.Models.Services
                     ad.Drequired && adRequest.Drequired
                     )
                 {
+                    var company = appctx.Company.Where(c => c.Id == ad.CompanyId).SingleOrDefault();
+
+                    var companyUser = await CompanySer.GetCompanyById(company.AspNetUsersId);
+
                     filteredAds.Add(new AdsVm
                     {
                         Id = ad.Id,
@@ -186,6 +208,7 @@ namespace LeveransAkuten.Models.Services
                         Crequired = ad.Crequired,
                         Cerequired = ad.Cerequired,
                         Description = ad.Description,
+                        Image = companyUser.Image,
                         StartDate = ad.StartDate,
                         EndDate = ad.EndDate.Value
                     });
