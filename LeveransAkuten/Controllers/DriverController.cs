@@ -89,12 +89,13 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> DisplayAds()
         {
             var ads = await driverSer.GetAllAds();
+            var notBookedAds = ads.Where(x => x.DriverId == null).ToArray();
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var driverId = driverSer.GetDriverId(loggedInUser.Id);
             AdSearchVm vm = new AdSearchVm
             {
                 DriverId = driverId,
-                Ads = ads
+                Ads = notBookedAds
             };
             return View(vm);
         }
