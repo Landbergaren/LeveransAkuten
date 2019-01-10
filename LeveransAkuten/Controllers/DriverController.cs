@@ -79,11 +79,7 @@ namespace LeveransAkuten.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        public IActionResult SearchAd()
-        {
-            return View();
-        }
+      
 
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
