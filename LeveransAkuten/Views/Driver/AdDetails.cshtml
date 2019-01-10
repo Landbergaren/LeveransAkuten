@@ -9,73 +9,73 @@
     <link href="~/styles/AdDetails.css" rel="stylesheet" />
 }
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <h3>@Model.Header</h3>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <h3>@Model.Header</h3>
+    </div>
+    <div class="row justify-content-center">
+        Image goes here
+    </div>
+    <div class="row justify-content-center">
+        Company name goes here
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Uppdragsbeskrivning</label>
         </div>
-        <div class="row justify-content-center">
-            Image goes here
-        </div>
-        <div class="row justify-content-center">
-            Company name goes here
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>Uppdragsbeskrivning</label>
-            </div>
-            <div class="col-6">
-                @Model.Description
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>Startdatum</label>
-            </div>
-            <div class="col-6">
-                @Model.StartDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>Slutdatum</label>
-            </div>
-            <div class="col-6">
-                @Model.EndDate
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label>Körkortskrav</label>
-            </div>
-            <div class="col-6">
-                @{
-                    if (Model.Arequired)
-                    {
-                        <span>A</span>
-                    }
-                    if (Model.Brequired)
-                    {
-                        <span>B</span>
-                    }
-                    if (Model.Crequired)
-                    {
-                        <span>C</span>
-                    }
-                    if (Model.Cerequired)
-                    {
-                        <span>CE</span>
-                    }
-                    if (Model.Drequired)
-                    {
-                        <span>D</span>
-                    }
-                }
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
-        </div>
-        <div class="row justify-content-center m-2">
-            <a asp-action="Index" class="btn btn-dark">Tillbaka</a>
+        <div class="col-6">
+            @Model.Description
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Startdatum</label>
+        </div>
+        <div class="col-6">
+            @Model.StartDate
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Slutdatum</label>
+        </div>
+        <div class="col-6">
+            @Model.EndDate
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Körkortskrav</label>
+        </div>
+        <div class="col-6">
+            @{
+                if (Model.Arequired)
+                {
+                    <span>A</span>
+                }
+                if (Model.Brequired)
+                {
+                    <span>B</span>
+                }
+                if (Model.Crequired)
+                {
+                    <span>C</span>
+                }
+                if (Model.Cerequired)
+                {
+                    <span>CE</span>
+                }
+                if (Model.Drequired)
+                {
+                    <span>D</span>
+                }
+            }
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
+    </div>
+    <div class="row justify-content-center m-2">
+        <a asp-action="Index" class="btn btn-dark">Tillbaka</a>
+    </div>
+</div>
