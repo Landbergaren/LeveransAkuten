@@ -7,75 +7,99 @@
 
 @section scripts {
     <link href="~/styles/AdDetails.css" rel="stylesheet" />
+    <link href="~/styles/DriverDetails.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <h3>@Model.Header</h3>
-    </div>
-    <div class="row justify-content-center">
-        <img class="card-img-top" src="http://placehold.it/700x400" alt="">
-    </div>
-    <div class="row justify-content-center">
-        Company name goes here
-    </div>
+<div class="container emp-profile border border-dark bg-light">
     <div class="row">
-        <div class="col-6">
-            <label>Uppdragsbeskrivning</label>
-        </div>
-        <div class="col-6">
-            @Model.Description
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <label>Startdatum</label>
-        </div>
-        <div class="col-6">
-            @Model.StartDate
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <label>Slutdatum</label>
-        </div>
-        <div class="col-6">
-            @Model.EndDate
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <label>Körkortskrav</label>
-        </div>
-        <div class="col-6">
-            @{
-                if (Model.Arequired)
-                {
-                    <span>A</span>
+        <div class="col-md-4">
+            <div class="profile-img">
+                @{
+                    @*if (Model.Image != null)
+            {
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
+            }*@
                 }
-                if (Model.Brequired)
-                {
-                    <span>B</span>
-                }
-                if (Model.Crequired)
-                {
-                    <span>C</span>
-                }
-                if (Model.Cerequired)
-                {
-                    <span>CE</span>
-                }
-                if (Model.Drequired)
-                {
-                    <span>D</span>
-                }
-            }
+            </div>
+            <div class="row justify-content-center mt-2">
+                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
-    </div>
-    <div class="row justify-content-center m-2">
-        <a asp-action="Index" class="btn btn-dark">Tillbaka</a>
+        <div class="col-md-5">
+            <div class="profile-head">
+                <h5>
+                    @Model.Header
+                </h5>
+                <div class="col-md-8 mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Företag</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Företagsnamn</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Uppdrag</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.Description</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Startdatum</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.StartDate</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Slutdatum</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>@Model.EndDate</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Körkortskrav</label>
+                        </div>
+                        <div class="col-6">
+                            @{
+                                if (Model.Arequired)
+                                {
+                                    <span>A</span>
+                                }
+                                if (Model.Brequired)
+                                {
+                                    <span>B</span>
+                                }
+                                if (Model.Crequired)
+                                {
+                                    <span>C</span>
+                                }
+                                if (Model.Cerequired)
+                                {
+                                    <span>CE</span>
+                                }
+                                if (Model.Drequired)
+                                {
+                                    <span>D</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-end">
+            <a asp-action="Index" class="btn btn-dark">Tillbaka</a>
+        </div>
     </div>
 </div>
