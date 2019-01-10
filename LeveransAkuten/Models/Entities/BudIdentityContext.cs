@@ -12,6 +12,7 @@ namespace LeveransAkuten.Models.Entities
         public BudIdentityContext(DbContextOptions<BudIdentityContext> options) 
             : base(options)
         {
+            //var result = Database.EnsureCreated();
         }
     }
 }

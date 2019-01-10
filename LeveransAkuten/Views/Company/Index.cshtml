@@ -11,12 +11,15 @@
 
         @if (Model?.AdsNotStarted != null && Model?.AdsNotStarted.Count() > 0)
         {
-            <h3>Dina kommande uppdrag</h3>
-            foreach (var ad in Model?.AdsNotStarted)
-            {
-                <partial name="_CompanyDetailsPartielV" model="ad" />
 
-            }
+            <h3>Dina kommande uppdrag</h3>
+            <div class="row">
+                @foreach (var ad in Model?.AdsNotStarted)
+                {
+                    <partial name="_CompanyDetailsPartielV" model="ad" />
+
+                }
+            </div>
             <partial name="_PaginationPartielV" />
         }
         else
@@ -29,10 +32,12 @@
         @if (Model?.AdsActive != null && Model?.AdsActive.Count() > 0)
         {
             <h3>Dina pågeånde uppdrag</h3>
-            foreach (var ad in Model?.AdsActive)
-            {
-                <partial name="_CompanyDetailsPartielV" model="ad" />
-            }
+            <div class="row">
+                @foreach (var ad in Model?.AdsActive)
+                {
+                    <partial name="_CompanyDetailsPartielV" model="ad" />
+                }
+            </div>
             <partial name="_PaginationPartielV" />
         }
         else
@@ -44,10 +49,13 @@
         @if (Model?.AdsFinished != null && Model?.AdsFinished.Count() > 0)
         {
             <h3>Dina avslutade uppdrag</h3>
-            foreach (var ad in Model?.AdsFinished)
-            {
-                <partial name="_CompanyDetailsPartielV" model="ad" />
-            }
+            <div class="row">
+
+                @foreach (var ad in Model?.AdsFinished)
+                {
+                    <partial name="_CompanyDetailsPartielV" model="ad" />
+                }
+            </div>
             <partial name="_PaginationPartielV" />
         }
         else

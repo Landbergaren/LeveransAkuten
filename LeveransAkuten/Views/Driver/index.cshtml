@@ -3,26 +3,34 @@
     <!-- Page Heading -->
     <section>
         <h1 class="my-4">
-            @User.Identity.Name
+            Hej @User.Identity.Name !
         </h1>
     </section>
-    <form class="float-right" asp-action="DisplayAds" asp-controller="Driver" method="get">
-        <input type="submit" value="Sök Annons" class="btn btn-success " />
-    </form>
+    <br />
+    <hr />
+    <br />
+    <div>
+        <h3>
+            Här är dina Ärenden:
+        </h3>
 
+    </div>
+    <br />
+    <br />
+    <br />
     <main>
 
         @if (Model?.AdsNotStarted != null)
         {
-
-            foreach (var ad in Model?.AdsNotStarted)
+            <div class="row">
+            @foreach (var ad in Model?.AdsNotStarted)
             {
                 @if (ad.DriverId != null)
                 {
 
 
 
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success m-3">
 
                         <div class="card h-100 ">
                             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
@@ -33,7 +41,7 @@
                                         @ad.Header
                                     </h4>
                                 </a>
-                                <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End </h4>
+                                <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End?.ToString("yyyy/MM/dd") </h4>
 
                             </div>
                         </div>
@@ -42,6 +50,7 @@
                     <br />
                     <br />
                     <br />
+
                 }
 
                 else
@@ -69,6 +78,7 @@
                 }
 
             }
+            </div>
         }
         else
         {

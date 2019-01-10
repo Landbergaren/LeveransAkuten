@@ -14,155 +14,152 @@
             <div>@error</div>
         }
     }
-    <table>
-        <tr>
-            <td>
-                <div class="container">
-                    <div class="jumbotron">
-                        <h3>Företag</h3>
-                        <form asp-controller="registration" asp-action="CreateCompany">
-                            <div class="form-group">
-                                <label asp-for="Company.Username"></label>
-                                <input asp-for="Company.Username" type="text" class="form-control">
-                                <span asp-validation-for="Company.Username"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.Password"></label>
-                                <input asp-for="Company.Password" type="password" class="form-control">
-                                <span asp-validation-for="Company.Password"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.ConfirmPassword"></label>
-                                <input asp-for="Company.ConfirmPassword" type="password" class="form-control">
-                                <span asp-validation-for="Company.ConfirmPassword"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.CompanyName"></label>
-                                <input asp-for="Company.CompanyName" type="text" class="form-control" id="exampleInputEmail1">
-                                <span asp-validation-for="Company.CompanyName"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.Email"></label>
-                                <input asp-for="Company.Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <span asp-validation-for="Company.Email"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.PhoneNumber"></label>
-                                <input asp-for="Company.PhoneNumber" type="text" class="form-control" id="exampleInputPassword1">
-                                <span asp-validation-for="Company.PhoneNumber"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.City"></label>
-                                <input asp-for="Company.City" type="text" class="form-control" id="exampleInputPassword1">
-                                <span asp-validation-for="Company.City"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.ZipCode"></label>
-                                <input asp-for="Company.ZipCode" type="text" class="form-control" id="exampleInputPassword1">
-                                <span asp-validation-for="Company.ZipCode"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Company.StreetAdress"></label>
-                                <input asp-for="Company.StreetAdress" type="text" class="form-control" id="exampleInputPassword1">
-                                <span asp-validation-for="Company.StreetAdress"></span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Registrera</button>
-                        </form>
+
+    <div class="row">
+        <div class="container col-5">
+            <div class="jumbotron">
+                <h3>Företag</h3>
+                <form asp-controller="registration" asp-action="CreateCompany">
+                    <div class="form-group">
+                        <label asp-for="Company.Username"></label>
+                        <input asp-for="Company.Username" type="text" class="form-control">
+                        <span asp-validation-for="Company.Username"></span>
                     </div>
-                </div>
-            </td>
-            <td>
-                <div class="container">
-                    <div class="jumbotron">
-                        <h3>Förare</h3>
-                        <form asp-controller="registration" asp-action="CreateDriver">
-                            <div class="form-group">
-                                <label asp-for="Driver.UserName"></label>
-                                <input asp-for="Driver.UserName" type="text" class="form-control">
-                                <span asp-validation-for="Driver.UserName"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.Password"></label>
-                                <input asp-for="Driver.Password" type="password" class="form-control">
-                                <span asp-validation-for="Driver.Password"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.ConfirmPassword"></label>
-                                <input asp-for="Driver.ConfirmPassword" type="password" class="form-control">
-                                <span asp-validation-for="Driver.ConfirmPassword"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.FirstName"></label>
-                                <input asp-for="Driver.FirstName" type="text" class="form-control">
-                                <span asp-validation-for="Driver.FirstName"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.LastName"></label>
-                                <input asp-for="Driver.LastName" type="text" class="form-control">
-                                <span asp-validation-for="Driver.LastName"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.DateOfBirth"></label>
-                                <input asp-for="Driver.DateOfBirth" type="date" class="form-control">
-                                <span asp-validation-for="Driver.DateOfBirth"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.Email"></label>
-                                <input asp-for="Driver.Email" type="text" class="form-control">
-                                <span asp-validation-for="Driver.Email"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.PhoneNumber"></label>
-                                <input asp-for="Driver.PhoneNumber" type="text" class="form-control">
-                                <span asp-validation-for="Driver.PhoneNumber"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.City"></label>
-                                <input asp-for="Driver.City" type="text" class="form-control">
-                                <span asp-validation-for="Driver.City"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.StreetAdress"></label>
-                                <input asp-for="Driver.StreetAdress" type="text" class="form-control">
-                                <span asp-validation-for="Driver.StreetAdress"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.ZipCode"></label>
-                                <input asp-for="Driver.ZipCode" type="text" class="form-control">
-                                <span asp-validation-for="Driver.ZipCode"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.A"></label>
-                                <input asp-for="Driver.A" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.A"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.B"></label>
-                                <input asp-for="Driver.B" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.B"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.C"></label>
-                                <input asp-for="Driver.C" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.C"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.CE"></label>
-                                <input asp-for="Driver.CE" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.CE"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Driver.D"></label>
-                                <input asp-for="Driver.D" type="checkbox" class="form-control">
-                                <span asp-validation-for="Driver.D"></span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Registrera</button>
-                        </form>
+                    <div class="form-group">
+                        <label asp-for="Company.Password"></label>
+                        <input asp-for="Company.Password" type="password" class="form-control">
+                        <span asp-validation-for="Company.Password"></span>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                    <div class="form-group">
+                        <label asp-for="Company.ConfirmPassword"></label>
+                        <input asp-for="Company.ConfirmPassword" type="password" class="form-control">
+                        <span asp-validation-for="Company.ConfirmPassword"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.CompanyName"></label>
+                        <input asp-for="Company.CompanyName" type="text" class="form-control" id="exampleInputEmail1">
+                        <span asp-validation-for="Company.CompanyName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.Email"></label>
+                        <input asp-for="Company.Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <span asp-validation-for="Company.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.PhoneNumber"></label>
+                        <input asp-for="Company.PhoneNumber" type="text" class="form-control" id="exampleInputPassword1">
+                        <span asp-validation-for="Company.PhoneNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.City"></label>
+                        <input asp-for="Company.City" type="text" class="form-control" id="exampleInputPassword1">
+                        <span asp-validation-for="Company.City"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.ZipCode"></label>
+                        <input asp-for="Company.ZipCode" type="text" class="form-control" id="exampleInputPassword1">
+                        <span asp-validation-for="Company.ZipCode"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Company.StreetAdress"></label>
+                        <input asp-for="Company.StreetAdress" type="text" class="form-control" id="exampleInputPassword1">
+                        <span asp-validation-for="Company.StreetAdress"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrera</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container col-5">
+            <div class="jumbotron">
+                <h3>Förare</h3>
+                <form asp-controller="registration" asp-action="CreateDriver">
+                    <div class="form-group">
+                        <label asp-for="Driver.UserName"></label>
+                        <input asp-for="Driver.UserName" type="text" class="form-control">
+                        <span asp-validation-for="Driver.UserName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.Password"></label>
+                        <input asp-for="Driver.Password" type="password" class="form-control">
+                        <span asp-validation-for="Driver.Password"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.ConfirmPassword"></label>
+                        <input asp-for="Driver.ConfirmPassword" type="password" class="form-control">
+                        <span asp-validation-for="Driver.ConfirmPassword"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.FirstName"></label>
+                        <input asp-for="Driver.FirstName" type="text" class="form-control">
+                        <span asp-validation-for="Driver.FirstName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.LastName"></label>
+                        <input asp-for="Driver.LastName" type="text" class="form-control">
+                        <span asp-validation-for="Driver.LastName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.DateOfBirth"></label>
+                        <input asp-for="Driver.DateOfBirth" type="date" class="form-control">
+                        <span asp-validation-for="Driver.DateOfBirth"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.Email"></label>
+                        <input asp-for="Driver.Email" type="text" class="form-control">
+                        <span asp-validation-for="Driver.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.PhoneNumber"></label>
+                        <input asp-for="Driver.PhoneNumber" type="text" class="form-control">
+                        <span asp-validation-for="Driver.PhoneNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.City"></label>
+                        <input asp-for="Driver.City" type="text" class="form-control">
+                        <span asp-validation-for="Driver.City"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.StreetAdress"></label>
+                        <input asp-for="Driver.StreetAdress" type="text" class="form-control">
+                        <span asp-validation-for="Driver.StreetAdress"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.ZipCode"></label>
+                        <input asp-for="Driver.ZipCode" type="text" class="form-control">
+                        <span asp-validation-for="Driver.ZipCode"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.A"></label>
+                        <input asp-for="Driver.A" type="checkbox" class="form-control">
+                        <span asp-validation-for="Driver.A"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.B"></label>
+                        <input asp-for="Driver.B" type="checkbox" class="form-control">
+                        <span asp-validation-for="Driver.B"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.C"></label>
+                        <input asp-for="Driver.C" type="checkbox" class="form-control">
+                        <span asp-validation-for="Driver.C"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.CE"></label>
+                        <input asp-for="Driver.CE" type="checkbox" class="form-control">
+                        <span asp-validation-for="Driver.CE"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Driver.D"></label>
+                        <input asp-for="Driver.D" type="checkbox" class="form-control">
+                        <span asp-validation-for="Driver.D"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrera</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 @section scripts{<link href="~/styles/jockes.css" rel="stylesheet" />}
 

@@ -1,47 +1,52 @@
 ﻿@model CompanyIndexAdVm
 @if (Model.DriverId != null)
 {
-   
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
+
+
+    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success">
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+                <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company">
                     <h4 class="card-title text-primary ">
                         @Model.Header
                     </h4>
-                    <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Editera</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Detaljer</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger" /></form>
+                </a>
+                <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
+                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Editera</a>
+                <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger" /></form>
 
-                    <form>
-                        <input type="submit" asp-action="DriverDetails" asp-controller="Company" asp-route-id="@Model.DriverId" class="btn btn-info" value="Förarens detaljer" />
-                    </form>
+                <a asp-action="DriverDetails" asp-controller="Company" asp-route-id="@Model.DriverId" class="btn btn-info ">Förarens detaljer</a>
 
 
-                </div>
+
             </div>
         </div>
     </div>
+
 
 
 }
 else
 {
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
+
+    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+                <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company">
                     <h4 class="card-title text-primary ">
                         @Model.Header
                     </h4>
-                    <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
+                </a>
 
-                    <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning">Editera</a>  <a asp-action="AdDetails" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-secondary">Detaljer</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger" /></form>
-                </div>
+                <h4>Från: @Model.Start.ToString("yyyy/MM/dd") Till: @Model.End?.ToString("yyyy/MM/dd") </h4>
+
+                <a asp-action="EditAd" asp-controller="Company" asp-route-id="@Model.Id" class="btn btn-warning col-md-4">Editera</a> <form asp-action="DeleteAd" asp-controller="Company" asp-route-id="@Model.Id" method="post"><input type="submit" value="Radera" class="btn btn-danger col-md-4" /></form>
             </div>
         </div>
     </div>
+
 
 
 }
