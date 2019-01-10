@@ -134,9 +134,12 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImg(UploadImgVm image)
         {
-            var u = User.Identity.Name;
-            await driverSer.UploadImage(u, image.Img);
-            return RedirectToAction(nameof(Details), new { name = u });
+            var userName = User.Identity.Name;
+            if (!ModelState.IsValid)
+                return Redirect(nameof(Details) + "/" + userName);
+
+            await driverSer.UploadImage(userName, image.Img);
+            return RedirectToAction(nameof(Details), new { name = userName });
         }
     }
 }

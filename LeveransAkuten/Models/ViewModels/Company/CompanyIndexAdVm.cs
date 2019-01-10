@@ -13,6 +13,6 @@ namespace LeveransAkuten.Models.ViewModels.Company
         public DateTime Start { get; set; }
         [Display(Name = "Slutdatum")]
         public DateTime? End { get; set; }
-
+        public byte[] Image { get; set; }
     }
 }
