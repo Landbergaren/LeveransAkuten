@@ -124,7 +124,7 @@ namespace LeveransAkuten.Models.Services
             return c;
         }
 
-        public async Task UpdateCompany(CompanyUpdateVm company)
+        public async Task UpdateCompanyAsync(CompanyUpdateVm company)
         {
             BudAkutenUsers c = await idctx.Users.Where(o => o.UserName == company.UserName).SingleOrDefaultAsync();
 

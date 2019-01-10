@@ -80,9 +80,9 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdDetails(int id)
+        public async Task<IActionResult> AdDetails(int id)
         {
-            var adDetailsVm = adService.GetAdDetailsAsync(id);
+            var adDetailsVm = await adService.GetAdDetailsAsync(id);
             return View(adDetailsVm);
         }
 
@@ -117,7 +117,7 @@ namespace LeveransAkuten.Controllers
                 return View();
 
             var u = User.Identity.Name;
-            await companyServices.UpdateCompany(company);
+            await companyServices.UpdateCompanyAsync(company);
             return RedirectToAction(nameof(Details));
 
         }
