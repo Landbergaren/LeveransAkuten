@@ -39,7 +39,7 @@
                             <label>Företag</label>
                         </div>
                         <div class="col-md-6">
-                            <a asp-controller="driver" asp-action="">@Model.CompanyName</a>
+                            <a asp-controller="driver" asp-action="CompanyDetails" asp-route-id="@Model.CompanyId">@Model.CompanyName</a>
                         </div>
                     </div>
                     <div class="row">

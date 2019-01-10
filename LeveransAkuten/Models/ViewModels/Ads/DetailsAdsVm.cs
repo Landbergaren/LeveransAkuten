@@ -8,6 +8,7 @@ namespace LeveransAkuten.Models.ViewModels.Ads
 {
     public class DetailsAdsVm
     {
+        public int CompanyId { get; set; }
         public int Id { get; set; }
         [Required]
         [Display(Name = "Rubrik")]

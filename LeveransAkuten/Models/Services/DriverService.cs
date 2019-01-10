@@ -3,7 +3,9 @@ using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Company;
 using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,13 +17,16 @@ namespace LeveransAkuten.Models.Services
     {
         private readonly DbFirstContext appctx;
         private readonly BudIdentityContext idctx;
+        private readonly UserManager<BudAkutenUsers> userManager;
+
         public CompanyServices CompanySer { get; }
 
-        public DriverService(DbFirstContext appctx, BudIdentityContext idctx, CompanyServices companySer)
+        public DriverService(DbFirstContext appctx, BudIdentityContext idctx, CompanyServices companySer, UserManager<BudAkutenUsers> userManager)
         {
             this.appctx = appctx;
             this.idctx = idctx;
             CompanySer = companySer;
+            this.userManager = userManager;
         }
 
         public async Task<DriverVm> GetDriverByUserName(string name)
@@ -104,6 +109,25 @@ namespace LeveransAkuten.Models.Services
             driver.LastName = driver2.LastName;
 
             return driver;
+        }
+
+        internal async Task<CompanyDetailsVm> getCompanyDetailsVmAsync(int companyId)
+        {
+            var company = await appctx.Company.Where(c => c.Id == companyId).Select(c => new { c.CompanyName, c.Description, c.AspNetUsersId }).FirstOrDefaultAsync();
+            var companyUser = await userManager.FindByIdAsync(company.AspNetUsersId);
+            var companyDetailsVm = new CompanyDetailsVm
+            {
+                
+                City = companyUser.City,
+                CompanyName = company.CompanyName,
+                Description = company.Description,
+                Email = companyUser.Email,
+                Image = companyUser.Image,
+                PhoneNumber = companyUser.PhoneNumber,
+                StreetAdress = companyUser.StreetAdress,
+                ZipCode = companyUser.ZipCode
+            };
+            return companyDetailsVm;
         }
 
         public async Task<DriverIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)

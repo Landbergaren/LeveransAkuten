@@ -1,4 +1,10 @@
-﻿@model CompanyDriverDetailsVm
+﻿
+@model CompanyDetailsVm
+
+@{
+    ViewData["Title"] = "DriverDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @section scripts {
     <link href="~/styles/DriverDetails.css" rel="stylesheet" />
@@ -9,7 +15,7 @@
 
 <div class="container emp-profile border border-dark bg-light">
     <form method="post" asp-controller="Driver" asp-action="UploadImg" enctype="multipart/form-data">
-        <div class="row" >
+        <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
                     @{
@@ -23,7 +29,7 @@
             <div class="col-md-5">
                 <div class="profile-head">
                     <h5>
-                        @Model.UserName
+                        @Model.CompanyName
                     </h5>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -51,18 +57,9 @@
                                         <label>Förnamn</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>@Model.FirstName</p>
+                                        <p>@Model.CompanyName</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Efternamn</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@Model.LastName</p>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Gatuadress</label>
@@ -103,45 +100,13 @@
                                         <p>@Model.Email</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Körkortsbehörighet</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>
-
-                                            @{
-                                                if (Model.A)
-                                                {
-                                                    <span>A</span>
-                                                }
-                                                if (Model.B)
-                                                {
-                                                    <span>B</span>
-                                                }
-                                                if (Model.C)
-                                                {
-                                                    <span>C</span>
-                                                }
-                                                if (Model.CE)
-                                                {
-                                                    <span>CE</span>
-                                                }
-                                                if (Model.D)
-                                                {
-                                                    <span>D</span>
-                                                }
-                                            }
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="justify-content-end">
-                <a asp-action="DriverSearch" class="btn btn-dark">Tillbaka</a>
+                <a asp-action="DisplayAds" class="btn btn-dark">Tillbaka</a>
             </div>
         </div>
     </form>

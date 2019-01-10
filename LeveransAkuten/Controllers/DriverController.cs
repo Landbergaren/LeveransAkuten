@@ -73,8 +73,15 @@ namespace LeveransAkuten.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-      
+        [HttpGet, Route("Driver/" + nameof(CompanyDetails) + "/{companyId}")]
+        public async Task<IActionResult> CompanyDetails(int companyId)
+        {
+            var companyVm = await driverSer.getCompanyDetailsVmAsync(companyId);
 
+            //var driver = await driverService.GetDriverDetailsByIdAsync(companyUserId);
+            return View(companyVm);
+        }
+ 
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
