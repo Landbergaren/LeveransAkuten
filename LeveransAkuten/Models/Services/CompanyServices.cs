@@ -13,7 +13,7 @@ namespace LeveransAkuten.Models.Services
     public class CompanyServices
     {
         private readonly DbFirstContext dbContext;
-      
+
         UserManager<BudAkutenUsers> userManager;
         private readonly BudIdentityContext idctx;
 
@@ -73,7 +73,7 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<CompanyVm> GetCompanyByName(string name)
         {
-            BudAkutenUsers company = await idctx.Users.Where(p => p.UserName == name).
+            BudAkutenUsers companyUser = await idctx.Users.Where(p => p.UserName == name).
                 Select(d => new BudAkutenUsers
                 {
                     Email = d.Email,
@@ -87,23 +87,23 @@ namespace LeveransAkuten.Models.Services
                 })
                 .SingleOrDefaultAsync();
 
-            CompanyVm company2 = await dbContext.Company.Where(p => p.AspNetUsersId == company.Id).
+            CompanyVm companyVm = await dbContext.Company.Where(p => p.AspNetUsersId == companyUser.Id).
                 Select(d => new CompanyVm
                 {
                     Description = d.Description,
                     CompanyName = d.CompanyName
                 })
                 .SingleOrDefaultAsync();
+            //companyVm.UserId = companyUser.Id;
+            companyVm.Email = companyUser.Email;
+            companyVm.StreetAdress = companyUser.StreetAdress;
+            companyVm.ZipCode = companyUser.ZipCode;
+            companyVm.City = companyUser.City;
+            companyVm.PhoneNumber = companyUser.PhoneNumber;
+            companyVm.UserName = companyUser.UserName;
+            companyVm.Image = companyUser.Image;
 
-            company2.Email = company.Email;
-            company2.StreetAdress = company.StreetAdress;
-            company2.ZipCode = company.ZipCode;
-            company2.City = company.City;
-            company2.PhoneNumber = company.PhoneNumber;
-            company2.UserName = company.UserName;
-            company2.Image = company.Image;
-
-            return company2;
+            return companyVm;
         }
 
         public async Task<CompanyUpdateVm> GetCompanyForUpdate(string name)
@@ -114,7 +114,7 @@ namespace LeveransAkuten.Models.Services
             c.City = company.City;
             c.Description = company.Description;
             c.Email = company.Email;
-            c.Id = company.Id;
+            //c.Id = company.Id;
             c.Image = company.Image;
             c.PhoneNumber = company.PhoneNumber;
             c.StreetAddress = company.StreetAdress;
@@ -135,7 +135,7 @@ namespace LeveransAkuten.Models.Services
             c.City = company.City;
             c.PhoneNumber = company.PhoneNumber;
             c.UserName = company.UserName;
-            c.Image = company.Image;
+            //c.Image = company.Image;
 
             var company2 = await dbContext.Company.Where(o => o.AspNetUsersId == c.Id).SingleOrDefaultAsync();
 
