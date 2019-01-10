@@ -8,7 +8,7 @@ namespace LeveransAkuten.Models.ViewModels.Driver
 {
     public class DriverUpdateVm
     {
-        public int Id { get; set; }
+       
         public bool A { get; set; }
         public bool B { get; set; }
         public bool C { get; set; }
@@ -30,9 +30,6 @@ namespace LeveransAkuten.Models.ViewModels.Driver
 
         [Required, MinLength(2)]
         public string LastName { get; set; }
-
-        [Required]
-        public DateTime DateOfBirth { get; set; }
 
         [Required, EmailAddress]
         public string Email { get; set; }
