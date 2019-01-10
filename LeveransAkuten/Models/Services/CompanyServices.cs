@@ -94,7 +94,7 @@ namespace LeveransAkuten.Models.Services
                     CompanyName = d.CompanyName
                 })
                 .SingleOrDefaultAsync();
-            //companyVm.UserId = companyUser.Id;
+           
             companyVm.Email = companyUser.Email;
             companyVm.StreetAdress = companyUser.StreetAdress;
             companyVm.ZipCode = companyUser.ZipCode;
@@ -113,8 +113,7 @@ namespace LeveransAkuten.Models.Services
 
             c.City = company.City;
             c.Description = company.Description;
-            c.Email = company.Email;
-            //c.Id = company.Id;
+            c.Email = company.Email;         
             c.Image = company.Image;
             c.PhoneNumber = company.PhoneNumber;
             c.StreetAddress = company.StreetAdress;
@@ -135,7 +134,7 @@ namespace LeveransAkuten.Models.Services
             c.City = company.City;
             c.PhoneNumber = company.PhoneNumber;
             c.UserName = company.UserName;
-            //c.Image = company.Image;
+
 
             var company2 = await dbContext.Company.Where(o => o.AspNetUsersId == c.Id).SingleOrDefaultAsync();
 
