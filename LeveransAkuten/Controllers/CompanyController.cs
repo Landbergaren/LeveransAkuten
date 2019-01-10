@@ -116,8 +116,12 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(CompanyUpdateVm company)
         {
+            if (!ModelState.IsValid)
+                return View();
+            var u = User.Identity.Name;
             await companyServices.UpdateCompany(company);
-            return View();
+            return RedirectToAction(nameof(Details), new { name = u });
+
         }
 
         [HttpPost]
