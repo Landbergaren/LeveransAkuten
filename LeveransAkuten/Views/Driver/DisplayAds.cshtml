@@ -54,7 +54,7 @@
             <div class="card h-100">
               @if (ad.Image != null)
               {
-                <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(ad.Image)" width="200" height="150" /></a>
+                <img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(ad.Image)" width="200" height="150" />
 
               }
               else
@@ -149,7 +149,7 @@
                     </tbody>
                   </table>
                 }
-                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@ad.Id" method="post"><input type="submit" class="btn btn-primary" value="Ta jobb" /></form>
+                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@ad.Id" method="post"><input type="submit" class="btn btn-primary" value="Ta uppdrag" /></form>
               </div>
             </div>
           </div>

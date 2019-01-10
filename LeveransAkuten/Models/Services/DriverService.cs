@@ -316,6 +316,7 @@ namespace LeveransAkuten.Models.Services
             driver.D = driver2.D;
             driver.FirstName = driver2.FirstName;
             driver.LastName = driver2.LastName;
+            driver.Description = driver2.Description;
 
             return driver;
         }
