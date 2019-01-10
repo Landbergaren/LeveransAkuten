@@ -118,6 +118,7 @@ namespace LeveransAkuten.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
+
             var u = User.Identity.Name;
             await companyServices.UpdateCompany(company);
             return RedirectToAction(nameof(Details), new { name = u });
@@ -127,9 +128,13 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImg(UploadImgVm image)
         {
-            var u = User.Identity.Name;
-            await companyServices.UploadImage(u, image.Img);
-            return RedirectToAction(nameof(Details), new { name = u });
+            var userName = User.Identity.Name;
+
+            if (!ModelState.IsValid)
+                return Redirect(nameof(Details) + "/" + userName);
+
+            await companyServices.UploadImage(userName, image.Img);
+            return RedirectToAction(nameof(Details), new { name = userName });
         }
 
         [HttpGet]

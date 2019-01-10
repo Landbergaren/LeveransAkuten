@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +32,7 @@ namespace LeveransAkuten.Models.ViewModels.Driver
     [Bind(Prefix = nameof(DriverVm.UpImg))]
     public class UploadImgVm
     {
+        [Required]
         public IFormFile Img { get; set; }
     }
 }
