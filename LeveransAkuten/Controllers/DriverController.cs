@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers
 {
-    [Authorize(Roles = Roles.Driver)]
+    //[Authorize(Roles = Roles.Driver)]
     public class DriverController : Controller
     {
       
