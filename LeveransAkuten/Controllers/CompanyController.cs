@@ -88,9 +88,9 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        [Route("company/Details/{name}")]
         public async Task<IActionResult> Details(string name)
         {
+            name = User.Identity.Name;
             return View(await companyServices.GetCompanyByName(name));
         }
 
@@ -104,9 +104,9 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        [Route("company/update/{name}")]
-        public async Task<IActionResult> Update(string name)
+        public async Task<IActionResult> Update()
         {
+            var name = User.Identity.Name;
             var d = await companyServices.GetCompanyForUpdate(name);
             return View(d);
         }
@@ -119,7 +119,7 @@ namespace LeveransAkuten.Controllers
 
             var u = User.Identity.Name;
             await companyServices.UpdateCompany(company);
-            return RedirectToAction(nameof(Details), new { name = u });
+            return RedirectToAction(nameof(Details));
 
         }
 
@@ -132,7 +132,7 @@ namespace LeveransAkuten.Controllers
                 return Redirect(nameof(Details) + "/" + userName);
 
             await companyServices.UploadImage(userName, image.Img);
-            return RedirectToAction(nameof(Details), new { name = userName });
+            return RedirectToAction(nameof(Details));
         }
 
         [HttpGet]

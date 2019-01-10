@@ -43,9 +43,9 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        [Route("driver/details/{name}")]
-        public async Task<IActionResult> Details(string name)
+        public async Task<IActionResult> Details()
         {
+            var name = User.Identity.Name;
             return View(await driverSer.GetDriverByUserName(name));
         }
 
@@ -111,7 +111,7 @@ namespace LeveransAkuten.Controllers
                 return View();
             var u = User.Identity.Name;
             await driverSer.UpdateDriver(driver);
-            return RedirectToAction(nameof(Details), new { name = u });
+            return RedirectToAction(nameof(Details));
         }
 
         [HttpPost]
@@ -135,7 +135,7 @@ namespace LeveransAkuten.Controllers
                 return Redirect(nameof(Details) + "/" + userName);
 
             await driverSer.UploadImage(userName, image.Img);
-            return RedirectToAction(nameof(Details), new { name = userName });
+            return RedirectToAction(nameof(Details));
         }
     }
 }
