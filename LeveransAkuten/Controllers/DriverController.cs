@@ -97,9 +97,9 @@ namespace LeveransAkuten.Controllers
         }
         
         [HttpGet]
-        [Route("driver/update/{name}")]
-        public async Task<IActionResult> Update(string name)
+        public async Task<IActionResult> Update()
         {
+            var name = User.Identity.Name;
             var d = await driverSer.GetDriverForUpdate(name);
             return View(d);
         }
