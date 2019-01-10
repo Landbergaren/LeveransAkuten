@@ -254,14 +254,15 @@ namespace LeveransAkuten.Models.Services
                     ZipCode = d.ZipCode,
                     City = d.City,
                     PhoneNumber = d.PhoneNumber,
-                    UserName = d.UserName
-
+                    UserName = d.UserName,
+                    Image = d.Image
                 })
                 .SingleOrDefaultAsync();
 
             CompanyDriverDetailsVm driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == id).
                 Select(d => new CompanyDriverDetailsVm
                 {
+                    Description = d.Description,
                     A = d.A,
                     B = d.B,
                     C = d.C,
