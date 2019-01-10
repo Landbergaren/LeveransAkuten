@@ -15,19 +15,20 @@
     <form method="post" asp-controller="Company" asp-action="UploadImg" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
-                <div class="profile-img">
-                    @{
-                        if (Model.Image != null)
-                        {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
-                        }
-                    }
-                        <div class="file btn btn-lg btn-primary">
-                            Ladda upp ny bild
-                            <input type="file" asp-for="UpImg.Img"><br />
-                            <input type="submit" value="Ladda Upp" />
-                        </div>
+              <div class="profile-img">
+                @{
+    if (Model.Image != null)
+    {
+              <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
+}
+                }
+                <div class="file btn btn-lg btn-primary">
+                  Ladda upp ny bild
+                  <input type="file" asp-for="UpImg.Img"><br />
+
                 </div>
+                <input class="btn btn-primary" type="submit" value="Ladda Upp" />
+              </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">

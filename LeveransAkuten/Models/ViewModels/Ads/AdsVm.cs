@@ -11,6 +11,8 @@ namespace LeveransAkuten.Models.ViewModels.Ads
     {
         public int? DriverId { get; set; }
 
+        public int CompanyId { get; set; }
+
         public int Id { get; set; }
         [Required]
         [Display(Name = "Rubrik")]
@@ -28,7 +30,8 @@ namespace LeveransAkuten.Models.ViewModels.Ads
         [Required]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
-        
+        public byte[] Image { get; set; }
+
         [Display(Name = "A")]
         public bool Arequired { get; set; }
         [Display(Name = "B")]
