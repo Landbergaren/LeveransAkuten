@@ -196,7 +196,6 @@ namespace LeveransAkuten.Models.Services
             d.Email = driver.Email;
             d.FirstName = driver.FirstName;
             d.Id = driver.Id;
-            d.Image = driver.Image;
             d.LastName = driver.LastName;
             d.PhoneNumber = driver.PhoneNumber;
             d.StreetAdress = driver.StreetAdress;
@@ -216,7 +215,6 @@ namespace LeveransAkuten.Models.Services
             d.City = driver.City;
             d.PhoneNumber = driver.PhoneNumber;
             d.UserName = driver.UserName;
-            d.Image = driver.Image;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
             

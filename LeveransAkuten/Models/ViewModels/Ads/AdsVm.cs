@@ -12,19 +12,19 @@ namespace LeveransAkuten.Models.ViewModels.Ads
         public int? DriverId { get; set; }
 
         public int Id { get; set; }
+
         [Required]
-        [Display(Name = "Rubrik")]
-      
-       
+        [Display(Name = "Rubrik")]         
         public string Header { get; set; }
         
         [Required]
         [Display(Name = "Beskrivning")]
         public string Description { get; set; }
+
         [Required]
-        [Display(Name = "Startdatum")]
-       
+        [Display(Name = "Startdatum")]       
         public DateTime StartDate { get; set; }
+
         [Required]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
