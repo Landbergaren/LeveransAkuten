@@ -50,7 +50,7 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAd(AdsVm adsVm)
+        public async Task<IActionResult> CreateAd(CompanyCreateAdVm adsVm)
         {
             if (!ModelState.IsValid)
                 return View(adsVm);

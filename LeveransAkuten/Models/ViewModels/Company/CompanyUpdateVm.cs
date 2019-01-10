@@ -16,13 +16,11 @@ namespace LeveransAkuten.Models.ViewModels.Company
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(6, ErrorMessage = "Minst sex bokstäver")]
-        [Display(Name = "Lösenord")]
-        
+        [Display(Name = "Lösenord")]        
         public string Password { get; set; }
 
         [Required, Compare(nameof(Password))]
-        [Display(Name = "Bekräfta Lösenord")]
-     
+        [Display(Name = "Bekräfta Lösenord")]     
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(2, ErrorMessage = "Minst två bokstäver")]

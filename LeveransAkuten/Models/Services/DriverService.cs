@@ -15,11 +15,13 @@ namespace LeveransAkuten.Models.Services
     {
         private readonly DbFirstContext appctx;
         private readonly BudIdentityContext idctx;
+        public CompanyServices CompanySer { get; }
 
-        public DriverService(DbFirstContext appctx, BudIdentityContext idctx)
+        public DriverService(DbFirstContext appctx, BudIdentityContext idctx, CompanyServices companySer)
         {
             this.appctx = appctx;
             this.idctx = idctx;
+            CompanySer = companySer;
         }
 
         public async Task<DriverVm> GetDriverByUserName(string name)
@@ -130,22 +132,33 @@ namespace LeveransAkuten.Models.Services
         public async Task<AdsVm[]> GetAllAds()
         {
             var allAds = await appctx.Ad.ToArrayAsync();
+            List<AdsVm> ads = new List<AdsVm>();
 
-            var ads = allAds.Where(a => a.DriverId == null).Select
-                (a => new AdsVm
+            foreach (var ad in allAds)
+            {
+                var company = appctx.Company.Where(c => c.Id == ad.CompanyId).SingleOrDefault();
+
+                var companyUser = await CompanySer.GetCompanyById(company.AspNetUsersId);
+
+                ads.Add(new AdsVm
                 {
-                    DriverId = a.DriverId,
-                    Id = a.Id,
-                    Header = a.Header,
-                    Arequired = a.Arequired,
-                    Brequired = a.Brequired,
-                    Crequired = a.Crequired,
-                    Cerequired = a.Cerequired,
-                    Description = a.Description,
-                    StartDate = a.StartDate,
-                    EndDate = a.EndDate.Value
+                    CompanyId = ad.CompanyId,
+                    DriverId = ad.DriverId,
+                    Id = ad.Id,
+                    Header = ad.Header,
+                    Image = companyUser.Image,
+                    Arequired = ad.Arequired,
+                    Brequired = ad.Brequired,
+                    Crequired = ad.Crequired,
+                    Cerequired = ad.Cerequired,
+                    Drequired = ad.Drequired,
+                    Description = ad.Description,
+                    StartDate = ad.StartDate,
+                    EndDate = ad.EndDate.Value
 
                 });
+            }
+
 
             return ads.ToArray();
         }
@@ -196,7 +209,6 @@ namespace LeveransAkuten.Models.Services
             d.Email = driver.Email;
             d.FirstName = driver.FirstName;
             d.Id = driver.Id;
-            d.Image = driver.Image;
             d.LastName = driver.LastName;
             d.PhoneNumber = driver.PhoneNumber;
             d.StreetAdress = driver.StreetAdress;
@@ -216,7 +228,6 @@ namespace LeveransAkuten.Models.Services
             d.City = driver.City;
             d.PhoneNumber = driver.PhoneNumber;
             d.UserName = driver.UserName;
-            d.Image = driver.Image;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
             

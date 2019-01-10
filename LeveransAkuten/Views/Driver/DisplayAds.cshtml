@@ -1,87 +1,161 @@
 ﻿@model AdSearchVm
-@{
+
+@section styles{
+  <link href="~/styles/jockes.css" rel="stylesheet" />
 }
-<section>
+  <section>
     <div class="container">
-        <div class="jumbotron">
-            <form asp-controller="Driver" asp-action="DisplayAds">
-                <div class="form-check form-check-inline">
-                    <h4>Filtrera efter körkortskrav</h4>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input asp-for="Ad.Arequired" type="checkbox" class="form-check-input">
-                    <label asp-for="Ad.Arequired" class="form-check-label"></label>
-                    <span asp-validation-for="Ad.Arequired"></span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input asp-for="Ad.Brequired" type="checkbox" class="form-check-input">
-                    <label asp-for="Ad.Brequired" class="form-check-label"></label>
-                    <span asp-validation-for="Ad.Brequired"></span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input asp-for="Ad.Crequired" type="checkbox" class="form-check-input">
-                    <label asp-for="Ad.Crequired" class="form-check-label"></label>
-                    <span asp-validation-for="Ad.Crequired"></span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input asp-for="Ad.Cerequired" type="checkbox" class="form-check-input">
-                    <label asp-for="Ad.Cerequired" class="form-check-label"></label>
-                    <span asp-validation-for="Ad.Cerequired"></span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input asp-for="Ad.Drequired" type="checkbox" class="form-check-input">
-                    <label asp-for="Ad.Drequired" class="form-check-label"></label>
-                    <span asp-validation-for="Ad.Drequired"></span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <button type="submit" class="btn btn-primary">Sök</button>
-                </div>
-            </form>
-        </div>
+      <div class="checkboxes">
+        <form asp-controller="Driver" asp-action="DisplayAds">
+          <div class="form-check form-check-inline">
+            <h4>Filtrera efter körkortskrav</h4>
+          </div>
+          <div class="form-check form-check-inline">
+            <input asp-for="Ad.Arequired" type="checkbox" class="form-check-input">
+            <label asp-for="Ad.Arequired" class="form-check-label"></label>
+            <span asp-validation-for="Ad.Arequired"></span>
+          </div>
+          <div class="form-check form-check-inline">
+            <input asp-for="Ad.Brequired" type="checkbox" class="form-check-input">
+            <label asp-for="Ad.Brequired" class="form-check-label"></label>
+            <span asp-validation-for="Ad.Brequired"></span>
+          </div>
+          <div class="form-check form-check-inline">
+            <input asp-for="Ad.Crequired" type="checkbox" class="form-check-input">
+            <label asp-for="Ad.Crequired" class="form-check-label"></label>
+            <span asp-validation-for="Ad.Crequired"></span>
+          </div>
+          <div class="form-check form-check-inline">
+            <input asp-for="Ad.Cerequired" type="checkbox" class="form-check-input">
+            <label asp-for="Ad.Cerequired" class="form-check-label"></label>
+            <span asp-validation-for="Ad.Cerequired"></span>
+          </div>
+          <div class="form-check form-check-inline">
+            <input asp-for="Ad.Drequired" type="checkbox" class="form-check-input">
+            <label asp-for="Ad.Drequired" class="form-check-label"></label>
+            <span asp-validation-for="Ad.Drequired"></span>
+          </div>
+          <div class="form-check form-check-inline">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+      </div>
     </div>
+     
 </section>
 <main>
-    <div class="container">
-        <div class="row">
-            @if (Model != null)
-            {
-                foreach (var ad in Model.Ads)
-                {
-                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">@ad.Header</a>
-                                </h4>
-                                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@ad.Id" method="post"><input type="submit" class="btn btn-primary" value="Take It" /></form>
-                                <p class="card-text">@ad.Description</p>
-                                @if (ad.Arequired)
-                                {
-                                    <p class="card-text">körkortskrav : A</p>
-                                }
-                                @if (ad.Brequired)
-                                {
-                                    <p class="card-text">körkortskrav : B</p>
-                                }
-                                @if (ad.Crequired)
-                                {
-                                    <p class="card-text">körkortskrav : C</p>
-                                }
-                                @if (ad.Cerequired)
-                                {
-                                    <p class="card-text">körkortskrav : CE</p>
-                                }
-                                @if (ad.Drequired)
-                                {
-                                    <p class="card-text">körkortskrav : D</p>
-                                }
-                            </div>
-                        </div>
-                    </div>
+  <div class="container">
+    <div class="row">
+      @if (Model != null)
+      {
+        foreach (var ad in Model.Ads)
+        {
+          <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              @if (ad.Image != null)
+              {
+                <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(ad.Image)" width="200" height="150" /></a>
 
+              }
+              else
+              {
+                <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
+              }
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">@ad.Header</a>
+                </h4>
+                @*//<p class="card-text">@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</p>*@
+                @if (ad.Arequired)
+                {
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Körkort</th>
+                        <th scope="col">från/till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>A</td>
+                        <td>@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 }
-            }
-        </div>
+                @if (ad.Brequired)
+                {
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Körkort</th>
+                        <th scope="col">från/till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>B</td>
+                        <td>@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>}
+                @if (ad.Crequired)
+                {
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Körkort</th>
+                        <th scope="col">från/till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>C</td>
+                        <td>@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>}
+                @if (ad.Cerequired)
+                {
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Körkort</th>
+                        <th scope="col">från/till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CE</td>
+                        <td>@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                }
+                @if (ad.Drequired)
+                {
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Körkort</th>
+                        <th scope="col">från/till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>D</td>
+                        <td>@ad.StartDate.Day/@ad.StartDate.Month - @ad.EndDate.Day/@ad.EndDate.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                }
+                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@ad.Id" method="post"><input type="submit" class="btn btn-primary" value="Ta jobb" /></form>
+              </div>
+            </div>
+          </div>
+
+        }
+      }
     </div>
+  </div>
 </main>

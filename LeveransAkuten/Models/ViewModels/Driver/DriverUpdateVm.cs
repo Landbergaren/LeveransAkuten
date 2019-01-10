@@ -9,7 +9,6 @@ namespace LeveransAkuten.Models.ViewModels.Driver
     public class DriverUpdateVm
     {
         public int Id { get; set; }
-        public byte[] Image { get; set; }
         public bool A { get; set; }
         public bool B { get; set; }
         public bool C { get; set; }

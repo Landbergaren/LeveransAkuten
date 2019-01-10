@@ -24,7 +24,7 @@
                         Välj fil
                         <input type="file" asp-for="UpImg.Img" class="btn"><br />
                     </div>
-                    <div class="btn btn-lg btn-primary">
+                    <div class="btn btn-lg btn-dark">
                         <input type="submit" class="btn" value="Ladda Upp   " />
                     </div>
                 </div>
@@ -32,14 +32,14 @@
             <div class="col-md-5">
                 <div class="profile-head">
                     <h5>
-                        @Model.UserName
+                        @Model.CompanyName
                     </h5>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Presentation</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Personlig info</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mer info</a>
                         </li>
                     </ul>
                     <div class="col-md-8">
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <a class="btn btn-secondary" asp-action="Update" asp-controller="Company">Uppdatera profil</a>
+                <a class="btn btn-dark" asp-action="Update" asp-controller="Company">Uppdatera profil</a>
             </div>
         </div>
     </form>
