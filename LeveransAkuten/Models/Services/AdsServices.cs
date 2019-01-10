@@ -17,12 +17,10 @@ namespace LeveransAkuten.Models.Services
 
         public AdsServices(DbFirstContext Appctx, IMapper mapper)
         {
-
             this.appctx = Appctx;
             this.mapper = mapper;
-
-
         }
+
         public async Task AddAdsAsync(CompanyCreateAdVm ad, string id)
         {
             Company com = appctx.Company.FirstOrDefault(c => c.AspNetUsersId == id);
@@ -30,22 +28,21 @@ namespace LeveransAkuten.Models.Services
             await appctx.Ad.AddAsync(newAd);
             await appctx.SaveChangesAsync();
         }
+
         public Ad GetAdsAsync()
         {
-
             Ad adsHeaders = appctx.Ad.SingleOrDefault();
             return adsHeaders;
         }
 
         public Ad GetUserAd(int id)
         {
-
             Ad ad = appctx.Ad.FirstOrDefault(u => u.Id == id);
             return ad;
         }
+
         public async Task EditAdsAsync(EditAdsVm ad)
         {
-
             var dbAd = await appctx.Ad.FindAsync(ad.Id);
             mapper.Map(ad, dbAd);
             await appctx.SaveChangesAsync();
@@ -53,7 +50,6 @@ namespace LeveransAkuten.Models.Services
 
         public async Task RemoveAd(int id)
         {
-
             appctx.Ad.Remove(new Ad() { Id = id });
             await appctx.SaveChangesAsync();
         }
@@ -64,6 +60,5 @@ namespace LeveransAkuten.Models.Services
 
             return AdDetails;
         }
-       
     }
 }
