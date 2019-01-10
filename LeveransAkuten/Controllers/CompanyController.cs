@@ -57,9 +57,9 @@ namespace LeveransAkuten.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult EditAd(int id)
+        public async Task<IActionResult> EditAd(int id)
         {
-            var ad = adService.GetUserAd(id);
+            var ad = await adService.GetUserAdAsync(id);
 
             var adToEdit = mapper.Map<EditAdsVm>(ad);
             return View(adToEdit);
@@ -75,15 +75,14 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> DeleteAd(int id)
         {
 
-            await adService.RemoveAd(id);
+            await adService.RemoveAdAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public IActionResult AdDetails(int id)
         {
-            var adDetails = adService.GetAdDetails(id);
-            var adDetailsVm = mapper.Map<DetailsAdsVm>(adDetails);
+            var adDetailsVm = adService.GetAdDetailsAsync(id);
             return View(adDetailsVm);
         }
 

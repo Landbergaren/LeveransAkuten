@@ -2,6 +2,8 @@
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Company;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,55 +12,54 @@ namespace LeveransAkuten.Models.Services
 {
     public class AdsServices
     {
-        private readonly DbFirstContext appctx;
+        private readonly DbFirstContext appCtx;
         private readonly IMapper mapper;
+        private readonly UserManager<BudAkutenUsers> userManager;
 
-
-
-        public AdsServices(DbFirstContext Appctx, IMapper mapper)
+        public AdsServices(DbFirstContext Appctx, IMapper mapper, UserManager<BudAkutenUsers> userManager)
         {
-            this.appctx = Appctx;
+            this.appCtx = Appctx;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
         public async Task AddAdsAsync(CompanyCreateAdVm ad, string id)
         {
-            Company com = appctx.Company.FirstOrDefault(c => c.AspNetUsersId == id);
+            Company com = appCtx.Company.FirstOrDefault(c => c.AspNetUsersId == id);
             var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired, Company = com };
-            await appctx.Ad.AddAsync(newAd);
-            await appctx.SaveChangesAsync();
+            await appCtx.Ad.AddAsync(newAd);
+            await appCtx.SaveChangesAsync();
         }
 
         public Ad GetAdsAsync()
         {
-            Ad adsHeaders = appctx.Ad.SingleOrDefault();
+            Ad adsHeaders = appCtx.Ad.SingleOrDefault();
             return adsHeaders;
         }
 
-        public Ad GetUserAd(int id)
+        public async Task<Ad> GetUserAdAsync(int id)
         {
-            Ad ad = appctx.Ad.FirstOrDefault(u => u.Id == id);
+            Ad ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
             return ad;
         }
 
         public async Task EditAdsAsync(EditAdsVm ad)
         {
-            var dbAd = await appctx.Ad.FindAsync(ad.Id);
+            var dbAd = await appCtx.Ad.FindAsync(ad.Id);
             mapper.Map(ad, dbAd);
-            await appctx.SaveChangesAsync();
+            await appCtx.SaveChangesAsync();
         }
 
-        public async Task RemoveAd(int id)
+        public async Task RemoveAdAsync(int id)
         {
-            appctx.Ad.Remove(new Ad() { Id = id });
-            await appctx.SaveChangesAsync();
+            appCtx.Ad.Remove(new Ad() { Id = id });
+            await appCtx.SaveChangesAsync();
         }
 
-        public Ad GetAdDetails(int id)
+        public async Task<DetailsAdsVm> GetAdDetailsAsync(int id)
         {
-            var AdDetails = GetUserAd(id);
-
-            return AdDetails;
+            var adVm = await appCtx.Ad.Include(a => a.Company).Select(a => mapper.Map<DetailsAdsVm>(a)).FirstOrDefaultAsync(u => u.Id == id);
+            return adVm;
         }
     }
 }

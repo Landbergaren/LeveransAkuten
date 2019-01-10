@@ -145,7 +145,7 @@ namespace LeveransAkuten.Models.Services
             return driverIdInt;
         }
 
-        public async Task<AdsVm[]> GetAllAds()
+        public async Task<AdsVm[]> GetAllAdsAsync()
         {
             var allAds = await appctx.Ad.ToArrayAsync();
             List<AdsVm> ads = new List<AdsVm>();

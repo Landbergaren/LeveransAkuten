@@ -19,7 +19,15 @@ namespace LeveransAkuten.Helpers
             CreateMap<SearchDriverVm, BudAkutenUsers>();
             CreateMap<DriverRegVm, Driver>();
             CreateMap<CompanyRegVm, Company>();
-            CreateMap<Ad, DetailsAdsVm>().ForMember(x => x.Booked, opt => opt.Ignore());
+            CreateMap<Ad, DetailsAdsVm>().ForMember(x => x.Booked, opt => opt.Ignore())
+            .ForMember(dest => dest.CompanyName, opt =>
+             {
+                 opt.MapFrom(d => d.Company.CompanyName);
+             })
+            .ForMember(dest => dest.Booked, opt =>
+             {
+                 opt.MapFrom(d => d.DriverId != null);
+             });
 
         }
     }
