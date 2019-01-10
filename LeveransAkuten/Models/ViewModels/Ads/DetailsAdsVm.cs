@@ -18,6 +18,7 @@ namespace LeveransAkuten.Models.ViewModels.Ads
         [Required]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
+        public string CompanyName { get; set; }
         [Required]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }

@@ -50,31 +50,25 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdDetails(int id)
+        public async Task<IActionResult> AdDetails(int id)
         {
-            var adDetails = adsServices.GetAdDetails(id);
-            var adDetailsVm = map.Map<DetailsAdsVm>(adDetails);
-            if (adDetails.DriverId != null)
-            {
-                adDetailsVm.Booked = true;
-            }
+            var adDetailsVm = await adsServices.GetAdDetailsAsync(id);
             return View(adDetailsVm);
         }
 
         [HttpPost]
         public async Task<IActionResult> TakeIt(int id)
         {
-            var adDetails = adsServices.GetAdDetails(id);
-            if(adDetails.DriverId == null)
+            var adDetails = await adsServices.GetAdDetailsAsync(id);
+            if(!adDetails.Booked)
             {
-                var ad = adsServices.GetUserAd(id);
-                var driverId = HttpContext.User.Claims.FirstOrDefault().Value;
-                var driverIdInt = driverSer.GetDriverId(driverId);
+                var ad = await adsServices.GetUserAdAsync(id);
+                var driverUserId = HttpContext.User.Claims.FirstOrDefault().Value;
+                var driverIdInt = driverSer.GetDriverId(driverUserId);
                 
                 ad.DriverId = driverIdInt;
                 var adEdit = map.Map<EditAdsVm>(ad);
-                await adsServices.EditAdsAsync(adEdit);
-              
+                await adsServices.EditAdsAsync(adEdit);              
             }
             return RedirectToAction(nameof(Index));
         }
@@ -84,7 +78,7 @@ namespace LeveransAkuten.Controllers
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
-            var ads = await driverSer.GetAllAds();
+            var ads = await driverSer.GetAllAdsAsync();
             var notBookedAds = ads.Where(x => x.DriverId == null).ToArray();
             var loggedInUser = await userMan.GetUserAsync(HttpContext.User);
             var driverId = driverSer.GetDriverId(loggedInUser.Id);
