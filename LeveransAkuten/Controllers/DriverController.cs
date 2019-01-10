@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LeveransAkuten.Controllers
 {
-    //[Authorize(Roles = Roles.Driver)]
+    [Authorize(Roles = Roles.Driver)]
     public class DriverController : Controller
     {
       
@@ -111,8 +111,11 @@ namespace LeveransAkuten.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(DriverUpdateVm driver)
         {
+            if (!ModelState.IsValid)
+                return View();
+            var u = User.Identity.Name;
             await driverSer.UpdateDriver(driver);
-            return View();
+            return RedirectToAction(nameof(Details), new { name = u });
         }
 
         [HttpPost]

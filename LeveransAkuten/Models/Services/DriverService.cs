@@ -26,7 +26,7 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<DriverVm> GetDriverByUserName(string name)
         {
-            BudAkutenUsers driver = await idctx.Users.Where(p => p.UserName == name).
+            BudAkutenUsers driverUser = await idctx.Users.Where(p => p.UserName == name).
                 Select(d => new BudAkutenUsers
                 {
                     Email = d.Email,
@@ -40,7 +40,7 @@ namespace LeveransAkuten.Models.Services
                 })
                 .SingleOrDefaultAsync();
 
-            DriverVm driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == driver.Id).
+            DriverVm driverVm = await appctx.Driver.Where(p => p.AspNetUsersId == driverUser.Id).
                 Select(d => new DriverVm
                 {
                     Description = d.Description,
@@ -54,15 +54,15 @@ namespace LeveransAkuten.Models.Services
                 })
                 .SingleOrDefaultAsync();
 
-            driver2.Email = driver.Email;
-            driver2.StreetAdress = driver.StreetAdress;
-            driver2.ZipCode = driver.ZipCode;
-            driver2.City = driver.City;
-            driver2.PhoneNumber = driver.PhoneNumber;
-            driver2.UserName = driver.UserName;
-            driver2.Image = driver.Image;
+            driverVm.Email = driverUser.Email;
+            driverVm.StreetAdress = driverUser.StreetAdress;
+            driverVm.ZipCode = driverUser.ZipCode;
+            driverVm.City = driverUser.City;
+            driverVm.PhoneNumber = driverUser.PhoneNumber;
+            driverVm.UserName = driverUser.UserName;
+            driverVm.Image = driverUser.Image;
 
-            return driver2;
+            return driverVm;
         }
 
         public async Task<DriverVm> GetDriverByIdAsync(string id)
@@ -208,7 +208,6 @@ namespace LeveransAkuten.Models.Services
             d.Description = driver.Description;
             d.Email = driver.Email;
             d.FirstName = driver.FirstName;
-            d.Id = driver.Id;
             d.LastName = driver.LastName;
             d.PhoneNumber = driver.PhoneNumber;
             d.StreetAdress = driver.StreetAdress;
