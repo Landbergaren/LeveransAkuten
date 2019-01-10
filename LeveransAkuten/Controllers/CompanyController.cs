@@ -129,10 +129,9 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> UploadImg(UploadImgVm image)
         {
             var userName = User.Identity.Name;
+
             if (!ModelState.IsValid)
-            {
                 return Redirect(nameof(Details) + "/" + userName);
-            }
 
             await companyServices.UploadImage(userName, image.Img);
             return RedirectToAction(nameof(Details), new { name = userName });
