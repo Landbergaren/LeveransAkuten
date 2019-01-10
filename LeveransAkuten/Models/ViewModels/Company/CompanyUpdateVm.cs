@@ -9,20 +9,17 @@ namespace LeveransAkuten.Models.ViewModels.Company
     public class CompanyUpdateVm
     {
         public int Id { get; set; }
-        public byte[] Image { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(3, ErrorMessage = "Minst tre bokstäver")]
         [Display(Name = "Användarnamn")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(6, ErrorMessage = "Minst sex bokstäver")]
-        [Display(Name = "Lösenord")]
-        
+        [Display(Name = "Lösenord")]        
         public string Password { get; set; }
 
         [Required, Compare(nameof(Password))]
-        [Display(Name = "Bekräfta Lösenord")]
-     
+        [Display(Name = "Bekräfta Lösenord")]     
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt"), MinLength(2, ErrorMessage = "Minst två bokstäver")]
