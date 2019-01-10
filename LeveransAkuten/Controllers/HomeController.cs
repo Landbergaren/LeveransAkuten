@@ -15,5 +15,10 @@ namespace LeveransAkuten.Controllers.HomeController
         {       
             return View();
         }
+        [Route("/errors")]
+        public IActionResult Error()
+        {
+            return View();
+        }
     }
 }
