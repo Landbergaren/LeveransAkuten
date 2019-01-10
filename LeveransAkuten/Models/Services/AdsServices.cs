@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.ViewModels.Ads;
+using LeveransAkuten.Models.ViewModels.Company;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,14 +23,12 @@ namespace LeveransAkuten.Models.Services
 
 
         }
-        public async Task AddAdsAsync(AdsVm ad, string id)
+        public async Task AddAdsAsync(CompanyCreateAdVm ad, string id)
         {
             Company com = appctx.Company.FirstOrDefault(c => c.AspNetUsersId == id);
             var newAd = new Ad() { Header = ad.Header, Description = ad.Description, StartDate = ad.StartDate, EndDate = ad.EndDate, Arequired = ad.Arequired, Brequired = ad.Brequired, Cerequired = ad.Cerequired, Crequired = ad.Crequired, Drequired = ad.Drequired, Company = com };
             await appctx.Ad.AddAsync(newAd);
             await appctx.SaveChangesAsync();
-
-
         }
         public Ad GetAdsAsync()
         {
