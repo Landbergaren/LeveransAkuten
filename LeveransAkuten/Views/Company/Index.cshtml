@@ -6,7 +6,6 @@
             @User.Identity.Name
         </h1>
     </section>
-    <a asp-controller="Company" asp-action="CreateAd" class="btn btn-success">Skapa ny Annons</a>
     <main>
 
         @if (Model?.AdsNotStarted != null && Model?.AdsNotStarted.Count() > 0)
