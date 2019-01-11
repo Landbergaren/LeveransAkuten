@@ -52,7 +52,7 @@ namespace LeveransAkuten.Controllers
         [HttpGet]
         public async Task<IActionResult> AdDetails(int id)
         {
-            var adDetailsVm = await adsServices.GetEditAdsVm(id);
+            var adDetailsVm = await adsServices.GetAdDetailsAsync(id);
             return View(adDetailsVm);
         }
 
