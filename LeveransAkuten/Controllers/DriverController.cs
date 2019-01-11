@@ -20,15 +20,12 @@ namespace LeveransAkuten.Controllers
         private readonly DriverService driverSer;
         private readonly UserManager<BudAkutenUsers> userMan;
         private readonly AdsServices adsServices;
-        private readonly IMapper map;
 
-        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adsServices, IMapper map)
+        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adsServices)
         {
-
             this.driverSer = driverSer;
             this.userMan = userMan;
             this.adsServices = adsServices;
-            this.map = map;
         }
 
         public async Task<IActionResult> Index()
@@ -71,8 +68,7 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> CompanyDetails(int companyId)
         {
             var companyVm = await driverSer.getCompanyDetailsVmAsync(companyId);
-
-            //var driver = await driverService.GetDriverDetailsByIdAsync(companyUserId);
+            
             return View(companyVm);
         }
 
@@ -113,11 +109,7 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> DisplayAds(AdsVm ad)
         {
             var filteredAds = await driverSer.FilterAds(ad);
-
-            AdSearchVm vm = new AdSearchVm
-            {
-                Ads = filteredAds
-            };
+            var vm = new AdSearchVm { Ads = filteredAds };
 
             return View(vm);
         }
