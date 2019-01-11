@@ -22,27 +22,26 @@
                         }*@
                 }
             </div>
-            <div class="row justify-content-center mt-2">
-                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
-            </div>
+          
+          
         </div>
         <div class="col-md-5">
             <div class="profile-head">
-                <h5>
+                <h2>
                     @Model.Header
-                </h5>
+                </h2>
                 <div class="col-md-8 mt-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Företag</label>
+                            <label  class="font-weight-bold">Företag</label>
                         </div>
                         <div class="col-md-6">
-                            <p>Företagsnamn</p>
+                            <p>@Model.CompanyName</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Uppdrag</label>
+                            <label class="font-weight-bold">Uppdrag</label>
                         </div>
                         <div class="col-md-6">
                             <p>@Model.Description</p>
@@ -50,23 +49,23 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Startdatum</label>
+                            <label  class="font-weight-bold">Startdatum</label>
                         </div>
                         <div class="col-md-6">
-                            <p>@Model.StartDate</p>
+                            <p>@Model.StartDate.ToString("yyyy/MM/dd")</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Slutdatum</label>
+                            <label  class="font-weight-bold">Slutdatum</label>
                         </div>
                         <div class="col-md-6">
-                            <p>@Model.EndDate</p>
+                            <p>@Model.EndDate.ToString("yyyy/MM/dd")</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label>Körkortskrav</label>
+                            <label  class="font-weight-bold">Körkortskrav</label>
                         </div>
                         <div class="col-6">
                             @{
