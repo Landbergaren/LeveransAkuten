@@ -57,18 +57,15 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TakeIt(int id)
+        public async Task<IActionResult> TakeIt(int Id)
         {
-            var adDetails = await adsServices.GetAdDetailsAsync(id);
-            if(!adDetails.Booked)
+            var isFree = await adsServices.CheckIfAdIsFree(Id);
+            if(isFree)
             {
-                var ad = await adsServices.GetUserAdAsync(id);
                 var driverUserId = HttpContext.User.Claims.FirstOrDefault().Value;
                 var driverIdInt = driverSer.GetDriverId(driverUserId);
-                
-                ad.DriverId = driverIdInt;
-                var adEdit = map.Map<EditAdsVm>(ad);
-                await adsServices.EditAdsAsync(adEdit);              
+                var ad = await adsServices.GetUserAdAsync(Id);
+                await adsServices.AddDriverToAd(Id, driverIdInt);              
             }
             return RedirectToAction(nameof(Index));
         }
