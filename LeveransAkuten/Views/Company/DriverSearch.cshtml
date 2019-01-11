@@ -1,57 +1,56 @@
 ﻿@model DriverVm[]
-
 <main>
     <br />
-     <img src="~/Img/driver.png" width="100" height="100" />
-     <div class="container justify-content-center">
-         <h1>Förarna : </h1>
-         <div class="row mt-4">
-             @foreach (var driver in Model)
-             {
-                 <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                     <div class="card h-100">
-                         @if (driver.Image != null)
-                         {
-                             <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(driver.Image)" width="200" height="150" /></a>
+    <img src="~/Img/driver.png" width="100" height="100" />
+    <div class="container justify-content-center">
+        <h1>Förarna : </h1>
+        <div class="row mt-4">
+            @foreach (var driver in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        @if (driver.Image != null)
+                        {
+                            <a href="#"><img class="card-img-top" src="data:image/jpeg;base64,@Convert.ToBase64String(driver.Image)" width="200" height="150" /></a>
 
-                         }
-                         else
-                         {
-                             <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
-                         }
-                         <div class="card-body">
-                             <a asp-action="DriverDetails" asp-controller="Company" asp-route-id="@driver.Id">
-                                 <h4 class="card-title">
-                                     @driver.UserName
-                                 </h4>
-                             </a>
-                             <p>
-                                 Körkort:
-                                 @if (driver.A)
-                                 {
-                                     <span>A</span>
-                                 }
-                                 @if (driver.B)
-                                 {
-                                     <span>B</span>
-                                 }
-                                 @if (driver.C)
-                                 {
-                                     <span>C</span>
-                                 }
-                                 @if (driver.CE)
-                                 {
-                                     <span>CE</span>
-                                 }
-                                 @if (driver.D)
-                                 {
-                                     <span>D</span>
-                                 }
-                             </p>
-                         </div>
-                     </div>
-                 </div>
-             }
-         </div>
-     </div>
+                        }
+                        else
+                        {
+                            <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
+                        }
+                        <div class="card-body">
+                            <a asp-action="DriverDetails" asp-controller="Company" asp-route-id="@driver.Id">
+                                <h4 class="card-title">
+                                    @driver.UserName
+                                </h4>
+                            </a>
+                            <p>
+                                Körkort:
+                                @if (driver.A)
+                                {
+                                    <span>A</span>
+                                }
+                                @if (driver.B)
+                                {
+                                    <span>B</span>
+                                }
+                                @if (driver.C)
+                                {
+                                    <span>C</span>
+                                }
+                                @if (driver.CE)
+                                {
+                                    <span>CE</span>
+                                }
+                                @if (driver.D)
+                                {
+                                    <span>D</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </main>

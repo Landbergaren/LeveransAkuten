@@ -1,108 +1,101 @@
 ﻿<!-- Page Content -->
 
-
 @section styles{
-  <link href="~/styles/jockes.css" rel="stylesheet" />
+    <link href="~/styles/jockes.css" rel="stylesheet" />
 }
-
 <header class="business-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12" id="header-pic">
-        <h1 class="display-3 text-center text-black-50 mt-4">Budakuten</h1>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" id="header-pic">
+                <h1 class="display-3 text-center text-black-50 mt-4">Budakuten</h1>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
-
 <div class="container">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2 class="mt-4">Vad vi gör</h2>
-      <p>Leveransakuten är ett företag som hjälper företag inom transportbranschen att rekrytera personal på nolltid. Leveransakuten löser företags personalbrist samtidigt som vi erbjuder en flexibel anställningsform för förare som vill jobba extra. </p>
-      <p>Hos leveransakuten så kan du se omdömen om förare från andra företag som anlitat dem och på så sätt veta vad du kan förvänta dig av föraren som du anlitar och du kan hitta en förare för att lösa din akuta personalbrist på bara några timmar. </p>
-      @if (!User.Identity.IsAuthenticated)
-      {
-        <div class="container">
-          <p>@Html.ActionLink("Logga in", "Login", "Account") eller @Html.ActionLink("Registera", "Index", "Registration") dig för att komma igång!</p>
-
+    <div class="row">
+        <div class="col-sm-8">
+            <h2 class="mt-4">Vad vi gör</h2>
+            <p>Leveransakuten är ett företag som hjälper företag inom transportbranschen att rekrytera personal på nolltid. Leveransakuten löser företags personalbrist samtidigt som vi erbjuder en flexibel anställningsform för förare som vill jobba extra. </p>
+            <p>Hos leveransakuten så kan du se omdömen om förare från andra företag som anlitat dem och på så sätt veta vad du kan förvänta dig av föraren som du anlitar och du kan hitta en förare för att lösa din akuta personalbrist på bara några timmar. </p>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="container">
+                    <p>@Html.ActionLink("Logga in", "Login", "Account") eller @Html.ActionLink("Registera", "Index", "Registration") dig för att komma igång!</p>
+                </div>
+            }
         </div>
-      }
-    </div>
-    <div class="col-sm-4">
-      <h2 class="mt-4">Kontakta oss</h2>
-      <address>
-        <strong>Budakuten</strong>
-        <br>Leveransgatan 10
-        <br>Stockholm, 112 61
-        <br>
-      </address>
-      <address>
-        <abbr title="Phone"><i class="fas fa-phone-square"></i></abbr>
-        08 - 779 58 38
-        <br>
-        <abbr title="Email"><i class="fas fa-envelope"></i></abbr>
-        <a href="mailto:#">info@leveransakuten.se</a>
-      </address>
-    </div>
-  </div>
-  <!-- /.row -->
-  <div class="row">
-    <div class="col-sm-4 my-4">
-      <div class="card">
-        <img class="card-img-top" src="~/Img/rekrytering.jpg" />
-        <div class="card-body">
-          <h4 class="card-title">Rekrytering</h4>
-          <p class="card-text">Hos budakuten kan du se omdömen från tidigare anställningar och cv från våra tusentals förare.</p>
+        <div class="col-sm-4">
+            <h2 class="mt-4">Kontakta oss</h2>
+            <address>
+                <strong>Budakuten</strong>
+                <br>Leveransgatan 10
+                <br>Stockholm, 112 61
+                <br>
+            </address>
+            <address>
+                <abbr title="Phone"><i class="fas fa-phone-square"></i></abbr>
+                08 - 779 58 38
+                <br>
+                <abbr title="Email"><i class="fas fa-envelope"></i></abbr>
+                <a href="mailto:#">info@leveransakuten.se</a>
+            </address>
         </div>
-        <div class="card-footer">
-          @if (!User.Identity.IsAuthenticated)
-          {
-            <div class="container">
-              <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
-
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="~/Img/rekrytering.jpg" />
+                <div class="card-body">
+                    <h4 class="card-title">Rekrytering</h4>
+                    <p class="card-text">Hos budakuten kan du se omdömen från tidigare anställningar och cv från våra tusentals förare.</p>
+                </div>
+                <div class="card-footer">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="container">
+                            <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
+                        </div>
+                    }
+                </div>
             </div>
-          }
         </div>
-      </div>
-    </div>
-    <div class="col-sm-4 my-4">
-      <div class="card">
-        <img class="card-img-top" src="~/Img/delivery-truck-clipart-22.jpg" />
-        <div class="card-body">
-          <h4 class="card-title">Express</h4>
-          <p class="card-text">Budakuten är det snabbaste sättet att rekrytera på marknaden. När du drabbas av sjukskrivningar eller oväntade personalförluster. Använd oss!</p>
-        </div>
-        <div class="card-footer">
-          @if (!User.Identity.IsAuthenticated)
-    {
-      <div class="container">
-        <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
-
-      </div>
-}
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4 my-4">
-      <div class="card">
-        <img class="card-img-top" src="~/Img/drivingtruck.jpg" />
-        <div class="card-body">
-          <h4 class="card-title">För förare</h4>
-          <p class="card-text">Budakuten erbjuder anställning på dina villkor. Du kan själv bestämma när du vill jobba och vilken ersättning du kräver.</p>
-        </div>
-        <div class="card-footer">
-          @if (!User.Identity.IsAuthenticated)
-          {
-            <div class="container">
-              <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
-
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="~/Img/delivery-truck-clipart-22.jpg" />
+                <div class="card-body">
+                    <h4 class="card-title">Express</h4>
+                    <p class="card-text">Budakuten är det snabbaste sättet att rekrytera på marknaden. När du drabbas av sjukskrivningar eller oväntade personalförluster. Använd oss!</p>
+                </div>
+                <div class="card-footer">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="container">
+                            <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
+                        </div>
+                    }
+                </div>
             </div>
-          }
         </div>
-      </div>
+        <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="~/Img/drivingtruck.jpg" />
+                <div class="card-body">
+                    <h4 class="card-title">För förare</h4>
+                    <p class="card-text">Budakuten erbjuder anställning på dina villkor. Du kan själv bestämma när du vill jobba och vilken ersättning du kräver.</p>
+                </div>
+                <div class="card-footer">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="container">
+                            <p>@Html.ActionLink("Logga in", "Login", "Account") || @Html.ActionLink("Registera", "Index", "Registration")</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- /.row -->
+    <!-- /.row -->
 </div>
 <!-- /.container -->
