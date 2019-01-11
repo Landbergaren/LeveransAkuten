@@ -3,6 +3,7 @@ using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Company;
 using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.IO;
@@ -15,13 +16,16 @@ namespace LeveransAkuten.Models.Services
     {
         private readonly DbFirstContext appctx;
         private readonly BudIdentityContext idctx;
+        private readonly UserManager<BudAkutenUsers> userManager;
+
         public CompanyServices CompanySer { get; }
 
-        public DriverService(DbFirstContext appctx, BudIdentityContext idctx, CompanyServices companySer)
+        public DriverService(DbFirstContext appctx, BudIdentityContext idctx, CompanyServices companySer, UserManager<BudAkutenUsers> userManager)
         {
             this.appctx = appctx;
             this.idctx = idctx;
             CompanySer = companySer;
+            this.userManager = userManager;
         }
 
         public async Task<DriverVm> GetDriverByUserName(string name)
@@ -67,43 +71,56 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<DriverVm> GetDriverByIdAsync(string id)
         {
-            DriverVm driver = await idctx.Users.Where(p => p.Id == id).
-                Select(d => new DriverVm
-                {
-                    Email = d.Email,
-                    StreetAdress = d.StreetAdress,
-                    ZipCode = d.ZipCode,
-                    City = d.City,
-                    PhoneNumber = d.PhoneNumber,
-                    UserName = d.UserName,
-                    Image = d.Image
-                })
-                .SingleOrDefaultAsync();
+            DriverVm driverUser = await idctx.Users.Where(p => p.Id == id).
+              Select(d => new DriverVm
+              {
+                  Email = d.Email,
+                  StreetAdress = d.StreetAdress,
+                  ZipCode = d.ZipCode,
+                  City = d.City,
+                  PhoneNumber = d.PhoneNumber,
+                  UserName = d.UserName,
+                  Image = d.Image
+              })
+              .SingleOrDefaultAsync();
 
-            DriverVm driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == id).
-                Select(d => new DriverVm
-                {
-                    Description = d.Description,
-                    A = d.A,
-                    B = d.B,
-                    C = d.C,
-                    CE = d.Ce,
-                    D = d.D,
-                    FirstName = d.FirstName,
-                    LastName = d.LastName
-                })
-                .SingleOrDefaultAsync();
+            var driver = await appctx.Driver.Where(p => p.AspNetUsersId == id).
+                Select(d => new { d.Description, d.A, d.B, d.C, d.Ce, d.D, d.FirstName, d.LastName }).SingleOrDefaultAsync();
 
-            driver.Description = driver2.Description;
-            driver.A = driver2.A;
-            driver.B = driver2.B;
-            driver.C = driver2.C;
-            driver.CE = driver2.CE;
-            driver.D = driver2.D;
-            driver.FirstName = driver2.FirstName;
-            driver.LastName = driver2.LastName;
+            driverUser.Description = driver.Description;
+            driverUser.A = driver.A;
+            driverUser.B = driver.B;
+            driverUser.C = driver.C;
+            driverUser.CE = driver.Ce;
+            driverUser.D = driver.D;
+            driverUser.FirstName = driver.FirstName;
+            driverUser.LastName = driver.LastName;
 
-            return driver;
+            return driverUser;
+        }
+
+        internal async Task<string> GetUserIdWithDriverIdAsync(int driverId)
+        {
+            var userId = await appctx.Driver.Where(d => d.Id == driverId).Select(d => d.AspNetUsersId).FirstOrDefaultAsync();
+            return userId;
+        }
+
+        internal async Task<CompanyDetailsVm> getCompanyDetailsVmAsync(int companyId)
+        {
+            var company = await appctx.Company.Where(c => c.Id == companyId).Select(c => new { c.CompanyName, c.Description, c.AspNetUsersId }).FirstOrDefaultAsync();
+            var companyUser = await userManager.FindByIdAsync(company.AspNetUsersId);
+            var companyDetailsVm = new CompanyDetailsVm
+            {
+                City = companyUser.City,
+                CompanyName = company.CompanyName,
+                Description = company.Description,
+                Email = companyUser.Email,
+                Image = companyUser.Image,
+                PhoneNumber = companyUser.PhoneNumber,
+                StreetAdress = companyUser.StreetAdress,
+                ZipCode = companyUser.ZipCode
+            };
+            return companyDetailsVm;
         }
 
         public async Task<DriverIndexVm> GetAdsNotStartedAsync(BudAkutenUsers loggedInUser)
@@ -123,7 +140,6 @@ namespace LeveransAkuten.Models.Services
 
                 ads.Add(new DriverIndexAdVm
                 {
-                    
                     DriverId = ad.DriverId,
                     Id = ad.Id,
                     Header = ad.Header,
@@ -171,7 +187,6 @@ namespace LeveransAkuten.Models.Services
                     Description = ad.Description,
                     StartDate = ad.StartDate,
                     EndDate = ad.EndDate.Value
-
                 });
             }
 
@@ -184,7 +199,7 @@ namespace LeveransAkuten.Models.Services
             var allAds = await appctx.Ad.ToArrayAsync();
             List<AdsVm> filteredAds = new List<AdsVm>();
 
-            foreach (var ad in allAds.Where(a => a.DriverId == null ))
+            foreach (var ad in allAds.Where(a => a.DriverId == null))
             {
 
 
@@ -221,7 +236,6 @@ namespace LeveransAkuten.Models.Services
         {
             var driver = await GetDriverByUserName(name);
             DriverUpdateVm d = new DriverUpdateVm();
-
             d.A = driver.A;
             d.B = driver.B;
             d.C = driver.C;
@@ -236,7 +250,6 @@ namespace LeveransAkuten.Models.Services
             d.StreetAdress = driver.StreetAdress;
             d.UserName = driver.UserName;
             d.ZipCode = driver.ZipCode;
-
             return d;
         }
 
@@ -252,7 +265,7 @@ namespace LeveransAkuten.Models.Services
             d.UserName = driver.UserName;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
-            
+
             driver2.Description = driver.Description;
             driver2.A = driver.A;
             driver2.B = driver.B;
@@ -307,8 +320,6 @@ namespace LeveransAkuten.Models.Services
                     LastName = d.LastName
                 })
                 .SingleOrDefaultAsync();
-
-
             driver.A = driver2.A;
             driver.B = driver2.B;
             driver.C = driver2.C;
@@ -321,24 +332,16 @@ namespace LeveransAkuten.Models.Services
             return driver;
         }
 
-        public async Task<DriverVm[]> GetAllDrivers ()
+        public async Task<DriverVm[]> GetAllDrivers()
         {
             var allDrivers = await appctx.Driver.ToArrayAsync();
             List<DriverVm> drivers = new List<DriverVm>();
 
-
             foreach (var driver in allDrivers)
             {
-
                 var driverStringId = appctx.Driver.Where(d => d.Id == driver.Id).Select(d => d.AspNetUsersId).FirstOrDefault();
-
                 var driverUser = await GetDriverDetailsByIdAsync(driverStringId.ToString());
-
                 var driverAspNetUser = idctx.Users.Where(du => du.Id == driver.AspNetUsersId).SingleOrDefault();
-
-
-
-
                 drivers.Add(new DriverVm
                 {
                     Id = driver.Id,
@@ -356,12 +359,11 @@ namespace LeveransAkuten.Models.Services
                     CE = driver.Ce,
                     D = driver.D,
                     PhoneNumber = driverUser.PhoneNumber
-
                 });
             }
 
-            return drivers.ToArray(); 
-            
+            return drivers.ToArray();
+
 
         }
     }

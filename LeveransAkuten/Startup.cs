@@ -63,6 +63,7 @@ namespace LeveransAkuten
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+            app.UseStatusCodePagesWithRedirects("~/errors");
         }
     }
 }

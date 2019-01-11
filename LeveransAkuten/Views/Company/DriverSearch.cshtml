@@ -1,7 +1,9 @@
 ﻿@model DriverVm[]
-
 <main>
-    <div class="container">
+    <br />
+    <img src="~/Img/driver.png" width="100" height="100" />
+    <div class="container justify-content-center">
+        <h1>Förarna : </h1>
         <div class="row mt-4">
             @foreach (var driver in Model)
             {
@@ -16,14 +18,12 @@
                         {
                             <a href="#"><img class="card-img-top" src="~/Img/profile.jpg" width="200" height="150" /></a>
                         }
-
                         <div class="card-body">
                             <a asp-action="DriverDetails" asp-controller="Company" asp-route-id="@driver.Id">
                                 <h4 class="card-title">
                                     @driver.UserName
                                 </h4>
                             </a>
-
                             <p>
                                 Körkort:
                                 @if (driver.A)

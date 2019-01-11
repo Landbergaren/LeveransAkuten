@@ -19,9 +19,9 @@
             <div class="profile-img">
                 @{
                     @*if (Model.Image != null)
-            {
-                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
-            }*@
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Profilbild" width="200" height="150" />
+                        }*@
                 }
             </div>
             <div class="row justify-content-center mt-2">
@@ -39,7 +39,7 @@
                             <label>Företag</label>
                         </div>
                         <div class="col-md-6">
-                            <a asp-controller="driver" asp-action="">@Model.CompanyName</a>
+                            <a asp-controller="driver" asp-action="CompanyDetails" asp-route-id="@Model.CompanyId">@Model.CompanyName</a>
                         </div>
                     </div>
                     <div class="row">

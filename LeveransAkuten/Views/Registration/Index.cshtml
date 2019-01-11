@@ -1,11 +1,9 @@
 ﻿@model RegIndexVm
-
 <div class="container">
     <div class="jumbotron">
         <h1>registration</h1>
     </div>
 </div>
-
 <div class="container">
     @if (Model?.ErrorMsges != null)
     {
@@ -14,7 +12,6 @@
             <div>@error</div>
         }
     }
-
     <div class="row">
         <div class="container col-5">
             <div class="jumbotron">
@@ -69,7 +66,6 @@
                 </form>
             </div>
         </div>
-
         <div class="container col-5">
             <div class="jumbotron">
                 <h3>Förare</h3>
@@ -160,6 +156,4 @@
         </div>
     </div>
 </div>
-
 @section scripts{<link href="~/styles/jockes.css" rel="stylesheet" />}
-

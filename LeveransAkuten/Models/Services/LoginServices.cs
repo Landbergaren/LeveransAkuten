@@ -13,7 +13,7 @@ namespace LeveransAkuten.Models
         UserManager<BudAkutenUsers> userManager;
         SignInManager<BudAkutenUsers> signInManager;
         RoleManager<IdentityRole> roleManager;
-        private object loginVm;
+
 
         public LoginServices(BudIdentityContext identCtx, UserManager<BudAkutenUsers> userMan, SignInManager<BudAkutenUsers> signInMan, RoleManager<IdentityRole> rolMan)
         {

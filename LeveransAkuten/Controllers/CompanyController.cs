@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using LeveransAkuten.Models.ClaimTypes;
+﻿using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
@@ -17,18 +16,14 @@ namespace LeveransAkuten.Controllers
     public class CompanyController : Controller
     {
         private readonly AdsServices adService;
-        private readonly IMapper mapper;
-        private readonly DbFirstContext dbCtx;
         private readonly DriverService driverService;
         CompanyServices companyServices;
         UserManager<BudAkutenUsers> userManager;
 
-        public CompanyController(CompanyServices compSer, DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer, IMapper map, DbFirstContext dbCtx)
+        public CompanyController(CompanyServices compSer, DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adSer)
         {
             companyServices = compSer;
             userManager = userMan;
-            mapper = map;
-            this.dbCtx = dbCtx;
             adService = adSer;
             driverService = driverSer;
         }
@@ -59,9 +54,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> EditAd(int id)
         {
-            var ad = await adService.GetUserAdAsync(id);
-
-            var adToEdit = mapper.Map<EditAdsVm>(ad);
+            var adToEdit = await adService.GetEditAdsVm(id);
             return View(adToEdit);
         }
 
@@ -80,9 +73,9 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdDetails(int id)
+        public async Task<IActionResult> AdDetails(int id)
         {
-            var adDetailsVm = adService.GetAdDetailsAsync(id);
+            var adDetailsVm = await adService.GetAdDetailsAsync(id);
             return View(adDetailsVm);
         }
 
@@ -96,7 +89,7 @@ namespace LeveransAkuten.Controllers
         [HttpGet, Route("Company/" + nameof(DriverDetails) + "/{driverId}")]
         public async Task<IActionResult> DriverDetails(int driverId)
         {
-            var driverStringId = dbCtx.Driver.Where(d => d.Id == driverId).Select(d => d.AspNetUsersId).FirstOrDefault();
+            var driverStringId = await driverService.GetUserIdWithDriverIdAsync(driverId);
 
             var driver = await driverService.GetDriverDetailsByIdAsync(driverStringId.ToString());
             return View(driver);
@@ -117,7 +110,7 @@ namespace LeveransAkuten.Controllers
                 return View();
 
             var u = User.Identity.Name;
-            await companyServices.UpdateCompany(company);
+            await companyServices.UpdateCompanyAsync(company);
             return RedirectToAction(nameof(Details));
 
         }

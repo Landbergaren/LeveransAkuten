@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LeveransAkuten.Models.Services;
+﻿using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Registration;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace LeveransAkuten.Controllers
@@ -47,7 +45,7 @@ namespace LeveransAkuten.Controllers
                 return View(nameof(Index), regVm);
 
             var createResult = await regService.CreateCompanyAsync(regVm.Company);
-            
+
             if (!createResult.Succeeded)
             {
                 //failed to create
