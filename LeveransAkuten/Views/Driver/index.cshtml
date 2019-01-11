@@ -1,10 +1,11 @@
 ﻿@model DriverIndexVm
 <div class="container">
+  <br/>
   <!-- Page Heading -->
   <section>
-    <h1 class="my-4">
-      Hej @User.Identity.Name !
-    </h1>
+    <h4 class="my-4">
+      Inloggad som: <a asp-action="Details" asp-controller="Driver">@User.Identity.Name</a>
+</h4>
   </section>
 
   <main>
@@ -28,7 +29,6 @@
           </h3>
         }
       </div>
-      <br />
       <br />
       <br />
       <div class="row">
@@ -56,8 +56,20 @@
                       @ad.Header
                     </h4>
                   </a>
-                  <h4>Från: @ad.Start.ToString("yyyy/MM/dd") Till: @ad.End?.ToString("yyyy/MM/dd") </h4>
-
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Från</th>
+                        <th scope="col">Till</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>@ad.Start.Day/@ad.Start.Month</td>
+                        <td>@ad.End.Value.Day/@ad.End.Value.Month</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
