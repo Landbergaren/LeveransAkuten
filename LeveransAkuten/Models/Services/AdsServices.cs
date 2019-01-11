@@ -4,6 +4,7 @@ using LeveransAkuten.Models.ViewModels.Ads;
 using LeveransAkuten.Models.ViewModels.Company;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,8 +40,15 @@ namespace LeveransAkuten.Models.Services
 
         public async Task<Ad> GetUserAdAsync(int id)
         {
-            Ad ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
+            var ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
             return ad;
+        }
+
+        public async Task<EditAdsVm> GetEditAdsVm(int id)
+        {
+            var ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
+            var adVm = mapper.Map<EditAdsVm>(ad);
+            return adVm;
         }
 
         public async Task EditAdsAsync(EditAdsVm ad)
@@ -60,6 +68,19 @@ namespace LeveransAkuten.Models.Services
         {
             var adVm = await appCtx.Ad.Include(a => a.Company).Select(a => mapper.Map<DetailsAdsVm>(a)).FirstOrDefaultAsync(u => u.Id == id);
             return adVm;
+        }
+
+        public async Task<bool> CheckIfAdIsFree(int id)
+        {
+            var IsFree = await appCtx.Ad.Where(a => a.Id == id).Select(a => a.DriverId == null).FirstOrDefaultAsync();
+            return IsFree;
+        }
+
+        internal async Task AddDriverToAd(int addId, int driverIdInt)
+        {
+            var ad = await appCtx.Ad.Where(a => a.Id == addId).FirstOrDefaultAsync();
+            ad.DriverId = driverIdInt;
+            await appCtx.SaveChangesAsync();
         }
     }
 }
