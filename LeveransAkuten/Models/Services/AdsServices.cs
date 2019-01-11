@@ -41,8 +41,14 @@ namespace LeveransAkuten.Models.Services
         public async Task<Ad> GetUserAdAsync(int id)
         {
             var ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
-            //var adVm = mapper.Map<EditAdsVm>(ad);
             return ad;
+        }
+
+        public async Task<EditAdsVm> GetEditAdsVm(int id)
+        {
+            var ad = await appCtx.Ad.FirstOrDefaultAsync(u => u.Id == id);
+            var adVm = mapper.Map<EditAdsVm>(ad);
+            return adVm;
         }
 
         public async Task EditAdsAsync(EditAdsVm ad)

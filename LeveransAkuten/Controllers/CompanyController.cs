@@ -55,7 +55,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> EditAd(int id)
         {
-            var adToEdit = await adService.GetUserAdAsync(id);            
+            var adToEdit = await adService.GetEditAdsVm(id);            
             return View(adToEdit);
         }
 
