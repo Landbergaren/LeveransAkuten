@@ -25,7 +25,7 @@
                 }
             </div>
             <div class="row justify-content-center mt-2">
-                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post" class="btn btn-dark"><input disabled="@Model.Booked" type="submit" value="Take It" /></form>
+                <form asp-action="TakeIt" asp-controller="Driver" asp-route-id="@Model.Id" method="post"><input type="submit" disabled="@Model.Booked" class="btn btn-primary" value="Ta uppdrag" /></form>
             </div>
         </div>
         <div class="col-md-5">

@@ -222,6 +222,7 @@ namespace LeveransAkuten.Models.Services
                         Brequired = ad.Brequired,
                         Crequired = ad.Crequired,
                         Cerequired = ad.Cerequired,
+                        Drequired = ad.Drequired,
                         Description = ad.Description,
                         Image = companyUser.Image,
                         StartDate = ad.StartDate,
