@@ -15,10 +15,18 @@
       <hr />
       <br />
       <div>
-        <h3>
-          Ärenden:
-        </h3>
-
+        @if (Model?.AdsNotStarted.Count != 0)
+        {
+          <h3>
+            Dina kommande ärenden:
+          </h3>
+        }
+        else
+        {
+          <h3>
+            Du har inga kommande uppdrag just nu
+          </h3>
+        }
       </div>
       <br />
       <br />
@@ -29,9 +37,7 @@
           @if (ad.DriverId != null)
           {
 
-
-
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item bg-success m-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item m-3">
 
               <div class="card h-100 ">
                 @if (ad.Image != null)
