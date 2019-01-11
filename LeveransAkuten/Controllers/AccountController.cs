@@ -29,7 +29,7 @@ namespace LeveransAkuten.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVm loginVm)
         {
             //Unsuccessfull            
