@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using LeveransAkuten.Models.ClaimTypes;
+﻿using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
 using LeveransAkuten.Models.ViewModels.Ads;
@@ -55,7 +54,7 @@ namespace LeveransAkuten.Controllers
 
         public async Task<IActionResult> EditAd(int id)
         {
-            var adToEdit = await adService.GetEditAdsVm(id);            
+            var adToEdit = await adService.GetEditAdsVm(id);
             return View(adToEdit);
         }
 

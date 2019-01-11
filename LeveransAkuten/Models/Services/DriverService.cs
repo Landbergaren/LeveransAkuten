@@ -5,7 +5,6 @@ using LeveransAkuten.Models.ViewModels.Driver;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -86,7 +85,7 @@ namespace LeveransAkuten.Models.Services
               .SingleOrDefaultAsync();
 
             var driver = await appctx.Driver.Where(p => p.AspNetUsersId == id).
-                Select(d => new { d.Description, d.A, d.B, d.C, d.Ce, d.D, d.FirstName, d.LastName}).SingleOrDefaultAsync();
+                Select(d => new { d.Description, d.A, d.B, d.C, d.Ce, d.D, d.FirstName, d.LastName }).SingleOrDefaultAsync();
 
             driverUser.Description = driver.Description;
             driverUser.A = driver.A;
@@ -111,7 +110,7 @@ namespace LeveransAkuten.Models.Services
             var company = await appctx.Company.Where(c => c.Id == companyId).Select(c => new { c.CompanyName, c.Description, c.AspNetUsersId }).FirstOrDefaultAsync();
             var companyUser = await userManager.FindByIdAsync(company.AspNetUsersId);
             var companyDetailsVm = new CompanyDetailsVm
-            {                
+            {
                 City = companyUser.City,
                 CompanyName = company.CompanyName,
                 Description = company.Description,
@@ -140,7 +139,7 @@ namespace LeveransAkuten.Models.Services
                 var companyUser = await CompanySer.GetCompanyById(company.AspNetUsersId);
 
                 ads.Add(new DriverIndexAdVm
-                {                    
+                {
                     DriverId = ad.DriverId,
                     Id = ad.Id,
                     Header = ad.Header,
@@ -200,7 +199,7 @@ namespace LeveransAkuten.Models.Services
             var allAds = await appctx.Ad.ToArrayAsync();
             List<AdsVm> filteredAds = new List<AdsVm>();
 
-            foreach (var ad in allAds.Where(a => a.DriverId == null ))
+            foreach (var ad in allAds.Where(a => a.DriverId == null))
             {
 
 
@@ -266,7 +265,7 @@ namespace LeveransAkuten.Models.Services
             d.UserName = driver.UserName;
 
             var driver2 = await appctx.Driver.Where(p => p.AspNetUsersId == d.Id).SingleOrDefaultAsync();
-            
+
             driver2.Description = driver.Description;
             driver2.A = driver.A;
             driver2.B = driver.B;
@@ -333,7 +332,7 @@ namespace LeveransAkuten.Models.Services
             return driver;
         }
 
-        public async Task<DriverVm[]> GetAllDrivers ()
+        public async Task<DriverVm[]> GetAllDrivers()
         {
             var allDrivers = await appctx.Driver.ToArrayAsync();
             List<DriverVm> drivers = new List<DriverVm>();
@@ -363,8 +362,8 @@ namespace LeveransAkuten.Models.Services
                 });
             }
 
-            return drivers.ToArray(); 
-            
+            return drivers.ToArray();
+
 
         }
     }

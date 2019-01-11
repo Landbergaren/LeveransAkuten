@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using LeveransAkuten.Models.ClaimTypes;
 using LeveransAkuten.Models.Entities;
 using LeveransAkuten.Models.Services;
@@ -13,21 +8,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LeveransAkuten.Controllers
 {
     [Authorize(Roles = Roles.Driver)]
     public class DriverController : Controller
     {
-      
+
         private readonly DriverService driverSer;
         private readonly UserManager<BudAkutenUsers> userMan;
         private readonly AdsServices adsServices;
         private readonly IMapper map;
 
-        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan,AdsServices adsServices, IMapper map)
+        public DriverController(DriverService driverSer, UserManager<BudAkutenUsers> userMan, AdsServices adsServices, IMapper map)
         {
-            
+
             this.driverSer = driverSer;
             this.userMan = userMan;
             this.adsServices = adsServices;
@@ -60,12 +57,12 @@ namespace LeveransAkuten.Controllers
         public async Task<IActionResult> TakeIt(int Id)
         {
             var isFree = await adsServices.CheckIfAdIsFree(Id);
-            if(isFree)
+            if (isFree)
             {
                 var driverUserId = HttpContext.User.Claims.FirstOrDefault().Value;
                 var driverIdInt = driverSer.GetDriverId(driverUserId);
                 var ad = await adsServices.GetUserAdAsync(Id);
-                await adsServices.AddDriverToAd(Id, driverIdInt);              
+                await adsServices.AddDriverToAd(Id, driverIdInt);
             }
             return RedirectToAction(nameof(Index));
         }
@@ -78,7 +75,7 @@ namespace LeveransAkuten.Controllers
             //var driver = await driverService.GetDriverDetailsByIdAsync(companyUserId);
             return View(companyVm);
         }
- 
+
         [HttpGet]
         public async Task<IActionResult> DisplayAds()
         {
@@ -93,7 +90,7 @@ namespace LeveransAkuten.Controllers
             };
             return View(vm);
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Update()
         {
